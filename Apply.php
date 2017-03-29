@@ -94,7 +94,6 @@ if(isset($_POST['login']))
 			{
 
 				header('Location: After-Confirm.php');
-
 			}
 
 		}
@@ -111,7 +110,7 @@ if(isset($_POST['login']))
 
 	{
 
-		$error = "<p style='color:red'>User Account not found.....</p>";
+		$error = "<p style='color:red'>Username or password is incorrect.....</p>";
 
 	}
 
