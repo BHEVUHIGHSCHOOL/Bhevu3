@@ -1,390 +1,197 @@
 <?php require('connection/conect.php');?>
-
 <?php
-ob_start();
 session_start();
 if(isset($_POST['next']))
-
 {
-
    			$idp = $_POST["ID_number"];
-
             $namep = $_POST["First_name"];
-
             $lnamep = $_POST["Last_name"];
-
             $snamep = $_POST["Surname"];
-
 			$cellnump = $_POST["cell"];
 
-
-
             //initials
-
             $iname = substr($namep,0,1);
-
 			$inameUp = strtoupper($iname);
-
             $ilname = substr($lnamep,0,1);
-
 			$ilnameUp = strtoupper($ilname);
-
             $isname1 = substr($snamep,0,1);
-
 			$isname1Up = strtoupper($isname1);
-
             $isname2 = substr($snamep,1);
-
 			$isname2Low = strtolower($isname2);
-
 			
-
             $initials = "Initials :" . " " . $inameUp. "." . " " . $ilnameUp . "." . " " . $isname1Up . $isname2Low . "<br/>";
-
             //fullnames
-
             $fname2 = substr($namep,1);
-
 			$fname2Low = strtolower($fname2);
-
             $flname2 = substr($lnamep,1);
-
 			$flname2Low = strtolower($flname2);
-
-
 
             $fullnames = "First Name :" . " " . $inameUp . $fname2Low . "<br/>" . "Second Name :" . " " . $ilnameUp . $flname2Low . "<br/>" . "Surname :" . " " . $isname1Up . $isname2Low . "<br/>";
 
-
-
             $length = strlen($idp);
-
             $months = substr($idp,2,2);
-
 			$password = $inameUp.$ilnameUp.$months;
-
 			$username = $months.$isname1Up.$isname2Low;
-
             if ($length == 13 && $months > 0 && $months < 13)
-
             {
-
                 //Date of birth
-
                 //get day
-
                 $day = substr($idp,4,2);
-
                 if ($day <= 10)
-
                 {
-
                     $getday = "0" . $day . " ";
-
                 }
-
                 else
-
                     $getday = $day . " ";
 
-
-
                 //get month
-
                 //array
-
                 $month = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-
                 $montha = array( 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13 );
-
                 for ($i = 0; $i < 13; $i++)
-
                 {
-
                     if($months == $montha[$i])
-
                     {
-
                         $getmongth = $month[$i] . " ";
-
                     }
-
                 }
-
-
 
                 //get year
-
                 $year = substr($idp,0,2);
-
                 if ($year > 17 && $year <= 99)
-
                 {
-
                     $getyear = "19" . $year;
-
                 }
-
                 else if ($year < 18)
-
                 {
-
                     if ($year < 10)
-
                     {
-
                         $getyear = "200" . $year;
-
                     }
-
                     else
-
                     {
-
                         $getyear = "20" . $year;
-
                     }
-
                 }
-
-
 
                 //Age
-
                 //90's
-
                 if ($year > 17 && $year <= 99)
-
                 {
-
                     $age = 2017 - (1900 + $year);
-
                     if ($age > 25)
-
                     {
-
                         
-
                     }
-
 					else
-
 					{
-
 						$getage = "This person can not be assigned to you as a Parent." . "<br/>" . "Age : " . $age . "<br>";
-
 					}
-
                 }
-
                 //2000's
-
                 else if ($year < 18)
-
                 {
-
                     $age = 2017 - (2000 + $year);
-
                     if($age>25)
-
                     {
-
                         
-
                     }
-
 					else
-
 					{
-
 						$getage = "This person can not be assigned to you as a parent." . "<br/>" . "Age :" . " " . $age . "<br>";
-
 					}
-
                 }
-
-
 
                 //get gender
-
                 $output = substr($idp,6,1);
-
                 if ($output >= 5)
-
                 {
-
                     $gender = "Male";
-
                 }
-
                 else
-
                 {
-
                     $gender = "Female";
-
                 }
-
-
 
                 //Citizenship
-
                 $citizen = substr($idp,10,1);
-
                 if($citizen == 0)
-
                 {
-
                     $citizenship = "Citizenship :" . " " . "SA Citizen.";
-
                 }
-
                 else
-
                 {
-
                     $citizenship = "Citizenship :" . " " . "Non SA Citizen.";
-
                 }
-
             }
-
             else
-
             {
-
                 $validity = "Invalid ID number!!!!";
-
             }
-
 			
-
 			//process
-
 			if(isset($getday))
-
 						{
 
-
-
 							$checkp = $con -> query ("select * from parent where First_Name ='$namep' && Second_Name = '$lnamep'");
-
 							$checkp1 = $con -> query ("select * from parent where Surname = '$snamep' && ID_Number = '$idp'");
-
 							$checkid = $con -> query ("select * from parent where ID_Number  = '$idp'");
-
 							$checkcell = $con -> query ("select * from parent where Cellphone = '$cellnump'");
-
 							$numcell = mysqli_num_rows($checkcell);
-
 							$numid = mysqli_num_rows($checkid);
-
 							$nump = mysqli_num_rows($checkp);
-
 							$nump1 = mysqli_num_rows($checkp1);
-
 							if($nump>0 && $nump1>0 && $numcell>0)
-
 							{
-
 								$array = $checkp -> fetch_array(MYSQLI_BOTH);
-
 								//sdfghnm,
-
 								//Display
-
 								$_SESSION["parent"] = $array['Parent_Gardien'];
-
 								$_SESSION["title"] = $array['Title'];;
-
 								$_SESSION["First_name"] = $array['First_Name'];
-
 								$_SESSION["Last_name"] = $array['Second_Name'];
-
 								$_SESSION["Surname"] = $array['Surname'];
-
 								$_SESSION["ID"] = $array['ID_Number'];
-
 								$_SESSION["email"] = $array['Email'];
-
 								$_SESSION["dob"] = $array['DOB'];
-
 								$_SESSION["gender"] = $array['Gender'];
-
 								$_SESSION["Home Address"] = $array['Home_Address'];
-
 								$_SESSION["Postal Address"] = $array['Postal_Address'];
-
 								header('Location: confpar.php');
-
 							}
-
 							else if($numid>0)
-
 							{
-
 								$parent = "That parent's Id already exists,are you sure you are inserting incorect info?Please re-check!";	
-
 							}
-
 							else if($numcell>0)
-
 							{
-
 								$parent = "That parent's cellphone number already exists,are you sure you are inserting incorect info?Please re-check!";
-
 							}
-
 							else
-
 							{
-
 								//to database
-
 								$_SESSION["initialsp"] = $inameUp.$ilnameUp;
-
 								$_SESSION["Relationship"];
-
 								$_SESSION["titlep"] = $_POST["title"];
-
 								$_SESSION["emailp"] = $_POST["email"];
-
 								$_SESSION["namep"] = $namep;
-
 								$_SESSION["lnamep"] = $lnamep;
-
 								$_SESSION["snamep"] = $snamep;
-
 								$_SESSION["dobp"] = $getday."/".$getmongth."/".$getyear;
-
 								$_SESSION["genderp"] = $gender;
-
 								$_SESSION["ID_numberp"] = $_POST["ID_number"];
-
 								$_SESSION["Home_Addressp"] = $_POST["Home_Address"];
-
 								$_SESSION["Postal_Addressp"] = $_POST["Postal_Address"];
-
 								$_SESSION["citizenshipp"] = $citizenship;
-
 								$_SESSION["usernamep"] = $username;
-
 								$_SESSION["passwordp"] = $password;
-
 								$_SESSION["Cellphone"] = $cellnump;
-
 								$_SESSION["LearnersIDp"] = $_SESSION["ID_number"];
-
 								header('Location: Confirm-details.php');
-
 							}
-
 							
-
 						}
-
 }
-
 ?>
 
 
@@ -835,25 +642,18 @@ if(isset($_POST['next']))
             <div class="form"  style="text-align:center; border-radius:10px;">
 
               <form action="" method="post" id="contactFrm" name="contactFrm">
-                           <!-- <div class="col-sm-15" >
-           <li class="dropdown"><a href="javascript:void(16)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">select--<i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                <li>Father</li>
-                  <li>Mother</li>
-                  </ul>
-                  </li>
-               </div>-->
+              <select>
+              <option value="Please Select">Please Select</option>
+              <option value="father">Father</option>
+              <option value="Mother">Mother</option>
+              <option value="Gardiant">Gardiant</option>
+              </select>
               <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">
-                                      <!--<div class="col-sm-15" >
-           <li class="dropdown">
-           <a href="javascript:void(16)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"           aria-expanded="true">Select Title<i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                <li>MR</li>
-                  <li>MRS/MISS</li>
-                  <li></li>
-                  </ul>
-                  </li>
-               </div>-->
+                            <select>
+              <option value="Please Select">Please Select</option>
+              <option value="MR">MR</option>
+              <option value="MRS">MRS</option>
+              </select>
 
                <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">
 
