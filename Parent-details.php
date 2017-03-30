@@ -316,7 +316,7 @@ if(isset($_POST['next']))
 
               <p><span>Email Us</span><br>
 
-                <a href="mailto:support@sbtechnosoft.com">support@sbtechnosoft.com</a></p>
+                <a href="mailto:support@sbtechnosoft.com">infor@BHS.com</a></p>
 
             </li>
 
@@ -647,7 +647,7 @@ if(isset($_POST['next']))
               <option value="Gardiant">Gardiant</option>
               </select>
               <!--<input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
-                            <select>
+              <select>
               <option value="Please Select">Please Select</option>
               <option value="MR">MR</option>
               <option value="MRS">MRS</option>
