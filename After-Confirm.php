@@ -1,197 +1,187 @@
-<?php require('connection/conect.php');?>
+<?php require ('connection/conect.php')?>
+
 <?php
+ob_start();
 session_start();
-if(isset($_POST['next']))
+if(isset($_POST['login']))
+
 {
-   			$idp = $_POST["ID_number"];
-            $namep = $_POST["First_name"];
-            $lnamep = $_POST["Last_name"];
-            $snamep = $_POST["Surname"];
-			$cellnump = $_POST["cell"];
-			
-            //initials
-            $iname = substr($namep,0,1);
-			$inameUp = strtoupper($iname);
-            $ilname = substr($lnamep,0,1);
-			$ilnameUp = strtoupper($ilname);
-            $isname1 = substr($snamep,0,1);
-			$isname1Up = strtoupper($isname1);
-            $isname2 = substr($snamep,1);
-			$isname2Low = strtolower($isname2);
-			
-            $initials = "Initials :" . " " . $inameUp. "." . " " . $ilnameUp . "." . " " . $isname1Up . $isname2Low . "<br/>";
-            //fullnames
-            $fname2 = substr($namep,1);
-			$fname2Low = strtolower($fname2);
-            $flname2 = substr($lnamep,1);
-			$flname2Low = strtolower($flname2);
 
-            $fullnames = "First Name :" . " " . $inameUp . $fname2Low . "<br/>" . "Second Name :" . " " . $ilnameUp . $flname2Low . "<br/>" . "Surname :" . " " . $isname1Up . $isname2Low . "<br/>";
+	$username = $_POST['username'];
 
-            $length = strlen($idp);
-            $months = substr($idp,2,2);
-			$password = $inameUp.$ilnameUp.$months;
-			$username = $months.$isname1Up.$isname2Low;
-            if ($length == 13 && $months > 0 && $months < 13)
-            {
-                //Date of birth
-                //get day
-                $day = substr($idp,4,2);
-                if ($day <= 10)
-                {
-                    $getday = "0" . $day . " ";
-                }
-                else
-                    $getday = $day . " ";
+	$password = $_POST['password'];
 
-                //get month
-                //array
-                $month = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-                $montha = array( 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13 );
-                for ($i = 0; $i < 13; $i++)
-                {
-                    if($months == $montha[$i])
-                    {
-                        $getmongth = $month[$i] . " ";
-                    }
-                }
+	
 
-                //get year
-                $year = substr($idp,0,2);
-                if ($year > 17 && $year <= 99)
-                {
-                    $getyear = "19" . $year;
-                }
-                else if ($year < 18)
-                {
-                    if ($year < 10)
-                    {
-                        $getyear = "200" . $year;
-                    }
-                    else
-                    {
-                        $getyear = "20" . $year;
-                    }
-                }
+	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
 
-                //Age
-                //90's
-                if ($year > 17 && $year <= 99)
-                {
-                    $age = 2017 - (1900 + $year);
-                    if ($age > 25)
-                    {
-                        
-                    }
-					else
-					{
-						$getage = "This person can not be assigned to you as a Parent." . "<br/>" . "Age : " . $age . "<br>";
-					}
-                }
-                //2000's
-                else if ($year < 18)
-                {
-                    $age = 2017 - (2000 + $year);
-                    if($age>25)
-                    {
-                        
-                    }
-					else
-					{
-						$getage = "This person can not be assigned to you as a parent." . "<br/>" . "Age :" . " " . $age . "<br>";
-					}
-                }
+	$resultadmin = mysqli_num_rows($admin);
 
-                //get gender
-                $output = substr($idp,6,1);
-                if ($output >= 5)
-                {
-                    $gender = "Male";
-                }
-                else
-                {
-                    $gender = "Female";
-                }
+	
 
-                //Citizenship
-                $citizen = substr($idp,10,1);
-                if($citizen == 0)
-                {
-                    $citizenship = "Citizenship :" . " " . "SA Citizen.";
-                }
-                else
-                {
-                    $citizenship = "Citizenship :" . " " . "Non SA Citizen.";
-                }
-            }
-            else
-            {
-                $validity = "Invalid ID number!!!!";
-            }
-			
-			//process
-			if(isset($getday))
-						{
+	//Learner
 
-							$checkp = $con -> query ("select * from parent where First_Name ='$namep' && Second_Name = '$lnamep'");
-							$checkp1 = $con -> query ("select * from parent where Surname = '$snamep' && ID_Number = '$idp'");
-							$checkid = $con -> query ("select * from parent where ID_Number  = '$idp'");
-							$checkcell = $con -> query ("select * from parent where Cellphone = '$cellnump'");
-							$numcell = mysqli_num_rows($checkcell);
-							$numid = mysqli_num_rows($checkid);
-							$nump = mysqli_num_rows($checkp);
-							$nump1 = mysqli_num_rows($checkp1);
-							if($nump>0 && $nump1>0 && $numcell>0)
-							{
-								$array = $checkp -> fetch_array(MYSQLI_BOTH);
-								//sdfghnm,
-								//Display
-								$_SESSION["parent"] = $array['Parent_Gardien'];
-								$_SESSION["title"] = $array['Title'];;
-								$_SESSION["First_name"] = $array['First_Name'];
-								$_SESSION["Last_name"] = $array['Second_Name'];
-								$_SESSION["Surname"] = $array['Surname'];
-								$_SESSION["ID"] = $array['ID_Number'];
-								$_SESSION["email"] = $array['Email'];
-								$_SESSION["dob"] = $array['DOB'];
-								$_SESSION["gender"] = $array['Gender'];
-								$_SESSION["Home Address"] = $array['Home_Address'];
-								$_SESSION["Postal Address"] = $array['Postal_Address'];
-								header('Location: confpar.php');
-							}
-							else if($numid>0)
-							{
-								$parent = "That parent's Id already exists,are you sure you are inserting incorect info?Please re-check!";	
-							}
-							else if($numcell>0)
-							{
-								$parent = "That parent's cellphone number already exists,are you sure you are inserting incorect info?Please re-check!";
-							}
-							else
-							{
-								//to database
-								$_SESSION["initialsp"] = $inameUp.$ilnameUp;
-								$_SESSION["Relationship"];
-								$_SESSION["titlep"] = $_POST["title"];
-								$_SESSION["emailp"] = $_POST["email"];
-								$_SESSION["namep"] = $namep;
-								$_SESSION["lnamep"] = $lnamep;
-								$_SESSION["snamep"] = $snamep;
-								$_SESSION["dobp"] = $getday."/".$getmongth."/".$getyear;
-								$_SESSION["genderp"] = $gender;
-								$_SESSION["ID_numberp"] = $_POST["ID_number"];
-								$_SESSION["Home_Addressp"] = $_POST["Home_Address"];
-								$_SESSION["Postal_Addressp"] = $_POST["Postal_Address"];
-								$_SESSION["citizenshipp"] = $citizenship;
-								$_SESSION["usernamep"] = $username;
-								$_SESSION["passwordp"] = $password;
-								$_SESSION["Cellphone"] = $cellnump;
-								$_SESSION["LearnersIDp"] = $_SESSION["ID_number"];
-								header('Location: Confirm-details.php');
-							}
-							
-						}
+	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
+
+	$resultlearner = mysqli_num_rows($learner);
+
+	
+
+	//Parent
+
+	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
+
+	$resultparent = mysqli_num_rows($parent);
+
+	
+
+	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
+
+	{
+
+		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
+
+		$_SESSION['usernamea'] = $queryadmin['username'];
+
+		$_SESSION['userid'] = $queryadmin['userId'];
+
+		
+
+		//Learner
+
+		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
+
+		$_SESSION['username'] = $querylearner['Username'];
+
+		$_SESSION["ID_number"] = $querylearner['IDNumber'];
+
+		$_SESSION['Status'] = $querylearner['Status'];
+
+		
+
+		if(isset($_SESSION['userid']))
+
+		{
+
+			header('Location: Admin-Page.php');
+
+		}
+
+		if(isset($_SESSION['username']))
+
+		{
+
+			//learner
+
+			if($_SESSION['Status'] == "Aproved")
+
+			{
+
+				header('Location: RegisterSubj.php');
+
+				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
+
+			}
+
+			else
+
+			{
+
+				header('Location: After-Confirm.php');
+
+			}
+
+		}
+
+		
+
+		//parent
+
+		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
+
+	}
+
+	else
+
+	{
+
+		$error = "<p style='color:red'>User Account not found.....</p>";
+
+	}
+
 }
+
+?>
+
+<?php
+if(isset($_SESSION["username"]) && isset($_SESSION['report']))
+
+	{
+
+		$report = $_SESSION['report'];
+
+		$username = $_SESSION["username"];
+
+		$checkreport = $con -> query ("SELECT * FROM images where username = '$username' and imagename = '$report' ");
+
+		$result = $checkreport -> fetch_array(MYSQLI_BOTH);
+
+		$reportname = $result['imagename'];
+
+		if($reportname<1)
+
+		{
+
+			$_SESSION["query"] = "<p style='color:#fff;'><h2><em>Please Upload your Report.....</em></h2></p>";
+
+		}
+
+		else if ($reportname>1)
+
+		{
+
+			$_SESSION["query2"] = "<p style='color:#fff;'><h2><em>Thank you for registering your application is in progress.</em></h2></p>";
+
+			header('Location: After-Upload-Report.php');
+
+		}
+
+	}
+
+	if(isset($_POST['upload']))
+
+		{
+
+			if($reportname<1)
+
+			{
+
+				//Inserting documents
+
+				$doc_name = "Report".$_SESSION["ID_number"];
+
+				$myfile = $_FILES['myfile']['name'];
+
+				$tmp_name = $_FILES['myfile']['tmp_name'];
+
+				if($myfile&&$doc_name)
+
+				{
+
+					$location = $myfile;
+
+					move_uploaded_file($tmp_name,"document/".$myfile);
+
+					$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}')");
+
+					//$query = $con -> query("INSERT INTO reports (Report, Reportname, Reportpath, username)VALUES('{$tmp_name}', '{$doc_name}' , '{$location}' , '{$username}')");
+
+				}
+
+			}
+
+		}
+
 ?>
 
 <!DOCTYPE html>
@@ -206,7 +196,7 @@ if(isset($_POST['next']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Parent-details</title>
+<title>Bhevu High&reg;</title>
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -260,27 +250,163 @@ if(isset($_POST['next']))
 
         <ul class="top-right pull-right ">
 
-          <!-- Login -->
+        <?php
 
-          <li class="login"><a href="javascript:void(0)"><i class="fa fa-lock"></i>Login</a>
+		  if(isset($_SESSION['username']))
 
-            <div class="login-form">
+		  {
 
-              <h4>Login</h4>
+			 echo "
 
-              <form action="#" method="post">
+			  <!-- Lgout -->
 
-                <input type="text" name="name" placeholder="Username">
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
 
-                <input type="password" name="password" placeholder="Password">
+            <div class='register-form'>
 
-                <button type="submit" class="btn">Login</button>
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
 
               </form>
 
             </div>
 
-          </li>
+          </li>";}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+				echo "
+
+			  <!-- Lgout -->
+
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
+
+            <div class='register-form'>
+
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
+
+              </form>
+
+            </div>
+
+          </li>";
+
+			}
+
+		  ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+			  echo "
+
+          <!-- Login -->
+
+          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
+
+            <div class='login-form'>
+
+              <h4>Login</h4>
+
+              <form action='' method='post'>
+
+                <input type='text' name='username' placeholder='Username'>
+
+                <input type='password' name='password' placeholder='Password'>";}?>
+
+                <?php if(isset($error)){echo $error;}?>
+
+           <?php
+
+           if(isset($_SESSION['username']))
+
+		  	{
+
+		 	}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}
+
+		  	else
+
+		  	{
+
+			  echo "  
+
+                <button type='submit' name='login' class='btn'>Login</button>
+
+              </form>
+
+            </div>
+
+          </li>";
+
+			}
+
+          ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+		  echo "
+
+          <!-- Apply -->
+
+          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
+
+            <div class='register-form'>
+
+              <h4>Apply</h4>
+
+            </div>
+
+           </li>";
+
+		  }
+
+		   ?>
 
         </ul>
 
@@ -296,9 +422,9 @@ if(isset($_POST['next']))
 
       <!-- Logo -->
 
-      <div class="row" align="left">
+      <div class="row">
 
-        <div class="col-sm-3"><a href="index.php"> <img src="Bhevu pics/3rd CD/Bhevu Logo.jpg"  width="200" height="200" alt="Bhevu High School"></a> </div>
+        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
 
         <div class="col-sm-8">
 
@@ -316,7 +442,7 @@ if(isset($_POST['next']))
 
               <p><span>Email Us</span><br>
 
-                <a href="mailto:support@sbtechnosoft.com">infor@BHS.com</a></p>
+                <a href="mailto:support@sbtechnosoft.com">support@sbtechnosoft.com</a></p>
 
             </li>
 
@@ -344,7 +470,7 @@ if(isset($_POST['next']))
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="Education World"/></a> </div>
+            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -354,7 +480,7 @@ if(isset($_POST['next']))
 
               <li><a href="index.php">Home</a></li>
 
-              <li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
+              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
 
                 <ul class="dropdown-menu">
 
@@ -473,6 +599,7 @@ if(isset($_POST['next']))
                           <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
+
                           <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
 
                           <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
@@ -549,7 +676,9 @@ if(isset($_POST['next']))
 
                 </ul>
 
-              </li>
+              </li>-->
+
+              <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
 
@@ -603,7 +732,7 @@ if(isset($_POST['next']))
 
 <section class="inner-wrapper contact-wrapper">
 
-  <div class="container" >
+  <div class="container">
 
     <div class="row">
 
@@ -615,121 +744,51 @@ if(isset($_POST['next']))
 
         <div class="col-sm-12">
 
-          <h2>
-
-          <?php
-
-				if(isset($_SESSION["elder"]))
-
-				{
-
-					echo $_SESSION["elder"]."'s"." ";
-
-				}
-
-		 ?> PARENT'S PARTICULARS</h2>
-
         </div>
 
         </div>
 
           <div class="col-sm-12 col-md-12 no-space-right">
 
-          <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
+          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm">
-              <select>
-              <option value="Please Select">Please Select</option>
-              <option value="father">Father</option>
-              <option value="Mother">Mother</option>
-              <option value="Gardiant">Gardiant</option>
-              </select>
-              <!--<input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
-              <select>
-              <option value="Please Select">Please Select</option>
-              <option value="MR">MR</option>
-              <option value="MRS">MRS</option>
-              </select>
+              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-              <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
-
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
-
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
-
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
-
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-
-                <?php
-
-                	if(isset($validity))
-
-					{
-
-						echo "<p style='color:red'>".$validity."</p>";
-
-					}
-
-					if(isset( $getage))
-
-					{
-
-						echo "<p style='color:red'>".$getage."</p>";
-
-					}
-
-				?>
-
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
-
-                <textarea placeholder="Physical/Home Address" name="Home_Address" type="text" class="txt_3"></textarea>
-
-                <textarea placeholder="Postal Address" name="Postal_Address" type="text" class="txt_3"></textarea>
-
-                <table style="color:#fff;">
+                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
 
                 	<tr>
 
-                    	<th colspan="4" style="text-align:center;">
-
-                        	<em>Contact details</em>
-
-                        </th>
-
-                        <td>
-
-                        <tr style="color:red;">
-
-                            <td><input type="text" required placeholder="Home(036.....)" value="" name="home" class="txt"></td>
-
-                            <td><input type="text" required placeholder="Work(036...)" value="" name="work" class="txt"></td>
-
-                            <td><input type="text" required placeholder="Cell(086....)" value="" name="cell" class="txt"></td>
-
-                        </tr>	
-
-                        </td>     
+                    	<th colspan="12" style="text-align:center;"><?php if(isset($_SESSION["query"])){echo $_SESSION["query"];} ?></th>
 
                     </tr>
 
-                    <?php
+                    <?php 
 
-                    	if(isset($parent))
+					if(isset($_SESSION["query"]))
 
-						{
+					{
 
-							echo "<p style='color:red;'>".$parent."</p>";
+						echo "<tr>
 
-						}
+								<td>.</td>
+
+								<td>Upload Report</td>
+
+                        		<td colspan='12' style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
+
+                        	 </tr>
+
+							 <tr><td>.</td></tr>";
+
+					}
 
 					?>
 
                 </table>
 
-                <input type="submit" value="Next..." name="next" class="txt2">
+                <?php if(isset($_SESSION["query"])){echo "<input type='submit' value='Upload Report' name='upload' class='txt2'>";}?>
 
               </form>
 
@@ -756,6 +815,19 @@ if(isset($_POST['next']))
 </section>
 
 <!-- Call to Action start -->
+
+<div class="call-to-action">
+
+  <div class="container">
+
+    <h3>Lorem Ipsum is simply dummy text</h3>
+
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing and typesetting industry.</p>
+
+    <a href="javascript:void(0)">Sign Up</a> </div>
+
+</div>
+
 <!-- Call to Action End -->
 
 <!-- Footer Links Start-->
@@ -764,15 +836,33 @@ if(isset($_POST['next']))
 
   <div class="container">
 
-    <div class="col-sm-3"><img src="Bhevu pics/3rd CD/Bhevu Logo.jpg" alt=""> </div>
+    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
 
-    
+    <div class="col-sm-5">
+
+      <div class="contactus">
+
+        <h2>Contact Us</h2>
+
+        <ul class="list-ul">
+
+          <li><i class="fa fa-map-marker"></i>Department of State, 300 E-Block Building, USA</li>
+
+          <li><i class="fa fa-phone"></i>0800 123 46 0000</li>
+
+          <li><i class="fa fa-envelope"></i><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
+
+        </ul>
+
+      </div>
+
+    </div>
 
     <div class="col-sm-4 subscirbe pull-right">
 
       <h2>Newsletter</h2>
 
-      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Posts on Events  &amp;</p>
+      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
 
       <div class="form">
 
@@ -806,7 +896,7 @@ if(isset($_POST['next']))
 
 	</script> 
 
-      Bhevu High School | All Rights Reserved.</p>
+      Education World | All Rights Reserved.</p>
 
   </div>
 
