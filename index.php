@@ -175,15 +175,15 @@ if(isset($_POST['login']))
 
           <li class="twitter"><a href="javascript:void(0)" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
-          <li class="linkedin"><a href="javascript:void(0)" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          <!--<li class="linkedin"><a href="javascript:void(0)" target="_blank"><i class="fa fa-linkedin"></i></a></li>-->
 
-          <li class="pinterest"><a href="javascript:void(0)" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+          <!--<li class="pinterest"><a href="javascript:void(0)" target="_blank"><i class="fa fa-pinterest"></i></a></li>-->
 
-          <li class="google-plus"><a href="javascript:void(0)" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+          <!--<li class="google-plus"><a href="javascript:void(0)" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
 
-          <li class="youtube"><a href="javascript:void(0)" target="_blank"><i class="fa fa-youtube"></i></a></li>
+          <!--<li class="youtube"><a href="javascript:void(0)" target="_blank"><i class="fa fa-youtube"></i></a></li>-->
 
-          <li class="dribbble"><a href="javascript:void(0)" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+         <!--<li class="dribbble"><a href="javascript:void(0)" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
 
         </ul>
 
@@ -377,7 +377,7 @@ if(isset($_POST['login']))
 
               <p> <span>Call us</span><br>
 
-                +1-012-345-6789</p>
+               062 569 8372</p>
 
             </li>
 
@@ -385,7 +385,7 @@ if(isset($_POST['login']))
 
               <p><span>Email Us</span><br>
 
-                <a href="mailto:support@sbtechnosoft.com">support@sbtechnosoft.com</a></p>
+                <a href="mailto:support@sbtechnosoft.com">lenjabulothabiso@gmail.com</a></p>
 
             </li>
 
@@ -867,7 +867,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
   <div class="container">
 
-    <h2>Statistics of <span><strong>School</strong></span></h2>
+    <h2>Statistics of <span><strong>Bhevu High School</strong></span></h2>
 
     <p class="center">Bhevu is proof that hard work and perseverance can overcome all odds.</p>
 
@@ -877,7 +877,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
       <div class="col-sm-3 counter"> <i class="fa fa-list-alt" aria-hidden="true"></i>
 
-        <div class="number animateNumber" data-num="28"> <span>28</span></div>
+        <div class="number animateNumber" data-num="01"> <span>01</span></div>
 
         <p>Our Branches</p>
 
@@ -885,7 +885,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
       <div class="col-sm-3 counter"> <i class="fa fa-user" aria-hidden="true"></i>
 
-        <div class="number animateNumber" data-num="180"> <span>180</span></div>
+        <div class="number animateNumber" data-num="50"> <span>50</span></div>
 
         <p>Our teachers</p>
 
@@ -893,7 +893,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
       <div class="col-sm-3 counter"> <i class="fa fa-users" aria-hidden="true"></i>
 
-        <div class="number animateNumber" data-num="3600"> <span>3600</span></div>
+        <div class="number animateNumber" data-num="600"> <span>600</span></div>
 
         <p>Students</p>
 
@@ -901,7 +901,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
       <div class="col-sm-3 counter"> <i class="fa fa-graduation-cap" aria-hidden="true"></i>
 
-        <div class="number animateNumber" data-num="768"> <span>768</span></div>
+        <div class="number animateNumber" data-num="368"> <span>368</span></div>
 
         <p>Graduates</p>
 
@@ -1205,13 +1205,13 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <div class="caption">
 
-                <h4>Gallery Image2</h4>
+                <h4>Soccer Team</h4>
 
-                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                <p>........</p>
 
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
 
-              <img src="images/gallery-img2.jpg" alt="Gallery Image"> </a>
+              <img src="Bhevu Pics/Edited/Gallery/Soccer.jpg" alt="Soccer Team"> </a>
 
               <div class="modal fade" id="2" tabindex="-1" role="dialog">
 
@@ -1221,11 +1221,11 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-                    <div class="modal-body"> <img src="images/gallery-img2.jpg" alt="Gallery Image"> </div>
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/SoccerFull.JPG" alt="Soccer Team"> </div>
 
                     <div class="col-md-12 description">
 
-                      <h4>This is the second one on my Gallery</h4>
+                      <h4>Soccer Team Players</h4>
 
                     </div>
 
@@ -1245,13 +1245,13 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <div class="caption">
 
-                <h4>Gallery Image3</h4>
+                <h4>Indlamu Dance</h4>
 
-                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                <p>......</p>
 
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
 
-              <img src="images/gallery-img3.jpg" alt="Gallery Image"> </a>
+              <img src="Bhevu Pics/Edited/Gallery/Indlamu.JPG" alt="Indlamu Dance"> </a>
 
               <div class="modal fade" id="3" tabindex="-1" role="dialog">
 
@@ -1261,11 +1261,11 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-                    <div class="modal-body"> <img src="images/gallery-img3.jpg" alt="Gallery Image"> </div>
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.JPG" alt="Indlamu Dance"> </div>
 
                     <div class="col-md-12 description">
 
-                      <h4>This is the third one on my Gallery</h4>
+                      <h4>Indlamu Dance</h4>
 
                     </div>
 
@@ -1285,13 +1285,13 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <div class="caption">
 
-                <h4>Gallery Image4</h4>
+                <h4>Matric Dance</h4>
 
-                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                <p>......</p>
 
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
 
-              <img src="images/gallery-img4.jpg" alt="Gallery Image"> </a>
+              <img src="Bhevu Pics/Edited/Gallery/MatriDance.JPG" alt="Matric Dance"> </a>
 
               <div class="modal fade" id="4" tabindex="-1" role="dialog">
 
@@ -1301,11 +1301,11 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-                    <div class="modal-body"> <img src="images/gallery-img4.jpg" alt="Gallery Image"> </div>
+                  <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/MatricDanceFull.JPG" alt="Matric Dance"> </div>
 
                     <div class="col-md-12 description">
 
-                      <h4>This is the fourth one on my Gallery</h4>
+                      <h4>Matric Dance 2015</h4>
 
                     </div>
 
@@ -1381,7 +1381,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
     </div>
 
-    <div class="col-sm-4 subscirbe pull-right">
+    <!--<div class="col-sm-4 subscirbe pull-right">
 
       <h2>Newsletter</h2>
 
@@ -1395,7 +1395,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
       </div>
 
-    </div>
+    </div>-->
 
   </div>
 
