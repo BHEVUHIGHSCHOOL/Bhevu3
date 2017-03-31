@@ -948,7 +948,6 @@ if(isset($_POST['next']))
 
                 <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
-<<<<<<< HEAD
                 <script>
                 	function numbersonly(input)
 					{
@@ -958,18 +957,13 @@ if(isset($_POST['next']))
                 </script>
                 <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
-
-=======
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-<br>
-                  <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Grade</option>
-              <option value="08">8</option>
-              <option value="09">9</option>
-              <option value="10">10</option>
-             <option value="11">11</option>
-              </select>
->>>>>>> d1f9b8b71ef79a0d4e73aeffb21d1e7c8b5025ac
+                 <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                  <option value="Please Select">Select Grade</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                 <option value="11">11</option>
+               </select>
                 <?php
 
                 	if(isset($validity))
@@ -989,12 +983,8 @@ if(isset($_POST['next']))
 					}
 
 				?>
-<<<<<<< HEAD
 
                 <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
-=======
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
->>>>>>> d1f9b8b71ef79a0d4e73aeffb21d1e7c8b5025ac
 
                 <table>
 
@@ -1028,9 +1018,9 @@ if(isset($_POST['next']))
               
               </select>
 
-                <table style="color:#fff;">
+                <table style="color:#fff;" class="col-sm-12">
 
-                	<tr><th colspan="4" style="text-align:center;"><em>Relative(s) @ Bhevu H.</em></th></tr>
+                	<tr><th colspan="4" style="text-align:center;"><em>Relative @ Bhevu H.</em></th></tr>
 
                 	<tr>
 
@@ -1050,9 +1040,25 @@ if(isset($_POST['next']))
 
                         <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Grade" value="" name="rel_Grade" class="txt" ></td>
+                        <td class="col-sm-3">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                              <option value="Please Select">Grade</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                             <option value="11">11</option>
+			               </select>
+                        </td>
 
-                        <td><input type="text" placeholder="Section" value="" name="rel_Section" class="txt"></td>
+                        <td class="col-sm-3">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                              <option value="Please Select">Section</option>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                             <option value="D">D</option>
+			               </select>
+                        </td>
 
                     </tr>
 
