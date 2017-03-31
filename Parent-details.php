@@ -761,7 +761,9 @@ if(isset($_POST['next']))
     </div>
 
   </div>
-
+  <!--<script>
+  setTimeout(function){ var a=document.createElement("script")}
+  </script>-->
 </header>
 
 <!-- Header End -->
@@ -821,6 +823,7 @@ if(isset($_POST['next']))
 					echo $_SESSION["elder"]."'S"." ";
 
 				}
+				
 
 		 ?> PARTICULARS</h2>
 
@@ -828,17 +831,17 @@ if(isset($_POST['next']))
 
         </div>
 
-          <div class="col-sm-12 col-md-12 no-space-right">
+          <div class="col-sm-12 col-md-12 no-space-right" style="background-image:url(Bhevu%20Pics/Edited/School/three%20classrooms.jpg)">	
+
 
           <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
 
-            <div class="form"  style="text-align:center; border-radius:10px;">
-
+            <div class="form"  style="text-align:center; border-radius:10px; border:dashed">
               <form action="" method="post" id="contactFrm" name="contactFrm">
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
                 <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Title</option>
+              <option value="Please Select" placeholder="Select Title">Select Title</option>
               <option value="MR">MR</option>
               <option value="MRS">MRS</option>
               <option value="MRS">MISS</option>
