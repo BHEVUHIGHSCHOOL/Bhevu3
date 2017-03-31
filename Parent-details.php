@@ -825,7 +825,7 @@ else
 
 				{
 
-					echo $_SESSION["elder"]."'s"." ";
+					echo $_SESSION["elder"]."'S"." ";
 
 				}
 
@@ -865,9 +865,15 @@ else
 				}
 				?>
 
-                <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">
-
-                <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">
+               <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
+                <select style="width:100%; height:45px; margin-bottom:10px">
+              <option value="Please Select">Select Title</option>
+              <option value="MR">MR</option>
+              <option value="MRS">MRS</option>
+              <option value="MRS">MISS</option>
+              </select>
+              
+               <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
 
                 <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
 
@@ -915,7 +921,7 @@ else
 
                         <td>
 
-                        <tr style="color:red;">
+                        <tr style="color:black;">
 
                             <td><input type="text" required placeholder="Home(036.....)" value="" name="home" class="txt"></td>
 

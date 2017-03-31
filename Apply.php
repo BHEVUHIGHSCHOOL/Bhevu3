@@ -948,6 +948,7 @@ if(isset($_POST['next']))
 
                 <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
+<<<<<<< HEAD
                 <script>
                 	function numbersonly(input)
 					{
@@ -958,6 +959,17 @@ if(isset($_POST['next']))
                 <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
 
+=======
+                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
+<br>
+                  <select style="width:100%; height:45px; margin-bottom:10px">
+              <option value="Please Select">Select Grade</option>
+              <option value="08">8</option>
+              <option value="09">9</option>
+              <option value="10">10</option>
+             <option value="11">11</option>
+              </select>
+>>>>>>> d1f9b8b71ef79a0d4e73aeffb21d1e7c8b5025ac
                 <?php
 
                 	if(isset($validity))
@@ -977,8 +989,12 @@ if(isset($_POST['next']))
 					}
 
 				?>
+<<<<<<< HEAD
 
                 <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
+=======
+                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
+>>>>>>> d1f9b8b71ef79a0d4e73aeffb21d1e7c8b5025ac
 
                 <table>
 
@@ -988,7 +1004,7 @@ if(isset($_POST['next']))
 
                         <tr>
 
-                        	<td style="color:#fff;"><input type="file" required placeholder="Insert image" value="" name="myfile" class="txt"></td>
+                        	<td style="color:#fff;"><input type="file" style="width:100%; height:20x; margin-bottom:30px;" required placeholder="Insert image" value="" name="myfile" class="txt"></td>
 
                         </tr>
 
@@ -999,8 +1015,18 @@ if(isset($_POST['next']))
                 <input type="text" required placeholder="Present School" value="" name="Present_school" class="txt">
 
                 <textarea placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
-
-                <input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">
+                <br><br>
+                <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
+               <select style="width:100%; height:45px; margin-bottom:10px">
+              <option value="Please Select">Select Your Home Language</option>
+              <option value="Zulu">Zulu</option>
+              <option value="English">English</option>
+              <option value="Afrikaans">Afrikaans</option>
+             <option value="Sesotho">Sesotho</option>
+             <option value="Sesotho">Xhosa</option>
+             <option value="Other">Other</option>
+              
+              </select>
 
                 <table style="color:#fff;">
 
