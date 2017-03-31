@@ -1,393 +1,107 @@
-<?php require('connection/conect.php');?>
+<?php require ('connection/conect.php')?>
 
 <?php
 ob_start();
 session_start();
-if(isset($_POST['next']))
+if(isset($_POST['save']))
 
 {
 
-   			$idp = $_POST["ID_number"];
+		//Saving Learner
 
-            $namep = $_POST["First_name"];
+		$initials = $_SESSION["initials"];
 
-            $lnamep = $_POST["Last_name"];
+		$name = $_SESSION["name"];
 
-            $snamep = $_POST["Surname"];
+		$lname = $_SESSION["lname"];
 
-			$cellnump = $_POST["cell"];
+		$sname = $_SESSION["sname"];
 
+		$dob = $_SESSION["dob"];
 
+		$gender = $_SESSION["gender"];
 
-            //initials
+		$id = $_SESSION["ID_number"];
 
-            $iname = substr($namep,0,1);
+		$present = $_SESSION["Present_school"];
 
-			$inameUp = strtoupper($iname);
+		$cell = $_SESSION["Mobile_number"];
 
-            $ilname = substr($lnamep,0,1);
+		$elder = $_SESSION["elder"];
 
-			$ilnameUp = strtoupper($ilname);
+		$leaners_addr = $_SESSION["Learners_address"];
 
-            $isname1 = substr($snamep,0,1);
+		$home_lang = $_SESSION["Home_Language"];
 
-			$isname1Up = strtoupper($isname1);
+		$relative = $_SESSION["Relative"];
 
-            $isname2 = substr($snamep,1);
+		$citizesh = $_SESSION["citizenship"];
 
-			$isname2Low = strtolower($isname2);
+		$username = $_SESSION["username"];
 
-			
+		$password = $_SESSION["password"];
 
-            $initials = "Initials :" . " " . $inameUp. "." . " " . $ilnameUp . "." . " " . $isname1Up . $isname2Low . "<br/>";
+		$elder_id = $_SESSION["ID_numberp"];
 
-            //fullnames
+		$status = "Waiting";
 
-            $fname2 = substr($namep,1);
+		//$image = $_SESSION["image"];
 
-			$fname2Low = strtolower($fname2);
+		
 
-            $flname2 = substr($lnamep,1);
+		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}')");
 
-			$flname2Low = strtolower($flname2);
+	
 
+	//Saving Parent
 
+	$initialsp = $_SESSION["initialsp"];
 
-            $fullnames = "First Name :" . " " . $inameUp . $fname2Low . "<br/>" . "Second Name :" . " " . $ilnameUp . $flname2Low . "<br/>" . "Surname :" . " " . $isname1Up . $isname2Low . "<br/>";
+	$parent_gardien = $_SESSION["elder"];
 
+	$cellp = $_SESSION["Cellphone"];
 
+	$titlep = $_SESSION["titlep"];
 
-            $length = strlen($idp);
+	$emailp = $_SESSION["emailp"];
 
-            $months = substr($idp,2,2);
+	$namep = $_SESSION["namep"];
 
-			$password = $inameUp.$ilnameUp.$months;
+	$lnamep = $_SESSION["lnamep"];
 
-			$username = $months.$isname1Up.$isname2Low;
+	$snamep = $_SESSION["snamep"];
 
-            if ($length == 13 && $months > 0 && $months < 13)
+	$dobp = $_SESSION["dobp"] ;
 
-            {
+	$genderp = $_SESSION["genderp"];
 
-                //Date of birth
+	$idp = $_SESSION["ID_numberp"];
 
-                //get day
+	$homeaddrp = $_SESSION["Home_Addressp"];
 
-                $day = substr($idp,4,2);
+	$postaladdrp = $_SESSION["Postal_Addressp"];
 
-                if ($day <= 10)
+	$citizeshp = $_SESSION["citizenshipp"];
 
-                {
+	$usernamep = $_SESSION["usernamep"];
 
-                    $getday = "0" . $day . " ";
+	$passwordp = $_SESSION["passwordp"];
 
-                }
+	$saveparent = $con -> query("INSERT INTO parent(Parent_Gardin, Title, First_Name, Second_Name, Surname, ID_Number, Email, Home_Address, Postal_Address, Gender, Password, Username, Citizenship, DOB, Initials, Cellphone)Values('{$parent_gardien}', '{$titlep}', '{$namep}', '{$lnamep}', '{$snamep}', '{$idp}', '{$emailp}', '{$homeaddrp}', '{$postaladdrp}', '{$genderp}', '{$passwordp}', '{$usernamep}', '{$citizeshp}', '{$dobp}', '{$initialsp}', '{$cellp}')");
 
-                else
+	
 
-                    $getday = $day . " ";
+	if($saveparent)
 
+	{
 
+		header('Location: After-Confirm.php');
 
-                //get month
-
-                //array
-
-                $month = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-
-                $montha = array( 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13 );
-
-                for ($i = 0; $i < 13; $i++)
-
-                {
-
-                    if($months == $montha[$i])
-
-                    {
-
-                        $getmongth = $month[$i] . " ";
-
-                    }
-
-                }
-
-
-
-                //get year
-
-                $year = substr($idp,0,2);
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $getyear = "19" . $year;
-
-                }
-
-                else if ($year < 18)
-
-                {
-
-                    if ($year < 10)
-
-                    {
-
-                        $getyear = "200" . $year;
-
-                    }
-
-                    else
-
-                    {
-
-                        $getyear = "20" . $year;
-
-                    }
-
-                }
-
-
-
-                //Age
-
-                //90's
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $age = 2017 - (1900 + $year);
-
-                    if ($age > 25)
-
-                    {
-
-                        
-
-                    }
-
-					else
-
-					{
-
-						$getage = "This person can not be assigned to you as a Parent." . "<br/>" . "Age : " . $age . "<br>";
-
-					}
-
-                }
-
-                //2000's
-
-                else if ($year < 18)
-
-                {
-
-                    $age = 2017 - (2000 + $year);
-
-                    if($age>25)
-
-                    {
-
-                        
-
-                    }
-
-					else
-
-					{
-
-						$getage = "This person can not be assigned to you as a parent." . "<br/>" . "Age :" . " " . $age . "<br>";
-
-					}
-
-                }
-
-
-
-                //get gender
-
-                $output = substr($idp,6,1);
-
-                if ($output >= 5)
-
-                {
-
-                    $gender = "Male";
-
-                }
-
-                else
-
-                {
-
-                    $gender = "Female";
-
-                }
-
-
-
-                //Citizenship
-
-                $citizen = substr($idp,10,1);
-
-                if($citizen == 0)
-
-                {
-
-                    $citizenship = "Citizenship :" . " " . "SA Citizen.";
-
-                }
-
-                else
-
-                {
-
-                    $citizenship = "Citizenship :" . " " . "Non SA Citizen.";
-
-                }
-
-            }
-
-            else
-
-            {
-
-                $validity = "Invalid ID number!!!!";
-
-            }
-
-			
-
-			//process
-
-			if(isset($getday))
-
-						{
-
-
-
-							$checkp = $con -> query ("select * from parent where First_Name ='$namep' && Second_Name = '$lnamep'");
-
-							$checkp1 = $con -> query ("select * from parent where Surname = '$snamep' && ID_Number = '$idp'");
-
-							$checkid = $con -> query ("select * from parent where ID_Number  = '$idp'");
-
-							$checkcell = $con -> query ("select * from parent where Cellphone = '$cellnump'");
-
-							$numcell = mysqli_num_rows($checkcell);
-
-							$numid = mysqli_num_rows($checkid);
-
-							$nump = mysqli_num_rows($checkp);
-
-							$nump1 = mysqli_num_rows($checkp1);
-
-							if($nump>0 && $nump1>0 && $numcell>0)
-
-							{
-
-								$array = $checkp -> fetch_array(MYSQLI_BOTH);
-
-								//sdfghnm,
-
-								//Display
-
-								$_SESSION["parent"] = $array['Parent_Gardien'];
-
-								$_SESSION["title"] = $array['Title'];;
-
-								$_SESSION["First_name"] = $array['First_Name'];
-
-								$_SESSION["Last_name"] = $array['Second_Name'];
-
-								$_SESSION["Surname"] = $array['Surname'];
-
-								$_SESSION["ID"] = $array['ID_Number'];
-
-								$_SESSION["email"] = $array['Email'];
-
-								$_SESSION["dob"] = $array['DOB'];
-
-								$_SESSION["gender"] = $array['Gender'];
-
-								$_SESSION["Home Address"] = $array['Home_Address'];
-
-								$_SESSION["Postal Address"] = $array['Postal_Address'];
-
-								header('Location: confpar.php');
-
-							}
-
-							else if($numid>0)
-
-							{
-
-								$parent = "That parent's Id already exists,are you sure you are inserting incorect info?Please re-check!";	
-
-							}
-
-							else if($numcell>0)
-
-							{
-
-								$parent = "That parent's cellphone number already exists,are you sure you are inserting incorect info?Please re-check!";
-
-							}
-
-							else
-
-							{
-
-								//to database
-
-								$_SESSION["initialsp"] = $inameUp.$ilnameUp;
-
-								$_SESSION["Relationship"];
-
-								$_SESSION["titlep"] = $_POST["title"];
-
-								$_SESSION["emailp"] = $_POST["email"];
-
-								$_SESSION["namep"] = $namep;
-
-								$_SESSION["lnamep"] = $lnamep;
-
-								$_SESSION["snamep"] = $snamep;
-
-								$_SESSION["dobp"] = $getday."/".$getmongth."/".$getyear;
-
-								$_SESSION["genderp"] = $gender;
-
-								$_SESSION["ID_numberp"] = $_POST["ID_number"];
-
-								$_SESSION["Home_Addressp"] = $_POST["Home_Address"];
-
-								$_SESSION["Postal_Addressp"] = $_POST["Postal_Address"];
-
-								$_SESSION["citizenshipp"] = $citizenship;
-
-								$_SESSION["usernamep"] = $username;
-
-								$_SESSION["passwordp"] = $password;
-
-								$_SESSION["Cellphone"] = $cellnump;
-
-								$_SESSION["LearnersIDp"] = $_SESSION["ID_number"];
-
-								header('Location: Confirm-details.php');
-
-							}
-
-							
-
-						}
+	}
 
 }
 
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -401,7 +115,7 @@ if(isset($_POST['next']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Education World</title>
+<title>Bhevu High&reg;</title>
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -668,6 +382,7 @@ if(isset($_POST['next']))
                           <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
+
                           <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
 
                           <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
@@ -810,117 +525,185 @@ if(isset($_POST['next']))
 
         <div class="col-sm-12">
 
-          <h2>
-
-          <?php
-
-				if(isset($_SESSION["elder"]))
-
-				{
-
-					echo $_SESSION["elder"]."'S"." ";
-
-				}
-
-		 ?> PARTICULARS</h2>
-
         </div>
 
         </div>
 
           <div class="col-sm-12 col-md-12 no-space-right">
 
-          <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
+          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
               <form action="" method="post" id="contactFrm" name="contactFrm">
 
-               <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
-                <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Title</option>
-              <option value="MR">MR</option>
-              <option value="MRS">MRS</option>
-              <option value="MRS">MISS</option>
-              </select>
-              
-               <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
-
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
-
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
-
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
-
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-
-                <?php
-
-                	if(isset($validity))
-
-					{
-
-						echo "<p style='color:red'>".$validity."</p>";
-
-					}
-
-					if(isset( $getage))
-
-					{
-
-						echo "<p style='color:red'>".$getage."</p>";
-
-					}
-
-				?>
-
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
-
-                <textarea placeholder="Physical/Home Address" name="Home_Address" type="text" class="txt_3"></textarea>
-
-                <textarea placeholder="Postal Address" name="Postal_Address" type="text" class="txt_3"></textarea>
-
-                <table style="color:#fff;">
+                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
 
                 	<tr>
 
-                    	<th colspan="4" style="text-align:center;">
-
-                        	<em>Contact details</em>
-
-                        </th>
-
-                        <td>
-
-                        <tr style="color:black;">
-
-                            <td><input type="text" required placeholder="Home(036.....)" value="" name="home" class="txt"></td>
-
-                            <td><input type="text" required placeholder="Work(036...)" value="" name="work" class="txt"></td>
-
-                            <td><input type="text" required placeholder="Cell(086....)" value="" name="cell" class="txt"></td>
-
-                        </tr>	
-
-                        </td>     
+                    	<th colspan="12" style="text-align:center;"><h4><em>Learner's Information</em></h4></th>
 
                     </tr>
 
-                    <?php
+                    <tr style="background-color:#363FA3; text-align:center;">
 
-                    	if(isset($parent))
+                    	<th style="text-align:center;">Initials</th>
 
-						{
+                        <th style="text-align:center;">First name</th>
 
-							echo "<p style='color:red;'>".$parent."</p>";
+                        <th style="text-align:center;">Second name</th>
 
-						}
+                        <th style="text-align:center;">Surname</th>
 
-					?>
+                        <th style="text-align:center;">Date of Birth</th>
+
+                        <th style="text-align:center;">Gander</th>
+
+                        <th style="text-align:center;">ID Number</th>
+
+                    </tr>
+
+                    <tr>
+
+                    	<td><?php echo $_SESSION["initials"]?></td>
+
+                        <td><?php echo $_SESSION["name"]?></td>
+
+                        <td><?php echo $_SESSION["lname"]?></td>
+
+                        <td><?php echo $_SESSION["sname"]?></td>
+
+                        <td><?php echo $_SESSION["dob"]?></td>
+
+                        <td><?php echo $_SESSION["gender"]?></td>
+
+                        <td><?php echo $_SESSION["ID_number"]?></td>
+
+                    </tr>
+
+                    <tr style="background-color:#363FA3; text-align:center;">
+
+                    	<th style="text-align:center;">Elder</th>
+
+                        <th style="text-align:center;">Address</th>
+
+                        <th style="text-align:center;">Home Language</th>
+
+                        <th style="text-align:center;">Relative</th>
+
+                        <th style="text-align:center;">Present school</th>
+
+                        <th style="text-align:center;">Citizenship</th>
+
+                        <th></th>
+
+                    </tr>
+
+                    <tr>
+
+                    	<td><?php echo $_SESSION["elder"]?></td>                        
+
+                        <td><?php echo $_SESSION["Learners_address"]?></td>
+
+                        <td><?php echo $_SESSION["Home_Language"]?></td>
+
+                        <td><?php echo $_SESSION["Relative"]?></td>
+
+                        <td><?php echo $_SESSION["Present_school"]?></td>
+
+                        <td><?php echo $_SESSION["citizenship"]?></td>
+
+                    </tr>
 
                 </table>
 
-                <input type="submit" value="Next..." name="next" class="txt2">
+                <br/>
+
+                <hr/>
+
+                <br/>
+
+                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
+
+                	<tr>
+
+                    	<th colspan="12" style="text-align:center;"><h4><em>Parent's Information</em></h4></th>
+
+                    </tr>
+
+                    <tr style="background-color:#363FA3; text-align:center;">
+
+                    	<th style="text-align:center;">Initials</th>
+
+                        <th style="text-align:center;">First name</th>
+
+                        <th style="text-align:center;">Second name</th>
+
+                        <th style="text-align:center;">Surname</th>
+
+                        <th style="text-align:center;">Date of Birth</th>
+
+                        <th style="text-align:center;">Gander</th>
+
+                        <th style="text-align:center;">ID Number</th>
+
+                    </tr>
+
+                    <tr>
+
+                    	<td><?php echo $_SESSION["initialsp"]?></td>
+
+                        <td><?php echo $_SESSION["namep"]?></td>
+
+                        <td><?php echo $_SESSION["lnamep"]?></td>
+
+                        <td><?php echo $_SESSION["snamep"]?></td>
+
+                        <td><?php echo $_SESSION["dobp"]?></td>
+
+                        <td><?php echo $_SESSION["genderp"]?></td>
+
+                        <td><?php echo $_SESSION["ID_numberp"]?></td>
+
+                    </tr>
+
+                    <tr style="background-color:#363FA3; text-align:center;">
+
+                    	<th style="text-align:center;">Title</th>
+
+                        <th style="text-align:center;">Home Address</th>
+
+                        <th style="text-align:center;">Postal Address</th>
+
+                        <th style="text-align:center;">Learner's ID</th>
+
+                        <th style="text-align:center;">Email</th>
+
+                        <th style="text-align:center;">Relationship</th>
+
+                        <th></th>
+
+                    </tr>
+
+                    <tr>
+
+                    	<td><?php echo $_SESSION["titlep"]?></td>                        
+
+                        <td><?php echo $_SESSION["Home_Addressp"]?></td>
+
+                        <td><?php echo $_SESSION["Postal_Addressp"]?></td>
+
+                        <td><?php echo $_SESSION["LearnersIDp"]?></td>
+
+                        <td><?php echo $_SESSION["emailp"]?></td>
+
+                        <td><?php echo $_SESSION["elder"]?></td>
+
+                    </tr>
+
+                </table>
+
+                <input type="submit" value="Submit Form" name="save" class="txt2">
 
               </form>
 

@@ -1,14 +1,7 @@
-<?php require ('connection/conect.php');
-
-	$sql = "SELECT * FROM images";
-
-	$res = $con -> query($sql);
-
-?>
+<?php require ('connection/conect.php');?>
 
 <?php
 ob_start();
-session_start();
 if(isset($_POST['login']))
 
 {
@@ -49,7 +42,7 @@ if(isset($_POST['login']))
 
 		$_SESSION['usernamea'] = $queryadmin['username'];
 
-		$_SESSION['userid'] = $queryadmin['userid'];
+		$_SESSION['userid'] = $queryadmin['userId'];
 
 		
 
@@ -89,11 +82,12 @@ if(isset($_POST['login']))
 
 			}
 
-			else if($_SESSION['Status'] == "Waiting")
+			else
 
 			{
 
 				header('Location: After-Confirm.php');
+
 			}
 
 		}
@@ -110,375 +104,13 @@ if(isset($_POST['login']))
 
 	{
 
-		$error = "<p style='color:red'>Username or password is incorrect.....</p>";
+		$error = "<p style='color:red'>User Account not found.....</p>";
 
 	}
 
 }
 
 ?>
-
-<?php
-
-if(isset($_POST['next']))
-
-{
-
-   	    $id = $_POST["ID_number"];
-
-            $name = $_POST["First_name"];
-
-            $lname = $_POST["Last_name"];
-
-            $sname = $_POST["Surname"];
-
-
-
-            //initials
-
-            $iname = substr($name,0,1);
-
-			$inameUp = strtoupper($iname);
-
-            $ilname = substr($lname,0,1);
-
-			$ilnameUp = strtoupper($ilname);
-
-            $isname1 = substr($sname,0,1);
-
-			$isname1Up = strtoupper($isname1);
-
-            $isname2 = substr($sname,1);
-
-			$isname2Low = strtolower($isname2);
-
-			
-
-            $initials = "Initials :" . " " . $inameUp. "." . " " . $ilnameUp . "." . " " . $isname1Up . $isname2Low . "<br/>";
-
-            //fullnames
-
-            $fname2 = substr($name,1);
-
-			$fname2Low = strtolower($fname2);
-
-            $flname2 = substr($lname,1);
-
-			$flname2Low = strtolower($flname2);
-
-
-
-            $fullnames = "First Name :" . " " . $inameUp . $fname2Low . "<br/>" . "Second Name :" . " " . $ilnameUp . $flname2Low . "<br/>" . "Surname :" . " " . $isname1Up . $isname2Low . "<br/>";
-
-
-
-            $length = strlen($id);
-
-            $months = substr($id,2,2);
-
-			$password = $inameUp.$ilnameUp.$months;
-
-			$username = $months.$isname1Up.$isname2Low;
-
-            if ($length == 13 && $months > 0 && $months < 13)
-
-            {
-
-                //Date of birth
-
-                //get day
-
-                $day = substr($id,4,2);
-
-                if ($day <= 10)
-
-                {
-
-                    $getday = "0" . $day . " ";
-
-                }
-
-                else
-
-				{
-
-                    $getday = $day . " ";
-
-				}
-
-                //get month
-
-                //array
-
-                $month = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-
-                $montha = array( 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12);
-
-                for ($i = 0; $i <12; $i++)
-
-                {
-
-                    if($months == $montha[$i])
-
-                    {
-
-                        $getmongth = $month[$i] . " ";
-
-                    }
-
-                }
-
-
-
-                //get year
-
-                $year = substr($id,0,2);
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $getyear = "19" . $year;
-
-                }
-
-                else if ($year < 18)
-
-                {
-
-                    if ($year < 10)
-
-                    {
-
-                        $getyear = "200" . $year;
-
-                    }
-
-                    else
-
-                    {
-
-                        $getyear = "20" . $year;
-
-                    }
-
-                }
-
-
-
-                //Age
-
-                //90's
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $age = 2017 - (1900 + $year);
-
-                    if ($age <= 25)
-
-                    {
-
-                        $getage = "Age :" . " " . $age . "<br>";
-
-                    }
-
-                    else
-
-                    {
-
-                        $getage = "Your age does not allow you to create account as a learner." . "<br/>" . "Age : " . $age . "<br>";
-
-                    }
-
-                }
-
-                //2000's
-
-                else if ($year < 18)
-
-                {
-
-                    $age = 2017 - (2000 + $year);
-
-                    if($age>13)
-
-                    {
-
-                        $getage = "Age :" . " " . $age . "<br>";
-
-                    }
-
-                    else
-
-                    {
-
-                        $getage = "Your age does not allow you to create account as a learner." . "<br/>" . "Age :" . " " . $age . "<br>";
-
-                    }
-
-                }
-
-
-
-                //get gender
-
-                $output = substr($id,6,1);
-
-                if ($output >= 5)
-
-                {
-
-                    $gender = "Male";
-
-                }
-
-                else
-
-                {
-
-                    $gender = "Female";
-
-                }
-
-
-
-                //Citizenship
-
-                $citizen = substr($id,10,1);
-
-                if($citizen == 0)
-
-                {
-
-                    $citizenship = "SA Citizen";
-
-                }
-
-                else
-
-                {
-
-                    $citizenship = "Non SA Citizen";
-
-                }
-
-            }
-
-            else
-
-            {
-
-                $validity = "Invalid ID number!!!!";
-
-            }
-
-			//processing
-
-			if(isset($getday))
-
-			{
-
-				$exist = $con -> query ("SELECT * FROM learner where IDNumber = '$id'");
-
-				$result = $exist -> fetch_array(MYSQLI_BOTH);
-
-				if($result<1)
-
-				{
-
-					//to the database
-
-					$_SESSION["initials"] = $inameUp.$ilnameUp;
-
-					$_SESSION["name"] = $name;
-
-					$_SESSION["lname"] = $lname;
-
-					$_SESSION["sname"] = $sname;
-
-					$_SESSION["dob"] = $getday."/".$getmongth."/".$getyear;
-
-					$_SESSION["gender"] = $gender;
-
-					$_SESSION["ID_number"] = $_POST["ID_number"];
-
-					$_SESSION["Present_school"] = $_POST["Present_school"];
-
-					$_SESSION["Learners_address"] = $_POST["Learners_address"];
-
-					$_SESSION["Home_Language"] = $_POST["Home_Language"];
-
-					$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["rel_Grade"]."-".$_POST["rel_Section"];
-
-					$_SESSION["citizenship"] = $citizenship;
-
-					$_SESSION["username"] = $username;
-
-					$_SESSION["password"] = $password;
-
-					$_SESSION["Mobile_number"] = $_POST["Mobile_number"];
-
-					if(empty($_POST["elder"]))
-
-					{
-
-						$error = "<p style='color:red;'>PLease select your elder.</p>";
-
-					}
-
-					else 
-
-					{
-
-						$_SESSION["elder"] = ($_POST["elder"]);
-
-					}
-
-					//Inserting documents
-
-					$doc_name = "ID/Certeficate".$id;
-
-					$myfile = $_FILES['myfile']['name'];
-
-					$tmp_name = $_FILES['myfile']['tmp_name'];
-
-					if($myfile&&$doc_name)
-
-					{
-
-						$location = $myfile;
-
-						move_uploaded_file($tmp_name,"document/".$myfile);
-
-						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}')");
-
-						$_SESSION["doc_name"] = $doc_name;
-
-						$_SESSION["report"] = "Report".$id;
-
-					}					
-
-					
-
-					header('Location: Parent-details.php');
-
-				 }
-
-				 else
-
-				 {
-
-					 $error = "Your alreadey exist in the system";
-
-				 }
-
-			}
-
-			}
-
-?>			
 
 <!DOCTYPE html>
 
@@ -492,19 +124,31 @@ if(isset($_POST['next']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Bhevu High&reg;</title>
+<title>Education World</title>
+
+<!-- Bootstrap CSS -->
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Font Awesome CSS-->
+
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
 
 <link href="css/style.css" rel="stylesheet">
 
+<!-- Animate CSS -->
+
 <link href="assets/animate/animate.css" rel="stylesheet">
+
+<!-- Owl Carousel -->
 
 <link href="assets/owl-carousel/css/owl.carousel.css" rel="stylesheet">
 
 <link href="assets/owl-carousel/css/owl.theme.css" rel="stylesheet">
+
+<!-- Favicon -->
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
@@ -512,7 +156,11 @@ if(isset($_POST['next']))
 
 <body>
 
+<!-- Pre Loader -->
+
 <div id="dvLoading"></div>
+
+<!-- Header Start -->
 
 <header>
 
@@ -542,23 +190,83 @@ if(isset($_POST['next']))
 
       </div>
 
-      <?php
+      <div class="col-md-8 col-sm-6">
 
-	  if(isset($_SESSION['username']))
+        <ul class="top-right pull-right ">
 
-	  {
+        <?php
 
-	  }
+		  if(isset($_SESSION['username']))
 
-	  else
+		  {
 
-	  {
+			 echo "
 
-		  echo "
+			  <!-- Lgout -->
 
-      <div class='col-md-8 col-sm-6'>
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
 
-        <ul class='top-right pull-right '>
+            <div class='register-form'>
+
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
+
+              </form>
+
+            </div>
+
+          </li>";}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+				echo "
+
+			  <!-- Lgout -->
+
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
+
+            <div class='register-form'>
+
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
+
+              </form>
+
+            </div>
+
+          </li>";
+
+			}
+
+		  ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+			  echo "
 
           <!-- Login -->
 
@@ -572,7 +280,29 @@ if(isset($_POST['next']))
 
                 <input type='text' name='username' placeholder='Username'>
 
-                <input type='password' name='password' placeholder='Password'>
+                <input type='password' name='password' placeholder='Password'>";}?>
+
+                <?php if(isset($error)){echo $error;}?>
+
+           <?php
+
+           if(isset($_SESSION['username']))
+
+		  	{
+
+		 	}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}
+
+		  	else
+
+		  	{
+
+			  echo "  
 
                 <button type='submit' name='login' class='btn'>Login</button>
 
@@ -580,15 +310,51 @@ if(isset($_POST['next']))
 
             </div>
 
-          </li>
+          </li>";
+
+			}
+
+          ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+		  echo "
+
+          <!-- Apply -->
+
+          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
+
+            <div class='register-form'>
+
+              <h4>Apply</h4>
+
+            </div>
+
+           </li>";
+
+		  }
+
+		   ?>
 
         </ul>
 
-      </div>";
-
-	  }
-
-	  ?>
+      </div>
 
     </div>
 
@@ -774,7 +540,7 @@ if(isset($_POST['next']))
 
                           <li><span>Pages</span></li>
 
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
+                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
 
@@ -844,7 +610,7 @@ if(isset($_POST['next']))
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="about-us.php">About Us</a></li>
+                  <li><a href="about-us.html">About Us</a></li>
 
                   <li><a href="coming-soon.html">Coming Soon</a></li>
 
@@ -852,13 +618,13 @@ if(isset($_POST['next']))
 
                   <li><a href="faq.html">FAQ</a></li>
 
-                </ul>-->
+                </ul>
 
-              </li>
+              </li>-->
 
               <li><a href="about-us.php">About Us</a></li>
 
-              <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
 
             </ul>
 
@@ -886,7 +652,7 @@ if(isset($_POST['next']))
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Contact Us</h2>
 
     </div>
 
@@ -896,7 +662,7 @@ if(isset($_POST['next']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Contact Us</li>
 
       </ul>
 
@@ -918,141 +684,59 @@ if(isset($_POST['next']))
 
         <div class="contact-address">
 
-        <div class="container">
+          <div class="col-sm-12 col-md-6 no-space-right">
 
-        <div class="col-sm-12">
+            <div class="col-sm-6 contact"> <i class="fa fa-map-marker"></i>
 
-          <h2>LEARNERS PARTICULARS</h2>
+              <p><span>Address</span><br>
 
-        </div>
+                Department of State, USA</p>
 
-        </div>
+            </div>
 
-          <div class="col-sm-12 col-md-12 no-space-right">
+            <div class="col-sm-6 contact white"> <i class="fa fa-phone"></i>
 
-          <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
+              <p><span>Phone Number</span><br>
 
-            <div class="form"  style="text-align:center; border-radius:10px;">
+                0800 123 46 0000</p>
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+            </div>
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
+            <div class="col-sm-6 contact white"> <i class="fa fa-volume-control-phone"></i>
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
+              <p><span>Customer Care</span><br>
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
+                0800 123 46 0000</p>
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-<br>
-                  <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Grade</option>
-              <option value="08">8</option>
-              <option value="09">9</option>
-              <option value="10">10</option>
-             <option value="11">11</option>
-              </select>
-                <?php
+            </div>
 
-                	if(isset($validity))
+            <div class="col-sm-6 contact"> <i class="fa fa-envelope"></i>
 
-					{
+              <p><span>Email</span><br>
 
-						echo "<p style='color:red'>".$validity."</p>"."You can not proceed.";
+                <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
 
-					}
+            </div>
 
-					if(isset($error))
+          </div>
 
-					{
+          <div class="col-sm-12 col-md-6 no-space-left">
 
-						echo "<p style='color:red'>".$error."</p>"."You can not proceed.";
+            <div class="form">
 
-					}
+              <form action="http://sbtechnosoft.com/education-world/multiple-pages/contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
 
-				?>
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
+                <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
 
-                <table>
+                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
 
-                	<tr>
+                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt">
 
-                    	<th style="text-align:center; color:#fff;"><em>Upload ID/Certificate Copy</em></th>
+                <input type="text" required placeholder="Email" value="" name="email" class="txt">
 
-                        <tr>
+                <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
 
-                        	<td style="color:#fff;"><input type="file" style="width:100%; height:20x; margin-bottom:30px;" required placeholder="Insert image" value="" name="myfile" class="txt"></td>
-
-                        </tr>
-
-                    </tr>
-
-                </table>
-
-                <input type="text" required placeholder="Present School" value="" name="Present_school" class="txt">
-
-                <textarea placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
-                <br><br>
-                <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
-               <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Your Home Language</option>
-              <option value="Zulu">Zulu</option>
-              <option value="English">English</option>
-              <option value="Afrikaans">Afrikaans</option>
-             <option value="Sesotho">Sesotho</option>
-             <option value="Sesotho">Xhosa</option>
-             <option value="Other">Other</option>
-              
-              </select>
-
-                <table style="color:#fff;">
-
-                	<tr><th colspan="4" style="text-align:center;"><em>Relative(s) @ Bhevu H.</em></th></tr>
-
-                	<tr>
-
-                    	<th>Name</th>
-
-                        <th>Surname</th>
-
-                        <th>Grade</th>
-
-                        <th>Section</th>
-
-                    </tr>
-
-                    <tr style="color:red;">
-
-                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt"></td>
-
-                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt"></td>
-
-                        <td><input type="text" placeholder="Grade" value="" name="rel_Grade" class="txt"></td>
-
-                        <td><input type="text" placeholder="Section" value="" name="rel_Section" class="txt"></td>
-
-                    </tr>
-
-                </table>
-
-                <table style="width:100%;">
-
-                	<tr>
-
-                    	<th colspan="2" style=" text-align:center; color:#fff;">Elder</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="parent">Parent</td>
-
-                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="gardien">Gardien</td>
-
-                    </tr>
-
-                </table>
-
-                <input type="submit" value="Next..." name="next" class="txt2">
+                <input type="submit" value="submit" name="submit" class="txt2">
 
               </form>
 
@@ -1071,8 +755,6 @@ if(isset($_POST['next']))
   <div id="google-map">
 
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
-
-        </div>
 
         </div>
 
