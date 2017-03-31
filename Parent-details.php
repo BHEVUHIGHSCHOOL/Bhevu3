@@ -384,7 +384,14 @@ if(isset($_POST['next']))
 						}
 
 }
-
+if(isset($_POST["parent"]))
+{
+	$_SESSION["parent"] = ($_POST["parent"]);
+}
+else 
+{
+	$error = "<p style='color:red;'>PLease select your elder.</p>";
+}
 ?>
 
 
@@ -838,6 +845,28 @@ if(isset($_POST['next']))
 
             <div class="form"  style="text-align:center; border-radius:10px; border:dashed">
               <form action="" method="post" id="contactFrm" name="contactFrm">
+              
+              <?php
+			  if(isset($_SESSION["elder"]))
+			    {
+					if($_SESSION["elder"] == "PARENT")
+					{
+                    	echo"
+						<table style='width:100%;'>
+							<tr>
+								<td style='color:#fff;'><input type='radio' name='elder'value='PARENT'>"."Father"."</td>
+								<td style='color:#fff;'><input type='radio' name='elder' value='GUADIEN'>"."Mother"."</td>	
+							<tr>
+						</table>";
+						if (isset($parent) && $parent=="Gardien") {$parent="Gardien";}
+						if (isset($parent) && $parent=="Gardien") {$parent="Gardien";}				
+					}
+					else
+					{
+						echo "<input type='text' required placeholder='Relationship(e.g Aunty)' value='' name='parent' class='txt'>";
+					}
+				}
+				?>
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
                 <select style="width:100%; height:45px; margin-bottom:10px">

@@ -922,12 +922,18 @@ if(isset($_POST['next']))
 
         <div class="col-sm-12">
 
-          <h2>LEARNERS PARTICULARS</h2>
+          <h2>LEARNER'S PARTICULARS</h2>
 
         </div>
 
         </div>
-
+		<script>
+                	function charsonly(input)
+					{
+						var regex = /[^a-zA-Z]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
           <div class="col-sm-12 col-md-12 no-space-right">
 
           <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
@@ -936,21 +942,28 @@ if(isset($_POST['next']))
 
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
+                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
+                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
+                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-<br>
-                  <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Grade</option>
-              <option value="08">8</option>
-              <option value="09">9</option>
-              <option value="10">10</option>
-             <option value="11">11</option>
-              </select>
+                <script>
+                	function numbersonly(input)
+					{
+						var regex = /[^0-9]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
+                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
+
+                 <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                  <option value="Please Select">Select Grade</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                 <option value="11">11</option>
+               </select>
                 <?php
 
                 	if(isset($validity))
@@ -970,7 +983,8 @@ if(isset($_POST['next']))
 					}
 
 				?>
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
+
+                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
 
                 <table>
 
@@ -1004,9 +1018,9 @@ if(isset($_POST['next']))
               
               </select>
 
-                <table style="color:#fff;">
+                <table style="color:#fff;" class="col-sm-12">
 
-                	<tr><th colspan="4" style="text-align:center;"><em>Relative(s) @ Bhevu H.</em></th></tr>
+                	<tr><th colspan="4" style="text-align:center;"><em>Relative @ Bhevu H.</em></th></tr>
 
                 	<tr>
 
@@ -1020,15 +1034,31 @@ if(isset($_POST['next']))
 
                     </tr>
 
-                    <tr style="color:red;">
+                    <tr style="color:black;">
 
-                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt"></td>
+                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt"></td>
+                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Grade" value="" name="rel_Grade" class="txt"></td>
+                        <td class="col-sm-3">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                              <option value="Please Select">Grade</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                             <option value="11">11</option>
+			               </select>
+                        </td>
 
-                        <td><input type="text" placeholder="Section" value="" name="rel_Section" class="txt"></td>
+                        <td class="col-sm-3">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                              <option value="Please Select">Section</option>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                             <option value="D">D</option>
+			               </select>
+                        </td>
 
                     </tr>
 
@@ -1044,9 +1074,9 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="parent">Parent</td>
+                    	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="PARENT">Parent</td>
 
-                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="gardien">Gardien</td>
+                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAUDIEN">Gardien</td>
 
                     </tr>
 
