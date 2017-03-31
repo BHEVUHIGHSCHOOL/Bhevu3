@@ -922,12 +922,18 @@ if(isset($_POST['next']))
 
         <div class="col-sm-12">
 
-          <h2>LEARNERS PARTICULARS</h2>
+          <h2>LEARNER'S PARTICULARS</h2>
 
         </div>
 
         </div>
-
+		<script>
+                	function charsonly(input)
+					{
+						var regex = /[^a-zA-Z]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
           <div class="col-sm-12 col-md-12 no-space-right">
 
           <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
@@ -936,15 +942,21 @@ if(isset($_POST['next']))
 
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
+                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
+                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
+                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
+                <script>
+                	function numbersonly(input)
+					{
+						var regex = /[^0-9]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
+                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
-                <p>
 
                 <?php
 
@@ -966,9 +978,7 @@ if(isset($_POST['next']))
 
 				?>
 
-                </p>
-
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
+                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
 
                 <table>
 
@@ -1008,13 +1018,13 @@ if(isset($_POST['next']))
 
                     </tr>
 
-                    <tr style="color:red;">
+                    <tr style="color:black;">
 
-                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt"></td>
+                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt"></td>
+                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Grade" value="" name="rel_Grade" class="txt"></td>
+                        <td><input type="text" placeholder="Grade" value="" name="rel_Grade" class="txt" ></td>
 
                         <td><input type="text" placeholder="Section" value="" name="rel_Section" class="txt"></td>
 
@@ -1032,9 +1042,9 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="parent">Parent</td>
+                    	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="PARENT">Parent</td>
 
-                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="gardien">Gardien</td>
+                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAUDIEN">Gardien</td>
 
                     </tr>
 
