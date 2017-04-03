@@ -408,7 +408,7 @@ else
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Education World</title>
+<title>Bhevu High School</title>
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -556,7 +556,7 @@ else
 
               <li><a href="index.php">Home</a></li>
 
-              <li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
+              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
 
                 <ul class="dropdown-menu">
 
@@ -751,7 +751,9 @@ else
 
                 </ul>
 
-              </li>
+              </li>-->
+
+              <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
 
@@ -807,7 +809,7 @@ else
 
 <section class="inner-wrapper contact-wrapper">
 
-  <div class="container">
+  <div class="container" style="background-color:#424242; border:dotted" >
 
     <div class="row">
 
@@ -815,7 +817,7 @@ else
 
         <div class="contact-address">
 
-        <div class="container">
+        <div class="container" style="border-color:#F7F2F2; background-color:#D2D2D2; margin-left:-3px">
 
         <div class="col-sm-12">
 
@@ -838,7 +840,7 @@ else
 
         </div>
 
-          <div class="col-sm-12 col-md-12 no-space-right" style="background-image:url(Bhevu%20Pics/Edited/School/three%20classrooms.jpg)">	
+          <div class="col-sm-12 col-md-12 no-space-right">	
 
 
           <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
@@ -869,6 +871,7 @@ else
 				?>
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
+               
                 <select style="width:100%; height:45px; margin-bottom:10px">
               <option value="Please Select" placeholder="Select Title">Select Title</option>
               <option value="MR">MR</option>
