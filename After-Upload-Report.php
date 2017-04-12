@@ -6,8 +6,7 @@ session_start();
 if(isset($_SESSION["query2"]))
 
 	{
-$message = "application successful,thank you.Please wait for approval ,we will contact you via sms.Thank you.";
-echo "<script type='text/javascript'>alert('$message');</script>";
+
 	}
 
 	else
@@ -19,7 +18,6 @@ echo "<script type='text/javascript'>alert('$message');</script>";
 	}
 
 ?>
-
 
 <?php
 
@@ -128,7 +126,6 @@ if(isset($_POST['login']))
 		$error = "<p style='color:red'>User Account not found.....</p>";
 
 	}
-
 }
 
 ?>
@@ -200,20 +197,6 @@ if(isset($_POST['login']))
 
         <ul class="top-right pull-right ">
         
-<SCRIPT LANGUAGE="JavaScript">
-
-AfterUpload = '';
-
-function openPopup(url) {
-    myPopup = window.open(url,'popupWindow','width=640,height=480');
-    if (!myPopup.opener)
-         myPopup.opener = self;
-}
-</SCRIPT>
-
-
-
-
 
         <?php
 
@@ -722,6 +705,15 @@ function openPopup(url) {
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
+<?php
+    if( $posted ) {
+      if( $result ) 
+        echo "<script type='text/javascript'>alert('submitted successfully!')</script>";
+      else
+        echo "<script type='text/javascript'>alert('failed!')</script>";
+    }
+  ?>
+
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
                 <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
@@ -880,21 +872,17 @@ function openPopup(url) {
 
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
-  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
-
-
+  })
+  
+  	(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-83282272-2', 'auto');
 
   ga('send', 'pageview');
 
-
-
 </script>
 
 </body>
-
-
 
 <!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
 
