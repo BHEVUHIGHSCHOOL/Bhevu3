@@ -6,7 +6,8 @@ session_start();
 if(isset($_SESSION["query2"]))
 
 	{
-
+$message = "application successful,thank you.Please wait for approval ,we will contact you via sms.Thank you.";
+echo "<script type='text/javascript'>alert('$message');</script>";
 	}
 
 	else
@@ -18,6 +19,7 @@ if(isset($_SESSION["query2"]))
 	}
 
 ?>
+
 
 <?php
 
@@ -165,6 +167,7 @@ if(isset($_POST['login']))
 
 <div id="dvLoading"></div>
 
+
 <header>
 
   <div class="top-wrapper hidden-xs">
@@ -196,6 +199,21 @@ if(isset($_POST['login']))
       <div class="col-md-8 col-sm-6">
 
         <ul class="top-right pull-right ">
+        
+<SCRIPT LANGUAGE="JavaScript">
+
+AfterUpload = '';
+
+function openPopup(url) {
+    myPopup = window.open(url,'popupWindow','width=640,height=480');
+    if (!myPopup.opener)
+         myPopup.opener = self;
+}
+</SCRIPT>
+
+
+
+
 
         <?php
 
@@ -645,6 +663,7 @@ if(isset($_POST['login']))
 
 </header>
 
+
 <!-- Header End -->
 
 <!-- Inner Banner Wrapper Start -->
@@ -674,6 +693,8 @@ if(isset($_POST['login']))
   </div>
 
 </div>
+
+<!-- After upload popup form-->
 
 <!-- Inner Banner Wrapper End -->
 
@@ -710,7 +731,7 @@ if(isset($_POST['login']))
                     	<td>
 
                         	<?php echo $_SESSION["query2"];?>
-
+									
                         </td>
 
                     </tr>
