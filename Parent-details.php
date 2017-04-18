@@ -816,7 +816,7 @@ else
 
 <section class="inner-wrapper contact-wrapper">
 
-  <div class="container" style="background-color:#424242; border:dotted" >
+  <div class="container">
 
     <div class="row">
 
@@ -824,7 +824,7 @@ else
 
         <div class="contact-address">
 
-        <div class="container" style="border-color:#F7F2F2; background-color:#D2D2D2; margin-left:-3px">
+        <div class="container" style="border-color:#F7F2F2; margin-left:-3px">
 
         <div class="col-sm-12">
 
@@ -878,16 +878,12 @@ else
 				?>
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
-<<<<<<< HEAD
-                <select style="width:100%; height:45px; margin-bottom:10px" name="title" required>
-=======
-               
-                <select style="width:100%; height:45px; margin-bottom:10px">
->>>>>>> bcd4be76aedfcd9315d85ca869023efcb77ef483
-              <option value="Please Select" placeholder="Select Title">Select Title</option>
-              <option value="MR">MR</option>
-              <option value="MRS">MRS</option>
-              <option value="MRS">MISS</option>
+
+               <select style="width:100%; height:45px; margin-bottom:10px" name="title" required>
+				 <option value="Please Select" placeholder="Select Title">Select Title</option>
+                 <option value="MR">MR</option>
+                 <option value="MRS">MRS</option>
+                 <option value="MRS">MISS</option>
               </select>
               
                <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
