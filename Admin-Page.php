@@ -419,11 +419,17 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 					else
 					{
 						echo "
+						<br/>
+						<hr/>
+						<br/>
 						<table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
 							<tr>
 								<td><h1>There are currently no waiting applicants.</h1><td>
 							</tr>
 						</table>
+						<br/>
+						<hr/>
+						<br/>
 						";
 					}
 				?>
@@ -501,6 +507,9 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 					else
 					{
 						echo "
+						<br/>
+						<hr/>
+						<br/>
 						<table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
 							<tr>
 								<td><h1 style'text-aligne:center;'>There are currently no Approved applicants.</h1><td>
