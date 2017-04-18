@@ -5,10 +5,20 @@
 	$res = $con -> query($sql);
 
 ?>
-
 <?php
 ob_start();
 session_start();
+if(isset($_SESSION['Register']))
+{
+	if($_SESSION['Register'] == "Registered")
+	{
+		header('Location: index.php');
+	}
+}
+/*header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
+
 if(isset($_POST['login']))
 
 {
@@ -41,7 +51,7 @@ if(isset($_POST['login']))
 
 	
 
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
+	if($resultadmin>0)
 
 	{
 
@@ -51,8 +61,17 @@ if(isset($_POST['login']))
 
 		$_SESSION['userid'] = $queryadmin['userid'];
 
+
+			header("Location:Admin-Page.php");
 		
 
+		//parent
+
+		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
+
+	}
+	else if($resultlearner>0)
+	{
 		//Learner
 
 		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
@@ -62,55 +81,59 @@ if(isset($_POST['login']))
 		$_SESSION["ID_number"] = $querylearner['IDNumber'];
 
 		$_SESSION['Status'] = $querylearner['Status'];
-
 		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
+		$_SESSION['Register'] = $querylearner['Register'];
 
 		if(isset($_SESSION['username']))
 
 		{
 
 			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
+			//Approved learner
+			if($_SESSION['Status'] == "Approved" && $_SESSION['Register'] == "Not Registered")
 			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
+				$_SESSION['Grade'] = $querylearner['Grade'];
+				if($_SESSION['Grade'] == "10")
+				{
+					header('Location: RegisterSubj.php');
+				}
+				else
+				{
+					header('Location: ConfirmSubj.php');
+				}
+				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
 			}
-
-			else if($_SESSION['Status'] == "Waiting")
-
+			//Registered learner
+			else if($_SESSION['Register'] == "Registered")
 			{
-
-				header('Location: After-Confirm.php');
+				header('Location: index.php');
+			}
+			else
+			{
+				$pic = $con -> query ("select * from images where username = '$username'");
+				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+				{
+					$_SESSION["query2"]=$res['docname'];
+					if(($_SESSION["query2"]) == '')
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: After-Confirm.php');
+					}
+					else
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: Waiting.php');
+					}
+				}
 			}
 
 		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
 	}
-
 	else
 
 	{
 
-		$error = "<p style='color:red'>Username or password is incorrect.....</p>";
+		$error = "<p style='color:red'>User Account not found.....</p>";
 
 	}
 
@@ -408,9 +431,7 @@ if(isset($_POST['next']))
 
 					$_SESSION["Learners_address"] = $_POST["Learners_address"];
 
-					$_SESSION["Home_Language"] = $_POST["Home_Language"];
-
-					$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["rel_Grade"]."-".$_POST["rel_Section"];
+					//$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["rel_Grade"]."-".$_POST["rel_Section"];
 
 					$_SESSION["citizenship"] = $citizenship;
 
@@ -419,7 +440,36 @@ if(isset($_POST['next']))
 					$_SESSION["password"] = $password;
 
 					$_SESSION["Mobile_number"] = $_POST["Mobile_number"];
-
+					
+					//============RELATIVE==============
+					if($_POST['grade_rel'] == 'Please_Select')
+					{
+						//$errorG = "Please Select Grade";
+					}
+					else
+					{
+						$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["grade_rel"]."-".$_POST["section_rel"];
+					}
+					//============END RELATIVE==========
+					//================Grade dropdown list
+					if($_POST['grade'] == 'Please_Select')
+					{
+						$errorG = "Please Select Grade";
+					}
+					else
+					{
+						$_SESSION['grade'] = $_POST['grade'];
+					}
+					//================Language dropdown list======
+					if($_POST['Language'] == 'Please_Select')
+					{
+						$errorG = "Please Select Grade";
+					}
+					else
+					{
+						$_SESSION["Home_Language"] = $_POST['Language'];
+					}
+	
 					if(empty($_POST["elder"]))
 
 					{
@@ -439,38 +489,25 @@ if(isset($_POST['next']))
 					//Inserting documents
 
 					$doc_name = "ID/Certeficate".$id;
-
 					$myfile = $_FILES['myfile']['name'];
-
 					$tmp_name = $_FILES['myfile']['tmp_name'];
-
 					if($myfile&&$doc_name)
-
 					{
-
 						$location = $myfile;
-
 						move_uploaded_file($tmp_name,"document/".$myfile);
-
-						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}')");
-
+						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
 						$_SESSION["doc_name"] = $doc_name;
-
 						$_SESSION["report"] = "Report".$id;
-
 					}					
-
 					
-
 					header('Location: Parent-details.php');
-
 				 }
 
 				 else
 
 				 {
 
-					 $error = "Your alreadey exist in the system";
+					 $errorid = "Your alreadey exist in the system";
 
 				 }
 
@@ -957,13 +994,19 @@ if(isset($_POST['next']))
                 </script>
                 <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
-                 <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
-                  <option value="Please Select">Select Grade</option>
+                 <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px"  name="grade" required>
+                  <option value="Please_Select">Select Grade</option>
                   <option value="08">8</option>
                   <option value="09">9</option>
                   <option value="10">10</option>
                  <option value="11">11</option>
                </select>
+      			<?php
+                        if(isset($errorG))
+						{
+							echo "<p style='color:red'>".$errorG."</p>";
+						}
+				?>
                 <?php
 
                 	if(isset($validity))
@@ -974,11 +1017,11 @@ if(isset($_POST['next']))
 
 					}
 
-					if(isset($error))
+					if(isset($errorid))
 
 					{
 
-						echo "<p style='color:red'>".$error."</p>"."You can not proceed.";
+						echo "<p style='color:red'>".$errorid."</p>"."You can not proceed.";
 
 					}
 
@@ -1007,15 +1050,14 @@ if(isset($_POST['next']))
                 <textarea placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
                 <br><br>
                 <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
-               <select style="width:100%; height:45px; margin-bottom:10px">
-              <option value="Please Select">Select Your Home Language</option>
-              <option value="Zulu">Zulu</option>
-              <option value="English">English</option>
-              <option value="Afrikaans">Afrikaans</option>
-             <option value="Sesotho">Sesotho</option>
-             <option value="Sesotho">Xhosa</option>
-             <option value="Other">Other</option>
-              
+               <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
+              <option value="Please_Select">Select Your Home Language</option>
+                  <option value="Zulu">Zulu</option>
+                  <option value="English">English</option>
+                  <option value="Afrikaans">Afrikaans</option>
+                  <option value="Sesotho">Sesotho</option>
+                  <option value="Sesotho">Xhosa</option>
+                  <option value="Other">Other</option>
               </select>
 
                 <table style="color:#fff;" class="col-sm-12">
@@ -1041,7 +1083,7 @@ if(isset($_POST['next']))
                         <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
                         <td class="col-sm-3">
-                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;" name="grade_rel">
                               <option value="Please Select">Grade</option>
                               <option value="8">8</option>
                               <option value="9">9</option>
@@ -1049,9 +1091,8 @@ if(isset($_POST['next']))
                              <option value="11">11</option>
 			               </select>
                         </td>
-
                         <td class="col-sm-3">
-                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;">
+                        	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;" name="section_rel">
                               <option value="Please Select">Section</option>
                               <option value="A">A</option>
                               <option value="B">B</option>
@@ -1068,7 +1109,7 @@ if(isset($_POST['next']))
 
                 	<tr>
 
-                    	<th colspan="2" style=" text-align:center; color:#fff;">Elder</th>
+                    	<th colspan="2" style=" text-align:center; color:#fff;">Parent/Gaurdian</th>
 
                     </tr>
 

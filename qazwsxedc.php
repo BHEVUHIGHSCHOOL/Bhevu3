@@ -71,7 +71,7 @@ else
 
 	{
 
-		$updatestatus = "Aproved";
+		$updatestatus = "Approved";
 
 		$applicantid = $_SESSION["ID_number"];
 
@@ -129,7 +129,7 @@ else
 
 		{
 			$emailbody= "You are rejected....";
-       		        mail('philanimanp27@gmail.com','Customer Support',$emailbody);
+       		mail('philanimanp27@gmail.com','Customer Support',$emailbody);
 			$sql2 = $con -> query("INSERT INTO rejected (Surname, Firstname, LastName, IDNumber, Mobilenumber, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status) VALUES ('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}')");
 
 		}
@@ -577,93 +577,64 @@ else
             <div class="form">
 
               <form action="" method="post" id="contactFrm" name="contactFrm">
-
-                 <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
-
-                	<tr>
-
-                    	<th colspan="12" style="text-align:center;"><h4><em>Learner's Information</em></h4></th>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Initials</th>
-
-                        <th style="text-align:center;">First name</th>
-
-                        <th style="text-align:center;">Second name</th>
-
-                        <th style="text-align:center;">Surname</th>
-
-                        <th style="text-align:center;">Date of Birth</th>
-
-                        <th style="text-align:center;">Gander</th>
-
-                        <th style="text-align:center;">ID Number</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["initials"]?></td>
-
-                        <td><?php echo $_SESSION["name"]?></td>
-
-                        <td><?php echo $_SESSION["lname"]?></td>
-
-                        <td><?php echo $_SESSION["sname"]?></td>
-
-                        <td><?php echo $_SESSION["dob"]?></td>
-
-                        <td><?php echo $_SESSION["gender"]?></td>
-
-                        <td><?php echo $_SESSION["ID_number"]?></td>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Elder</th>
-
-                        <th style="text-align:center;">Address</th>
-
-                        <th style="text-align:center;">Home Language</th>
-
-                        <th style="text-align:center;">Relative</th>
-
-                        <th style="text-align:center;">Present school</th>
-
-                        <th style="text-align:center;">Citizenship</th>
-
-                        <th style="text-align:center;">Documents</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["elder"]?></td>                        
-
-                        <td><?php echo $_SESSION["Learners_address"]?></td>
-
-                        <td><?php echo $_SESSION["Home_Language"]?></td>
-
-                        <td><?php echo $_SESSION["Relative"]?></td>
-
-                        <td><?php //echo $_SESSION["Present_school"]?></td>
-
-                        <td><?php echo $_SESSION["citizenship"]?></td>
-
-                        <td><a href="docs.php">Click here</a></td>
-
-                    </tr>
-
-                </table>
-
-                <input type="submit" value="Aprove" name="aprove" class="txt2">
-
-                <input type="submit" value="Reject" name="reject" class="txt2">
-
+<?php
+			  	if(isset($_SESSION["ID_number"]))
+					{
+						echo "
+							 <table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
+								<tr>
+									<th colspan='12' style='text-align:center;'><h4><em>Learner's Information</em></h4></th>
+								</tr>
+								<tr style='background-color:#363FA3; text-align:center;'>
+									<th style='text-align:center;'>Initials</th>
+									<th style='text-align:center;'>First name</th>
+									<th style='text-align:center;'>Second name</th>
+									<th style='text-align:center;'>Surname</th>
+									<th style='text-align:center;'>Date of Birth</th>
+									<th style='text-align:center;'>Gander</th>
+									<th style='text-align:center;'>ID Number</th>
+								</tr>".
+								"<tr>
+									<td>".$_SESSION['initials']."</td>
+									<td>".$_SESSION['name']."</td>
+									<td>".$_SESSION['lname']."</td>
+									<td>".$_SESSION['sname']."</td>
+									<td>".$_SESSION['dob']."</td>
+									<td>".$_SESSION['gender']."</td>
+									<td>".$_SESSION['ID_number']."</td>
+								</tr>
+								<tr style='background-color:#363FA3; text-align:center;'>
+									<th style='text-align:center;'>Elder</th>
+									<th style='text-align:center;'>Address</th>
+									<th style='text-align:center;'>Home Language</th>
+									<th style='text-align:center;'>Relative</th>
+									<th style='text-align:center;'>Citizenship</th>
+									<th style='text-align:center;'>Documents</th>
+									<th></th>
+								</tr>
+								<tr>
+									<td>".$_SESSION['elder']."</td>                        
+									<td>".$_SESSION['Learners_address']."</td>
+									<td>".$_SESSION['Home_Language']."</td>
+									<td>".$_SESSION['Relative']."</td>
+									<td>".$_SESSION['citizenship']."</td>
+									<td><a href='report.php'>Report</a><br/><a href='certificate.php'>ID/Certficate</a></td>
+								</tr>
+							</table>
+							<input type='submit' value='Approve' name='aprove' class='txt2'>
+							<input type='submit' value='Reject' name='reject' class='txt2'>
+							";
+					}
+					else
+					{
+						echo "
+						<table style=' width:100%;text-align:center;'>
+							<tr>
+								<td><h2>There are currently no waiting applicants.</h2><td>
+							</tr>
+						</table>";
+					}
+				?>
               </form>
 
             </div>

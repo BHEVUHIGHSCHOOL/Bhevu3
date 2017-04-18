@@ -5,12 +5,7 @@ ob_start();
 session_start();
 /*header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');**/
-
-
-
-
-
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
 
 if(isset($_POST['login']))
 
@@ -74,29 +69,50 @@ if(isset($_POST['login']))
 		$_SESSION["ID_number"] = $querylearner['IDNumber'];
 
 		$_SESSION['Status'] = $querylearner['Status'];
+		
+		$_SESSION['Register'] = $querylearner['Register'];
 
 		if(isset($_SESSION['username']))
 
 		{
 
 			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
+			//Approved learner
+			if($_SESSION['Status'] == "Approved" && $_SESSION['Register'] == "Not Registered")
 			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
+				$_SESSION['Grade'] = $querylearner['Grade'];
+				if($_SESSION['Grade'] == "10")
+				{
+					header('Location: RegisterSubj.php');
+				}
+				else
+				{
+					header('Location: ConfirmSubj.php');
+				}
+				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
 			}
-
-			else
-
+			//Registered learner
+			else if($_SESSION['Register'] == "Registered")
 			{
-
-				header('Location: After-Confirm.php');
-
+				header('Location: index.php');
+			}
+			else
+			{
+				$pic = $con -> query ("select * from images where username = '$username'");
+				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+				{
+					$_SESSION["query2"]=$res['docname'];
+					if(($_SESSION["query2"]) == '')
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: After-Confirm.php');
+					}
+					else
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: Waiting.php');
+					}
+				}
 			}
 
 		}
@@ -195,7 +211,7 @@ if(isset($_POST['login']))
 
         <?php
 
-		  if(isset($_SESSION['username']))
+		  if(isset($_SESSION['username']) || isset($_SESSION['userid']))
 
 		  {
 
@@ -218,49 +234,6 @@ if(isset($_POST['login']))
             </div>
 
           </li>";}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-				echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-		  ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
 		  else
 
 		  {
@@ -279,79 +252,36 @@ if(isset($_POST['login']))
 
                 <input type='text' name='username' placeholder='Username'>
 
-                <input type='password' name='password' placeholder='Password'>";}?>
-
-                <?php if(isset($error)){echo $error;}?>
-
-           <?php
-
-           if(isset($_SESSION['username']))
-
-		  	{
-
-		 	}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}
-
-		  	else
-
-		  	{
-
-			  echo "  
-
-                <button type='submit' name='login' class='btn'>Login</button>
+                <input type='password' name='password' placeholder='Password'>
+				<!--Button-->
+				<button type='submit' name='login' class='btn'>Login</button>
 
               </form>
 
             </div>
 
-          </li>";
-
-			}
-
-          ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-		  echo "
-
-          <!-- Apply -->
+          </li>
+		  <!-- Apply -->
 
           <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
 
             <div class='register-form'>
 
               <h4>Apply</h4>
+			  
+			  <form action='Apply.php' method='post'>
+				<!--Button-->
+				<button type='submit' name='Apply' class='btn'>Apply</button>
+
+              </form>
 
             </div>
 
-           </li>";
-
-		  }
-
-		   ?>
-
-        </ul>
+           </li>";}
+				
+				if(isset($error)){echo $error;}
+		  ?>
+          </ul>
 
       </div>
 
@@ -608,6 +538,21 @@ if(isset($_POST['login']))
               <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
+              
+              <!--Registerd Learner-->
+			  <?php
+			  if(isset($_SESSION['Register']))
+			  {
+              	if($_SESSION['Register'] == "Registered")
+				{
+					echo '<li><a href="contact-us.php">View Portal</a></li>';
+				}
+				else if($_SESSION['Register'] == "Not Registered")
+				{
+					echo '<li><a href="contact-us.php">Application Status</a></li>';
+				}
+			  }
+			  ?>
 
             </ul>
 

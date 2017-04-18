@@ -295,7 +295,7 @@ if(isset($_POST['next']))
 
 								$_SESSION["parent"] = $array['Parent_Gardien'];
 
-								$_SESSION["title"] = $array['Title'];;
+								$_SESSION["title"] = $array['Title'];
 
 								$_SESSION["First_name"] = $array['First_Name'];
 
@@ -344,8 +344,15 @@ if(isset($_POST['next']))
 								$_SESSION["initialsp"] = $inameUp.$ilnameUp;
 
 								$_SESSION["Relationship"];
-
-								$_SESSION["titlep"] = $_POST["title"];
+								
+								if($_POST['title'] == 'Please_Select')
+								{
+									$errorG = "Please Select Grade";
+								}
+								else
+								{
+									$_SESSION['titlep'] = $_POST['title'];
+								}
 
 								$_SESSION["emailp"] = $_POST["email"];
 
@@ -869,7 +876,7 @@ else
 				?>
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
-                <select style="width:100%; height:45px; margin-bottom:10px">
+                <select style="width:100%; height:45px; margin-bottom:10px" name="title" required>
               <option value="Please Select" placeholder="Select Title">Select Title</option>
               <option value="MR">MR</option>
               <option value="MRS">MRS</option>
@@ -878,13 +885,13 @@ else
               
                <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
+                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
+                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
+                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
+                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
                 <?php
 
@@ -905,7 +912,20 @@ else
 					}
 
 				?>
-
+				<script>
+                	function numbersonly(input)
+					{
+						var regex = /[^0-9]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
+                <script>
+                	function charsonly(input)
+					{
+						var regex = /[^a-zA-Z]/g;
+						input.value = input.value.replace(regex, "");
+					}
+                </script>
                 <input type="text" required placeholder="Email" value="" name="email" class="txt">
 
                 <textarea placeholder="Physical/Home Address" name="Home_Address" type="text" class="txt_3"></textarea>
@@ -926,11 +946,11 @@ else
 
                         <tr style="color:black;">
 
-                            <td><input type="text" required placeholder="Home(036.....)" value="" name="home" class="txt"></td>
+                            <td><input type="text"  placeholder="Home(036.....)" value="" name="home" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
-                            <td><input type="text" required placeholder="Work(036...)" value="" name="work" class="txt"></td>
+                            <td><input type="text"  placeholder="Work(036...)" value="" name="work" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
-                            <td><input type="text" required placeholder="Cell(086....)" value="" name="cell" class="txt"></td>
+                            <td><input type="text" required placeholder="Cell(086....)" value="" name="cell" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
                         </tr>	
 
