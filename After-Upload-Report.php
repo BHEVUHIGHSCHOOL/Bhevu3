@@ -126,7 +126,6 @@ if(isset($_POST['login']))
 		$error = "<p style='color:red'>User Account not found.....</p>";
 
 	}
-
 }
 
 ?>
@@ -165,6 +164,7 @@ if(isset($_POST['login']))
 
 <div id="dvLoading"></div>
 
+
 <header>
 
   <div class="top-wrapper hidden-xs">
@@ -196,6 +196,7 @@ if(isset($_POST['login']))
       <div class="col-md-8 col-sm-6">
 
         <ul class="top-right pull-right ">
+        
 
         <?php
 
@@ -645,6 +646,7 @@ if(isset($_POST['login']))
 
 </header>
 
+
 <!-- Header End -->
 
 <!-- Inner Banner Wrapper Start -->
@@ -675,6 +677,8 @@ if(isset($_POST['login']))
 
 </div>
 
+<!-- After upload popup form-->
+
 <!-- Inner Banner Wrapper End -->
 
 <section class="inner-wrapper contact-wrapper">
@@ -701,6 +705,15 @@ if(isset($_POST['login']))
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
+<?php
+    if( $posted ) {
+      if( $result ) 
+        echo "<script type='text/javascript'>alert('submitted successfully!')</script>";
+      else
+        echo "<script type='text/javascript'>alert('failed!')</script>";
+    }
+  ?>
+
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
                 <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
@@ -710,7 +723,7 @@ if(isset($_POST['login']))
                     	<td>
 
                         	<?php echo $_SESSION["query2"];?>
-
+									
                         </td>
 
                     </tr>
@@ -859,21 +872,17 @@ if(isset($_POST['login']))
 
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
-  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
-
-
+  })
+  
+  	(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-83282272-2', 'auto');
 
   ga('send', 'pageview');
 
-
-
 </script>
 
 </body>
-
-
 
 <!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
 

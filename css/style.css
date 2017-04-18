@@ -227,11 +227,11 @@ header {
 }
 @-webkit-keyframes toRightFromLeft {
  49% {
- -webkit-transform: translate(100%);
+ webkit-transform: translate(100%);
 }
  50% {
  opacity: 0;
- -webkit-transform: translate(-100%);
+ webkit-transform: translate(-100%);
 }
  51% {
  opacity: 1;
@@ -239,11 +239,11 @@ header {
 }
 @-moz-keyframes toRightFromLeft {
  49% {
- -moz-transform: translate(100%);
+ moz-transform: translate(100%);
 }
  50% {
  opacity: 0;
- -moz-transform: translate(-100%);
+ moz-transform: translate(-100%);
 }
  51% {
  opacity: 1;
@@ -389,7 +389,7 @@ header {
 	line-height: 15px;
 	display:inline-block;
 	vertical-align:middle;
-	line-height:18px;
+	
 }
 .contact-info li p span {
 	color:#7e7e7e;
