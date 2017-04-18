@@ -463,7 +463,7 @@ if(isset($_POST['next']))
 
 		  {
 
-			  header('Location: index.php');
+			 // header('Location: index.php');
 
 		  }
 
@@ -816,17 +816,14 @@ if(isset($_POST['next']))
             <div class="form"  style="text-align:center; border-radius:10px;">
 
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
-
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
-
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
-
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
-
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
-
-                <input type="email" required placeholder="Email" value="" name="email" class="txt">
-
+				
+                <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px"  name="grade" required>
+                  <option value="Please_Select">Choose Stream</option>
+                  <option value="10">Commerce</option>                  
+                  <option value="General">General</option>
+                  <option value="Science">Science</option>                  
+                 <option value="11">11</option>
+               </select>
                 <p>
 
                 <?php

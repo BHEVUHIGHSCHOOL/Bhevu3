@@ -5,7 +5,7 @@ ob_start();
 session_start();
 /*header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');**/
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
 
 
 
@@ -82,21 +82,25 @@ if(isset($_POST['login']))
 			//learner
 
 			if($_SESSION['Status'] == "Aproved")
-
 			{
-
 				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
+				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
 			}
-
 			else
-
 			{
-
-				header('Location: After-Confirm.php');
-
+				$pic = $con -> query ("select * from images where username = '$username'");
+				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+				{
+					$_SESSION["query2"]=$res['docname'];
+					if(($_SESSION["query2"]) == '')
+					{
+						header('Location: After-Confirm.php');
+					}
+					else
+					{
+						header('Location: Waiting.php');
+					}
+				}
 			}
 
 		}

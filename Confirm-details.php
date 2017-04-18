@@ -49,7 +49,7 @@ if(isset($_POST['save']))
 
 		
 
-		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}')");
+		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]')");
 
 	
 
@@ -583,7 +583,7 @@ if(isset($_POST['save']))
 
                     <tr style="background-color:#363FA3; text-align:center;">
 
-                    	<th style="text-align:center;">Elder</th>
+                    	<th style="text-align:center;">Parent/Gaurdien</th>
 
                         <th style="text-align:center;">Address</th>
 
@@ -595,7 +595,7 @@ if(isset($_POST['save']))
 
                         <th style="text-align:center;">Citizenship</th>
 
-                        <th></th>
+                        <th style="text-align:center;">Grade</th>
 
                     </tr>
 
@@ -612,6 +612,8 @@ if(isset($_POST['save']))
                         <td><?php echo $_SESSION["Present_school"]?></td>
 
                         <td><?php echo $_SESSION["citizenship"]?></td>
+                        
+                        <td><?php echo $_SESSION["grade"]?></td>
 
                     </tr>
 
