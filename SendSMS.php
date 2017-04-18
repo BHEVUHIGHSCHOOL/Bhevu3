@@ -3,138 +3,113 @@
 <?php
 ob_start();
 session_start();
-if(isset($_SESSION['userid']))
+if(isset($_POST['login']))
 
 {
 
-}
+	$username = $_POST['username'];
 
-else
-
-{
-
-	header('Location: index.php');
-
-}
-
-	$status = "waiting";
-
-	$query = $con -> query ("SELECT * FROM learner where Status = '$status'");
-
-	$result = $query -> fetch_array(MYSQLI_BOTH);
-
-	//SDFGHJKL
+	$password = $_POST['password'];
 
 	
 
-	$_SESSION["initials"] = $result['Initials'];
+	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
 
-	$_SESSION["name"] = $result['Firstname'];
-
-	$_SESSION["lname"] = $result['LastName'];
-
-	$_SESSION["sname"] = $result['Surname'];
-
-	$_SESSION["dob"] = $result['DOB'];
-
-	$_SESSION["gender"] = $result['Gender'];
-
-	$_SESSION["ID_number"] = $result['IDNumber'];
-
-	//$_SESSION["Present_school"] = $$result['PresentSchool'];
-
-	$_SESSION["Learners_address"] = $result['LearnersAddress'];
-
-	$_SESSION["Home_Language"] = $result['HomeLanguage'];
-
-	$_SESSION["Relative"] = $result['Relative'];
-
-	$_SESSION["citizenship"] = $result['Citizenship'];
-
-	$_SESSION["Mobile_number"] = $result['Mobilenumber'];
-
-	$_SESSION["elder"] = $result['Elder'];
-
-	$_SESSION["elderid"] = $result['ElderID'];
-
-	$_SESSION["cell"] = $result['Mobilenumber'];
-
-	$_SESSION["password"] = $result['Password'];
-
-	$_SESSION["username"] = $result['Username'];
+	$resultadmin = mysqli_num_rows($admin);
 
 	
 
+	//Learner
+
+	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
+
+	$resultlearner = mysqli_num_rows($learner);
+
 	
 
-	if(isset($_POST['aprove']))
+	//Parent
+
+	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
+
+	$resultparent = mysqli_num_rows($parent);
+
+	
+
+	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
 
 	{
 
-		$updatestatus = "Aproved";
+		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
 
-		$applicantid = $_SESSION["ID_number"];
+		$_SESSION['usernamea'] = $queryadmin['username'];
 
-		$sql = $con -> query("UPDATE learner SET Status = '{$updatestatus}' where $applicantid = IDNumber");
+		$_SESSION['userid'] = $queryadmin['userId'];
 
-	}
+		
 
-	if(isset($_POST['reject']))
+		//Learner
 
-	{
+		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
 
-		$updatestatusr = "Rejected";
+		$_SESSION['username'] = $querylearner['Username'];
 
-		$applicantid = $_SESSION["ID_number"];
+		$_SESSION["ID_number"] = $querylearner['IDNumber'];
 
-		$sql = $con -> query("DELETE FROM learner WHERE IDNumber = '$applicantid'");
+		$_SESSION['Status'] = $querylearner['Status'];
 
+		
 
-
-		$sname =  $_SESSION["sname"];
-
-		$name = $_SESSION["name"];
-
-		$lname = $_SESSION["lname"];
-
-		$id = $_SESSION["ID_number"];
-
-		$cell = $_SESSION["cell"];
-
-		$leaners_addr = $_SESSION["Learners_address"];
-
-		$home_lang = $_SESSION["Home_Language"];
-
-		$password = $_SESSION["password"];
-
-		$username = $_SESSION["username"];
-
-		$gender = $_SESSION["gender"];
-
-		$citizesh = $_SESSION["citizenship"];
-
-		$dob =  $_SESSION["dob"];
-
-		$initials = $_SESSION["initials"];
-
-		$elder = $_SESSION["elder"];
-
-		$relative = $_SESSION["Relative"];
-
-		$elder_id = $result['ElderID'];
-
-		$status = $updatestatusr;
-
-		if(isset($_SESSION["initials"]))
+		if(isset($_SESSION['userid']))
 
 		{
-			$emailbody= "You are rejected....";
-       		        mail('philanimanp27@gmail.com','Customer Support',$emailbody);
-			$sql2 = $con -> query("INSERT INTO rejected (Surname, Firstname, LastName, IDNumber, Mobilenumber, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status) VALUES ('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}')");
+
+			header('Location: Admin-Page.php');
 
 		}
 
+		if(isset($_SESSION['username']))
+
+		{
+
+			//learner
+
+			if($_SESSION['Status'] == "Aproved")
+
+			{
+
+				header('Location: RegisterSubj.php');
+
+				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
+
+			}
+
+			else
+
+			{
+
+				header('Location: After-Confirm.php');
+
+			}
+
+		}
+
+		
+
+		//parent
+
+		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
+
 	}
+
+	else
+
+	{
+
+		$error = "<p style='color:red'>User Account not found.....</p>";
+
+	}
+
+}
 
 ?>
 
@@ -150,7 +125,7 @@ else
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Bhevu&reg;</title>
+<title>Education World</title>
 
 <!-- Bootstrap CSS -->
 
@@ -220,23 +195,162 @@ else
 
         <ul class="top-right pull-right ">
 
-          <!-- Login -->
+        <?php
+			if (isset($_SESSION['userid']))
 
-          <li class="login"><a href="javascript:void(0)"><i class="fa fa-lock"></i>Logout</a>
+			{
 
-            <div class="login-form">
+				echo "
+
+			  <!-- Lgout -->
+
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
+
+            <div class='register-form'>
 
               <h4>Logout</h4>
 
-              <form action="Logout.php" method="post">
+              <form action='Logout.php' method='post'>
 
-                <button type="submit" class="btn">Logout</button>
+                <button type='submit' class='btn'>Logout</button>
 
               </form>
 
             </div>
 
-          </li>
+          </li>";
+
+			}
+
+		  ?>
+
+         <?php
+
+		 if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+			  echo "
+
+          <!-- Login -->
+
+          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
+
+            <div class='login-form'>
+
+              <h4>Login</h4>
+
+              <form action='' method='post'>
+
+                <input type='text' name='username' placeholder='Username'>
+
+                <input type='password' name='password' placeholder='Password'>";}?>
+
+                <?php if(isset($error)){echo $error;}?>
+
+           <?php
+
+           if(isset($_SESSION['username']))
+
+		  	{
+
+		 	}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}
+
+		  	else
+
+		  	{
+
+			  echo "  
+
+                <button type='submit' name='login' class='btn'>Login</button>
+
+              </form>
+
+            </div>
+
+          </li>";
+
+			}
+
+          ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+		  echo "
+
+          <!-- Apply -->
+
+          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
+
+            <div class='register-form'>
+
+              <h4>Apply</h4>
+
+            </div>
+
+           </li>";
+
+		  }
+
+		   ?>
+           <?php
+		   if(isset($_POST['sends']))
+		   {
+			   //$myquery = $con -> query(SELECT * FROM learner);
+			   
+	// Authorisation details.
+	$username = "mthokozisiemanuel@gmail.com";
+	$hash = "06367215f58938712371c243f89b035f433780b3932c8837cfedd2c01dcec5c6";
+
+	// Config variables. Consult http://api.txtlocal.com/docs for more info.
+	$test = "1";
+
+	// Data for text message. This is the text message data.
+	$sender = "API Test"; // This is who the message appears to be from.
+	$numbers = "44777000000,0835954940"; // A single number or a comma-seperated list of numbers
+	$message = "This is a test message from the PHP API script.";
+	// 612 chars or less
+	// A single number or a comma-seperated list of numbers
+	$message = urlencode($message);
+	$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+	$ch = curl_init('http://api.txtlocal.com/send/?');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($ch); // This is the result from the API
+	curl_close($ch);
+
+		   }
+		  
+		   ?>
 
         </ul>
 
@@ -300,7 +414,7 @@ else
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="Education World"/></a> </div>
+            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -426,7 +540,7 @@ else
 
                           <li><span>Pages</span></li>
 
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
+                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
 
@@ -496,7 +610,7 @@ else
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="about-us.php">About Us</a></li>
+                  <li><a href="about-us.html">About Us</a></li>
 
                   <li><a href="coming-soon.html">Coming Soon</a></li>
 
@@ -507,13 +621,11 @@ else
                 </ul>
 
               </li>-->
+                  <li><a href="Admin-Page.php">Admin</a></li>
+                  
+              <li><a href="about-us.php">About Us</a></li>
 
-              <li><a href="#">Applicants</a></li>
-
-              <li><a href="RegisterStuff.php">Register Staff</a></li>
-
-              <li><a href="Admin-Page.php">Admin</a></li>
-              <li><a href="SendSMS.php">Send SMS</a></li>
+              <li><a href="#">Contact Us</a></li>
 
             </ul>
 
@@ -541,7 +653,7 @@ else
 
     <div class="col-sm-12">
 
-      <h2>Applicants</h2>
+      <h2>Send SMS</h2>
 
     </div>
 
@@ -551,13 +663,14 @@ else
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Applicants</li>
+        <li>Send SMS</li> 
 
       </ul>
 
     </div>
 
   </div>
+  
 
 </div>
 
@@ -573,97 +686,36 @@ else
 
         <div class="contact-address">
 
-          <div class="col-sm-12 col-md-12 no-space-left">
+          <div class="col-sm-12 col-md-6 no-space-right">
+          <div>
+             <marquee height="500" width="500" direction="up" scrollamount="10" ><img alt="bhevu" src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg"/></marquee>
+            
+            </div>
+
+            
+
+          </div>
+
+          <div class="col-sm-12 col-md-6 no-space-left">
 
             <div class="form">
 
               <form action="" method="post" id="contactFrm" name="contactFrm">
 
-                 <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
+               <!-- <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
 
-                	<tr>
+                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
 
-                    	<th colspan="12" style="text-align:center;"><h4><em>Learner's Information</em></h4></th>
+                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt"> -->
 
-                    </tr>
+                <input type="text" required placeholder="Email" value="" name="email" class="txt">
 
-                    <tr style="background-color:#363FA3; text-align:center;">
+                <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
 
-                    	<th style="text-align:center;">Initials</th>
-
-                        <th style="text-align:center;">First name</th>
-
-                        <th style="text-align:center;">Second name</th>
-
-                        <th style="text-align:center;">Surname</th>
-
-                        <th style="text-align:center;">Date of Birth</th>
-
-                        <th style="text-align:center;">Gander</th>
-
-                        <th style="text-align:center;">ID Number</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["initials"]?></td>
-
-                        <td><?php echo $_SESSION["name"]?></td>
-
-                        <td><?php echo $_SESSION["lname"]?></td>
-
-                        <td><?php echo $_SESSION["sname"]?></td>
-
-                        <td><?php echo $_SESSION["dob"]?></td>
-
-                        <td><?php echo $_SESSION["gender"]?></td>
-
-                        <td><?php echo $_SESSION["ID_number"]?></td>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Elder</th>
-
-                        <th style="text-align:center;">Address</th>
-
-                        <th style="text-align:center;">Home Language</th>
-
-                        <th style="text-align:center;">Relative</th>
-
-                        <th style="text-align:center;">Present school</th>
-
-                        <th style="text-align:center;">Citizenship</th>
-
-                        <th style="text-align:center;">Documents</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["elder"]?></td>                        
-
-                        <td><?php echo $_SESSION["Learners_address"]?></td>
-
-                        <td><?php echo $_SESSION["Home_Language"]?></td>
-
-                        <td><?php echo $_SESSION["Relative"]?></td>
-
-                        <td><?php //echo $_SESSION["Present_school"]?></td>
-
-                        <td><?php echo $_SESSION["citizenship"]?></td>
-
-                        <td><a href="docs.php">Click here</a></td>
-
-                    </tr>
-
-                </table>
-
-                <input type="submit" value="Aprove" name="aprove" class="txt2">
-
-                <input type="submit" value="Reject" name="reject" class="txt2">
+                <input type="submit" value="Send to Students" name="sends" class="txt2">
+                 <input type="submit" value="Send to Staff" name="sendsf" class="txt2">
+                  <input type="submit" value="Send to Parents" name="sendsp" class="txt2">
+                   
 
               </form>
 
@@ -709,13 +761,13 @@ else
 
   <div class="container">
 
-    <div class="col-sm-3"><img src="images/footer-logo.jpg" alt="World Education"> </div>
+    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
 
     <div class="col-sm-5">
 
       <div class="contactus">
 
-        <h2>Applicants</h2>
+        <h2>Contact Us</h2>
 
         <ul class="list-ul">
 
@@ -769,7 +821,7 @@ else
 
 	</script> 
 
-      Bhevu High | All Rights Reserved.</p>
+      Education World | All Rights Reserved.</p>
 
   </div>
 

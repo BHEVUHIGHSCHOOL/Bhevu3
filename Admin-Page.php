@@ -261,8 +261,10 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
               <li><a href="qazwsxedc.php">Applicants</a></li>
 
               <li><a href="RegisterStuff.php">Register Staff</a></li>
+              
+              <li><a href="SendSMS.php">Send SMS</a></li>
 
-              <li><a href="#">Admin</a></li>
+              <li><a href="Admin-Page.php">Admin</a></li>
 
             </ul>
 
