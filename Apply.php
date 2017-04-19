@@ -495,9 +495,14 @@ if(isset($_POST['next']))
 					{
 						$location = $myfile;
 						move_uploaded_file($tmp_name,"document/".$myfile);
-						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
-						$_SESSION["doc_name"] = $doc_name;
-						$_SESSION["report"] = "Report".$id;
+						$check = $con -> query("SELECT * FROM images username = '$username'");
+						$number = mysqli_num_rows($check);
+						if($number<0)
+						{
+							$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
+							$_SESSION["doc_name"] = $doc_name;
+							$_SESSION["report"] = "Report".$id;
+						}
 					}					
 					
 					header('Location: Parent-details.php');
@@ -977,11 +982,11 @@ if(isset($_POST['next']))
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+              <form action="Apply.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+<!--MUST CHANGE-->
+                <input type="text" required placeholder="Surname" value="<?=((isset($sname))?$sname:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
-
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="First name" value="<?=((isset($name))?$name:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
                 <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
@@ -1051,7 +1056,7 @@ if(isset($_POST['next']))
                 <br><br>
                 <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
-              <option value="Please_Select">Select Your Home Language</option>
+             	  <option value="Please_Select">Select Your Home Language</option>
                   <option value="Zulu">Zulu</option>
                   <option value="English">English</option>
                   <option value="Afrikaans">Afrikaans</option>
