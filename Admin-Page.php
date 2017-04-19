@@ -261,8 +261,10 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
               <li><a href="qazwsxedc.php">Applicants</a></li>
 
               <li><a href="RegisterStuff.php">Register Staff</a></li>
+              
+              <li><a href="SendSMS.php">Send SMS</a></li>
 
-              <li><a href="#">Admin</a></li>
+              <li><a href="Admin-Page.php">Admin</a></li>
 
             </ul>
 
@@ -393,7 +395,7 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 										<td>".$row['Relative']."</td>
 										<td>".$row['Citizenship']."</td>
 										<td><a style='color:black;' href='report.php'>Report</a><br/><a style='color:black;' href='certificate.php'>ID/Certficate</a></td>
-										<td><a style='color:black;' href='#'>View Friendly Format</a></td>
+										<td><button type='button' class='btn btn-success' onclick='openModal(".$row['IDNumber'].")'>View</button></td>
 									</tr>
 									<tr><td colspan='7'><hr/></td></tr>
 									";
@@ -480,7 +482,7 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 										<td>".$row_approved['Relative']."</td>
 										<td>".$row_approved['Citizenship']."</td>
 										<td><a style='color:black;' href='report.php'>Report</a><br/><a style='color:black;' href='certificate.php'>ID/Certficate</a></td>
-										<td><a style='color:black;' href='#'>View Friendly Format</a></td>
+										<td><button type='button' class='btn btn-success' onclick='openModal(".$row_approved['IDNumber'].")'>View</button></td>
 									</tr>
 									<tr><td colspan='7'><hr/></td></tr>
 									";
@@ -611,7 +613,23 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
   <a id="scrool-top" href="javascript:void(0)"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a> 
 
 </div>
-
+<script>
+   function openModal(id){
+	   var data = {"id" : id}
+	   jQuery.ajax({
+		   url: 'modal.php',
+		   method: "post",
+		   data: data,
+		   success: function(data){
+			   jQuery('body').append(data);
+			   $('#modal-info').modal('toggle');
+			   },
+		   error: function(){
+			   alert('error');
+		   }
+		   });
+   }
+</script>
 <!-- Copy Rights End --> 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 

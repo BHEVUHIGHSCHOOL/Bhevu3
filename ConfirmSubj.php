@@ -1,177 +1,87 @@
-<?php require ('connection/conect.php')?>
+<?php require ('connection/conect.php');
+
+	$sql = "SELECT * FROM images";
+
+	$res = $con -> query($sql);
+
+?>
 
 <?php
 ob_start();
 session_start();
-if(isset($_POST['login']))
-
+if(isset($_SESSION['Register']))
 {
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
-
+	if($_SESSION['Register'] == "Registered")
 	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userId'];
-
-		
-
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-
-		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
-			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
-			}
-
-			else
-
-			{
-
-				header('Location: After-Confirm.php');
-
-			}
-
-		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
+		header('Location: index.php');
 	}
-
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-
 }
-
-?>
-
-<?php
-if(isset($_SESSION["username"]) && isset($_SESSION['report']))
-
+if(isset($_POST['stream']))
+{
+	if($_POST['stream'] == 'Please_Select')
 	{
-		$username = $_SESSION["username"];
-
-<<<<<<< HEAD
-		$checkreport = $con -> query ("SELECT * FROM images where username = '$username' and imagename = '$report' ");
-
-		$result = $checkreport -> fetch_array(MYSQLI_BOTH);
-
-		$reportname = $result['imagename'];
-
-		if($reportname<1)
-
-		{
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-		}
-
-		else if ($reportname>1)
-
-		{
-
-			$_SESSION["query2"] = "<p style='color:#fff;'><h2><em>Thank you for registering your application is in progress.</em></h2></p>";
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
+		$_SESSION['error']  = "Please choose stream.";
+		header('Location: RegisterSubj.php');
 	}
-
-	if(isset($_POST['upload']))
+	else if($_POST['stream'] == 'Commerce')
+	{
+		$_SESSION['subj1'] = 'Mathematics';
+		$_SESSION['subj2'] = 'Economics';
+		$_SESSION['subj3'] = 'Business Studies';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	else if($_POST['stream'] == 'History')
+	{
+		$_SESSION['subj1'] = 'Mathematics Literacy';
+		$_SESSION['subj2'] = 'Geography';
+		$_SESSION['subj3'] = 'History';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	else if($_POST['stream'] == 'Science')
+	{
+		$_SESSION['subj1'] = 'Mathematics';
+		$_SESSION['subj2'] = 'Physical Sciences';
+		$_SESSION['subj3'] = 'Business Studies';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	$_SESSION['stream'] = $_POST['stream'];
+} 
+//Default Subjects
+	$Maths = 'Mathematics';
+	$NS = 'Natural Sciences';
+	$SS = 'Social Sciences';
+	$EMS = 'Economic and Management Sciences';
+	$Art = 'Creative Arts';
+	$Tech = 'Technology';
+	$LO = 'Life Orientation';
+	$Eng = 'English First Additional Language';
+	$IsiZ = 'IsiZulu Home Language';
+	
+if(isset($_POST['confirm']))
+{
+	if(isset($_SESSION['stream']))
+	{
+		if($_SESSION['Grade'] == "10")
 		{
-<<<<<<< HEAD
-			if($reportname<1)
+			$subjects = $con -> query ("insert into Subjects101112 values ('$_SESSION[ID_number]', '$_SESSION[stream]', '$_SESSION[subj1]', '$_SESSION[subj2]', '$_SESSION[subj3]', '$_SESSION[subj4]', '$LO', '$Eng', '$IsiZ')");
+			if($subjects)
 			{
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-				//Inserting documents
-				$doc_name = "Report".$_SESSION["ID_number"];
-				$myfile = $_FILES['myfile']['name'];
-				$tmp_name = $_FILES['myfile']['tmp_name'];
-				if($myfile&&$doc_name)
-				{
-					$location = $myfile;
-					move_uploaded_file($tmp_name,"document/".$myfile);
-					$query = $con -> query("UPDATE images SET docname = '{$doc_name}', docpath = '{$location}',doc = '{$tmp_name}' where username = '$username'");
-					//$query = $con -> query("INSERT INTO reports (Report, Reportname, Reportpath, username)VALUES('{$tmp_name}', '{$doc_name}' , '{$location}' , '{$username}')");
-					$_SESSION["query2"] = "";
-					header('location: Waiting.php');
-				}
-<<<<<<< HEAD
+				$con -> query ("update learner set Register = 'Registered', Stream = '$_SESSION[stream]' where IDNumber = '$_SESSION[ID_number]'");
+				$_SESSION['Register'] == "Registered";
+				header('Location: index.php');
 			}
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 		}
-?>
+	}
+	else
+	{
+		$subjects = $con -> query ("insert into Subjects89 values ('$_SESSION[ID_number]', '$Maths', '$NS', '$SS', '$EMS', '$Art', '$Tech', '$LO', '$Eng', '$IsiZ')");
+		if($subjects)
+		{
+			$con -> query ("update learner set Register = 'Registered', Stream = 'No stream' where IDNumber = '$_SESSION[ID_number]'");
+		}
+	}
+}
+?>			
 
 <!DOCTYPE html>
 
@@ -265,137 +175,15 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
           </li>";}
 
-			else if (isset($_SESSION['userid']))
+		  else
 
-			{
+		  {
 
-				echo "
+			  header('Location: index.php');
 
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
+		  }
 
 		  ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-			  echo "
-
-          <!-- Login -->
-
-          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
-
-            <div class='login-form'>
-
-              <h4>Login</h4>
-
-              <form action='' method='post'>
-
-                <input type='text' name='username' placeholder='Username'>
-
-                <input type='password' name='password' placeholder='Password'>";}?>
-
-                <?php if(isset($error)){echo $error;}?>
-
-           <?php
-
-           if(isset($_SESSION['username']))
-
-		  	{
-
-		 	}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}
-
-		  	else
-
-		  	{
-
-			  echo "  
-
-                <button type='submit' name='login' class='btn'>Login</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-          ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-		  echo "
-
-          <!-- Apply -->
-
-          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
-
-            <div class='register-form'>
-
-              <h4>Apply</h4>
-
-            </div>
-
-           </li>";
-
-		  }
-
-		   ?>
 
         </ul>
 
@@ -413,7 +201,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
       <div class="row">
 
-        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
+        <div class="col-sm-4"><a href="index.php"> <img src="images/logo.png" alt="Education World"></a> </div>
 
         <div class="col-sm-8">
 
@@ -459,7 +247,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="Education World"/></a> </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -469,7 +257,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
               <li><a href="index.php">Home</a></li>
 
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
+              <li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
 
                 <ul class="dropdown-menu">
 
@@ -665,11 +453,9 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
                 </ul>
 
-              </li>-->
+              </li>
 
-              <li><a href="about-us.php">About us</a></li>
-
-              <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="contact-us.php">Register</a></li>
 
             </ul>
 
@@ -697,7 +483,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Register</h2>
 
     </div>
 
@@ -707,7 +493,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Register</li>
 
       </ul>
 
@@ -733,51 +519,76 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
         <div class="col-sm-12">
 
+          <h2>Registration of subjects</h2>
+
         </div>
 
         </div>
 
           <div class="col-sm-12 col-md-12 no-space-right">
 
-          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
+          <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
-
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
-
-                	<tr>
-
-                    	<th colspan="12" style="text-align:center;"><?php if(isset($_SESSION["query"])){echo $_SESSION["query"];} ?></th>
-
-                    </tr>
-
-                    <?php 
-
-					if(isset($_SESSION["query"]))
-
+              
+              	<?php
+                	if($_SESSION['Grade'] == "10")
 					{
-
-						echo "<tr>
-
-								<td>.</td>
-
-								<td>Upload Report</td>
-
-                        		<td colspan='12' style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
-
-                        	 </tr>
-
-							 <tr><td>.</td></tr>";
-
+						echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$_SESSION['subj1'].'</br>'.
+										$_SESSION['subj2'].'</br>'.
+										$_SESSION['subj3'].'</br>'.
+										$_SESSION['subj4'].'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
 					}
-
-					?>
-
-                </table>
-
-                <?php if(isset($_SESSION["query"])){echo "<input type='submit' value='Upload Report' name='upload' class='txt2'>";}?>
+					else
+					{
+						if($_SESSION['Grade'] == "8" || $_SESSION['Grade'] == "9")
+						{
+							echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$Maths.'</br>'.
+										$NS.'</br>'.
+										$SS.'</br>'.
+										$Art.'</br>'.
+										$EMS.'</br>'.
+										$Tech.'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
+						}
+						else
+						{
+							echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$_SESSION['subj1'].'</br>'.
+										$_SESSION['subj2'].'</br>'.
+										$_SESSION['subj3'].'</br>'.
+										$_SESSION['subj4'].'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
+						}
+					}
+				?>
+                <input type="submit" value="Confirm Subjects" name="confirm" class="txt2">
 
               </form>
 
@@ -825,7 +636,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
   <div class="container">
 
-    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
+    <div class="col-sm-3"><img src="images/footer-logo.jpg" alt="World Education"> </div>
 
     <div class="col-sm-5">
 

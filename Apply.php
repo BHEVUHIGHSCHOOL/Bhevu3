@@ -5,10 +5,20 @@
 	$res = $con -> query($sql);
 
 ?>
-
 <?php
 ob_start();
 session_start();
+if(isset($_SESSION['Register']))
+{
+	if($_SESSION['Register'] == "Registered")
+	{
+		header('Location: index.php');
+	}
+}
+/*header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
+
 if(isset($_POST['login']))
 
 {
@@ -41,7 +51,7 @@ if(isset($_POST['login']))
 
 	
 
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
+	if($resultadmin>0)
 
 	{
 
@@ -51,8 +61,17 @@ if(isset($_POST['login']))
 
 		$_SESSION['userid'] = $queryadmin['userid'];
 
+
+			header("Location:Admin-Page.php");
 		
 
+		//parent
+
+		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
+
+	}
+	else if($resultlearner>0)
+	{
 		//Learner
 
 		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
@@ -62,55 +81,59 @@ if(isset($_POST['login']))
 		$_SESSION["ID_number"] = $querylearner['IDNumber'];
 
 		$_SESSION['Status'] = $querylearner['Status'];
-
 		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
+		$_SESSION['Register'] = $querylearner['Register'];
 
 		if(isset($_SESSION['username']))
 
 		{
 
 			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
+			//Approved learner
+			if($_SESSION['Status'] == "Approved" && $_SESSION['Register'] == "Not Registered")
 			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
+				$_SESSION['Grade'] = $querylearner['Grade'];
+				if($_SESSION['Grade'] == "10")
+				{
+					header('Location: RegisterSubj.php');
+				}
+				else
+				{
+					header('Location: ConfirmSubj.php');
+				}
+				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
 			}
-
-			else if($_SESSION['Status'] == "Waiting")
-
+			//Registered learner
+			else if($_SESSION['Register'] == "Registered")
 			{
-
-				header('Location: After-Confirm.php');
+				header('Location: index.php');
+			}
+			else
+			{
+				$pic = $con -> query ("select * from images where username = '$username'");
+				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+				{
+					$_SESSION["query2"]=$res['docname'];
+					if(($_SESSION["query2"]) == '')
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: After-Confirm.php');
+					}
+					else
+					{
+						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
+						header('Location: Waiting.php');
+					}
+				}
 			}
 
 		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
 	}
-
 	else
 
 	{
 
-		$error = "<p style='color:red'>Username or password is incorrect.....</p>";
+		$error = "<p style='color:red'>User Account not found.....</p>";
 
 	}
 
@@ -472,9 +495,20 @@ if(isset($_POST['next']))
 					{
 						$location = $myfile;
 						move_uploaded_file($tmp_name,"document/".$myfile);
+<<<<<<< HEAD
 						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
 						$_SESSION["doc_name"] = $doc_name;
 						$_SESSION["report"] = "Report".$id;
+=======
+						$check = $con -> query("SELECT * FROM images username = '$username'");
+						$number = mysqli_num_rows($check);
+						if($number<0)
+						{
+							$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
+							$_SESSION["doc_name"] = $doc_name;
+							$_SESSION["report"] = "Report".$id;
+						}
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 					}					
 					
 					header('Location: Parent-details.php');
@@ -484,7 +518,7 @@ if(isset($_POST['next']))
 
 				 {
 
-					 $error = "Your alreadey exist in the system";
+					 $errorid = "Your alreadey exist in the system";
 
 				 }
 
@@ -954,11 +988,11 @@ if(isset($_POST['next']))
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+              <form action="Apply.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+<!--MUST CHANGE-->
+                <input type="text" required placeholder="Surname" value="<?=((isset($sname))?$sname:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
-
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="First name" value="<?=((isset($name))?$name:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
                 <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
@@ -994,11 +1028,11 @@ if(isset($_POST['next']))
 
 					}
 
-					if(isset($error))
+					if(isset($errorid))
 
 					{
 
-						echo "<p style='color:red'>".$error."</p>"."You can not proceed.";
+						echo "<p style='color:red'>".$errorid."</p>"."You can not proceed.";
 
 					}
 
@@ -1028,7 +1062,11 @@ if(isset($_POST['next']))
                 <br><br>
                 <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
+<<<<<<< HEAD
               <option value="Please_Select">Select Your Home Language</option>
+=======
+             	  <option value="Please_Select">Select Your Home Language</option>
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
                   <option value="Zulu">Zulu</option>
                   <option value="English">English</option>
                   <option value="Afrikaans">Afrikaans</option>

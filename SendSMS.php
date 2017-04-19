@@ -1,4 +1,4 @@
-<?php require ('connection/conect.php')?>
+<?php require ('connection/conect.php');?>
 
 <?php
 ob_start();
@@ -113,66 +113,6 @@ if(isset($_POST['login']))
 
 ?>
 
-<?php
-if(isset($_SESSION["username"]) && isset($_SESSION['report']))
-
-	{
-		$username = $_SESSION["username"];
-
-<<<<<<< HEAD
-		$checkreport = $con -> query ("SELECT * FROM images where username = '$username' and imagename = '$report' ");
-
-		$result = $checkreport -> fetch_array(MYSQLI_BOTH);
-
-		$reportname = $result['imagename'];
-
-		if($reportname<1)
-
-		{
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-		}
-
-		else if ($reportname>1)
-
-		{
-
-			$_SESSION["query2"] = "<p style='color:#fff;'><h2><em>Thank you for registering your application is in progress.</em></h2></p>";
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-	}
-
-	if(isset($_POST['upload']))
-		{
-<<<<<<< HEAD
-			if($reportname<1)
-			{
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-				//Inserting documents
-				$doc_name = "Report".$_SESSION["ID_number"];
-				$myfile = $_FILES['myfile']['name'];
-				$tmp_name = $_FILES['myfile']['tmp_name'];
-				if($myfile&&$doc_name)
-				{
-					$location = $myfile;
-					move_uploaded_file($tmp_name,"document/".$myfile);
-					$query = $con -> query("UPDATE images SET docname = '{$doc_name}', docpath = '{$location}',doc = '{$tmp_name}' where username = '$username'");
-					//$query = $con -> query("INSERT INTO reports (Report, Reportname, Reportpath, username)VALUES('{$tmp_name}', '{$doc_name}' , '{$location}' , '{$username}')");
-					$_SESSION["query2"] = "";
-					header('location: Waiting.php');
-				}
-<<<<<<< HEAD
-			}
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-		}
-?>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -185,19 +125,31 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Bhevu High&reg;</title>
+<title>Education World</title>
+
+<!-- Bootstrap CSS -->
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Font Awesome CSS-->
+
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
 
 <link href="css/style.css" rel="stylesheet">
 
+<!-- Animate CSS -->
+
 <link href="assets/animate/animate.css" rel="stylesheet">
+
+<!-- Owl Carousel -->
 
 <link href="assets/owl-carousel/css/owl.carousel.css" rel="stylesheet">
 
 <link href="assets/owl-carousel/css/owl.theme.css" rel="stylesheet">
+
+<!-- Favicon -->
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
@@ -205,7 +157,11 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 <body>
 
+<!-- Pre Loader -->
+
 <div id="dvLoading"></div>
+
+<!-- Header Start -->
 
 <header>
 
@@ -240,32 +196,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
         <ul class="top-right pull-right ">
 
         <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-			 echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";}
-
-			else if (isset($_SESSION['userid']))
+			if (isset($_SESSION['userid']))
 
 			{
 
@@ -293,15 +224,9 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 		  ?>
 
-          <?php
+         <?php
 
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
+		 if (isset($_SESSION['userid']))
 
 			{
 
@@ -395,6 +320,36 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 		  }
 
+		   ?>
+           <?php
+		   if(isset($_POST['sends']))
+		   {
+			   //$myquery = $con -> query(SELECT * FROM learner);
+			   
+	// Authorisation details.
+	$username = "mthokozisiemanuel@gmail.com";
+	$hash = "06367215f58938712371c243f89b035f433780b3932c8837cfedd2c01dcec5c6";
+
+	// Config variables. Consult http://api.txtlocal.com/docs for more info.
+	$test = "1";
+
+	// Data for text message. This is the text message data.
+	$sender = "API Test"; // This is who the message appears to be from.
+	$numbers = "44777000000,0835954940"; // A single number or a comma-seperated list of numbers
+	$message = "This is a test message from the PHP API script.";
+	// 612 chars or less
+	// A single number or a comma-seperated list of numbers
+	$message = urlencode($message);
+	$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+	$ch = curl_init('http://api.txtlocal.com/send/?');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($ch); // This is the result from the API
+	curl_close($ch);
+
+		   }
+		  
 		   ?>
 
         </ul>
@@ -585,7 +540,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
                           <li><span>Pages</span></li>
 
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
+                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
 
@@ -655,7 +610,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="about-us.php">About Us</a></li>
+                  <li><a href="about-us.html">About Us</a></li>
 
                   <li><a href="coming-soon.html">Coming Soon</a></li>
 
@@ -666,10 +621,11 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
                 </ul>
 
               </li>-->
+                  <li><a href="Admin-Page.php">Admin</a></li>
+                  
+              <li><a href="about-us.php">About Us</a></li>
 
-              <li><a href="about-us.php">About us</a></li>
-
-              <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
 
             </ul>
 
@@ -697,7 +653,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Send SMS</h2>
 
     </div>
 
@@ -707,13 +663,14 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Send SMS</li> 
 
       </ul>
 
     </div>
 
   </div>
+  
 
 </div>
 
@@ -729,55 +686,36 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
         <div class="contact-address">
 
-        <div class="container">
+          <div class="col-sm-12 col-md-6 no-space-right">
+          <div>
+             <marquee height="500" width="500" direction="up" scrollamount="10" ><img alt="bhevu" src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg"/></marquee>
+            
+            </div>
 
-        <div class="col-sm-12">
+            
 
-        </div>
+          </div>
 
-        </div>
+          <div class="col-sm-12 col-md-6 no-space-left">
 
-          <div class="col-sm-12 col-md-12 no-space-right">
+            <div class="form">
 
-          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
+              <form action="" method="post" id="contactFrm" name="contactFrm">
 
-            <div class="form"  style="text-align:center; border-radius:10px;">
+               <!-- <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
 
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
+                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt"> -->
 
-                	<tr>
+                <input type="text" required placeholder="Email" value="" name="email" class="txt">
 
-                    	<th colspan="12" style="text-align:center;"><?php if(isset($_SESSION["query"])){echo $_SESSION["query"];} ?></th>
+                <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
 
-                    </tr>
-
-                    <?php 
-
-					if(isset($_SESSION["query"]))
-
-					{
-
-						echo "<tr>
-
-								<td>.</td>
-
-								<td>Upload Report</td>
-
-                        		<td colspan='12' style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
-
-                        	 </tr>
-
-							 <tr><td>.</td></tr>";
-
-					}
-
-					?>
-
-                </table>
-
-                <?php if(isset($_SESSION["query"])){echo "<input type='submit' value='Upload Report' name='upload' class='txt2'>";}?>
+                <input type="submit" value="Send to Students" name="sends" class="txt2">
+                 <input type="submit" value="Send to Staff" name="sendsf" class="txt2">
+                  <input type="submit" value="Send to Parents" name="sendsp" class="txt2">
+                   
 
               </form>
 
@@ -796,8 +734,6 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
   <div id="google-map">
 
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
-
-        </div>
 
         </div>
 

@@ -513,6 +513,7 @@ else
               <li><a href="RegisterStuff.php">Register Staff</a></li>
 
               <li><a href="Admin-Page.php">Admin</a></li>
+              <li><a href="SendSMS.php">Send SMS</a></li>
 
             </ul>
 
@@ -621,7 +622,11 @@ else
 									<td><a href='report.php'>Report</a><br/><a href='certificate.php'>ID/Certficate</a></td>
 								</tr>
 							</table>
+<<<<<<< HEAD
 							<input type='submit' value='Aprove' name='aprove' class='txt2'>
+=======
+							<input type='submit' value='Approve' name='aprove' class='txt2'>
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 							<input type='submit' value='Reject' name='reject' class='txt2'>
 							";
 					}
