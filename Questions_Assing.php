@@ -3,174 +3,7 @@
 <?php
 ob_start();
 session_start();
-if(isset($_POST['login']))
-
-{
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
-
-	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userId'];
-
-		
-
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-
-		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
-			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
-			}
-
-			else
-
-			{
-
-				header('Location: After-Confirm.php');
-
-			}
-
-		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
-	}
-
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-
-}
-
-?>
-
-<?php
-if(isset($_SESSION["username"]) && isset($_SESSION['report']))
-
-	{
-		$username = $_SESSION["username"];
-
-<<<<<<< HEAD
-		$checkreport = $con -> query ("SELECT * FROM images where username = '$username' and imagename = '$report' ");
-
-		$result = $checkreport -> fetch_array(MYSQLI_BOTH);
-
-		$reportname = $result['imagename'];
-
-		if($reportname<1)
-
-		{
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-		}
-
-		else if ($reportname>1)
-
-		{
-
-			$_SESSION["query2"] = "<p style='color:#fff;'><h2><em>Thank you for registering your application is in progress.</em></h2></p>";
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-	}
-
-	if(isset($_POST['upload']))
-		{
-<<<<<<< HEAD
-			if($reportname<1)
-			{
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-				//Inserting documents
-				$doc_name = "Report".$_SESSION["ID_number"];
-				$myfile = $_FILES['myfile']['name'];
-				$tmp_name = $_FILES['myfile']['tmp_name'];
-				if($myfile&&$doc_name)
-				{
-					$location = $myfile;
-					move_uploaded_file($tmp_name,"document/".$myfile);
-					$query = $con -> query("UPDATE images SET docname = '{$doc_name}', docpath = '{$location}',doc = '{$tmp_name}' where username = '$username'");
-					//$query = $con -> query("INSERT INTO reports (Report, Reportname, Reportpath, username)VALUES('{$tmp_name}', '{$doc_name}' , '{$location}' , '{$username}')");
-					$_SESSION["query2"] = "";
-					header('location: Waiting.php');
-				}
-<<<<<<< HEAD
-			}
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-		}
+require ("UploadQuestionPapers.php");
 ?>
 
 <!DOCTYPE html>
@@ -207,6 +40,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 <div id="dvLoading"></div>
 
+
 <header>
 
   <div class="top-wrapper hidden-xs">
@@ -238,6 +72,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
       <div class="col-md-8 col-sm-6">
 
         <ul class="top-right pull-right ">
+        
 
         <?php
 
@@ -687,6 +522,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
 </header>
 
+
 <!-- Header End -->
 
 <!-- Inner Banner Wrapper Start -->
@@ -697,7 +533,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Upload Question Papers</h2>
 
     </div>
 
@@ -707,7 +543,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Question Papers</li>
 
       </ul>
 
@@ -716,6 +552,8 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
   </div>
 
 </div>
+
+<!-- After upload popup form-->
 
 <!-- Inner Banner Wrapper End -->
 
@@ -743,41 +581,48 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+              <form method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
+                <table class="col-sm-12" style="color:#000; width:100%; border-radius:5px; background-color:#fff; text-align:center">
 
                 	<tr>
 
-                    	<th colspan="12" style="text-align:center;"><?php if(isset($_SESSION["query"])){echo $_SESSION["query"];} ?></th>
+                    	<td class="col-sm-12" colspan="4" style="text-align:center">                        	
+							<h1>UPLOAD QUESTION PAPERS</h1>
+                        </td>
 
                     </tr>
-
-                    <?php 
-
-					if(isset($_SESSION["query"]))
-
-					{
-
-						echo "<tr>
-
-								<td>.</td>
-
-								<td>Upload Report</td>
-
-                        		<td colspan='12' style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
-
-                        	 </tr>
-
-							 <tr><td>.</td></tr>";
-
-					}
-
-					?>
+                    <tr>
+                    	<td class=" col-sm-3">Year</td>
+                        <td class=" col-sm-3">Subjects</td>
+                        <td class=" col-sm-3">Document</td>
+                        <td class=" col-sm-3">Grade</td>
+                    </tr>
+                    <tr>
+                    	<td class=" col-sm-3">
+                    		<input class="form-group" type="text" name="year" placeholder="e.g(2000)"/>
+                        </td>
+                        <td class=" col-sm-3">
+                        	<select class="form-group"  name="subjetcs">
+                            	<option value="Select">Select</option>
+                            </select>
+                        </td>
+                        <td class=" col-sm-3">
+                        	<input class="form-group"  type="file" name="document" />
+                        </td>
+                        <td class=" col-sm-3">
+                        	<select class="form-group"  name="grade">
+                            	<option value="Select">Select</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="4" class="col-sm-12">
+                        	<input type="submit" name="upload" class="txt2" value="UPLOAD">
+                        </td>
+                    </tr>
 
                 </table>
-
-                <?php if(isset($_SESSION["query"])){echo "<input type='submit' value='Upload Report' name='upload' class='txt2'>";}?>
 
               </form>
 
@@ -921,21 +766,17 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
-  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
-
-
+  })
+  
+  	(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-83282272-2', 'auto');
 
   ga('send', 'pageview');
 
-
-
 </script>
 
 </body>
-
-
 
 <!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
 

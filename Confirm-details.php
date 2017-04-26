@@ -49,7 +49,11 @@ if(isset($_POST['save']))
 
 		
 
+<<<<<<< HEAD
+		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]')");
+=======
 		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected')");
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 
 	
 

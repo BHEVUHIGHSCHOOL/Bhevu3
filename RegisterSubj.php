@@ -107,7 +107,11 @@ session_start();
 
 		  {
 
+<<<<<<< HEAD
+			 // header('Location: index.php');
+=======
 			 header('Location: index.php');
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 
 		  }
 
@@ -459,6 +463,37 @@ session_start();
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
+<<<<<<< HEAD
+              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+				
+                <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px"  name="grade" required>
+                  <option value="Please_Select">Choose Stream</option>
+                  <option value="10">Commerce</option>                  
+                  <option value="General">General</option>
+                  <option value="Science">Science</option>                  
+                 <option value="11">11</option>
+               </select>
+                <p>
+
+                <?php
+
+                	if(isset($validity))
+
+					{
+
+						echo "<p style='color:red'>".$validity."</p>"."You can not proceed.";
+
+					}
+
+					if(isset($error))
+
+					{
+
+						echo "<p style='color:red'>".$error."</p>"."You can not proceed.";
+
+					}
+
+=======
               <form action="ConfirmSubj.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 				
                 <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px"  name="stream" required>
@@ -472,6 +507,7 @@ session_start();
 				{
 					echo '<p style="color:red;">'.$_SESSION["error"].'</p></br>';
 				}
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 				?>
                 <input type="submit" value="Continue" name="next" class="txt2">
 

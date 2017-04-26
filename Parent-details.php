@@ -878,12 +878,20 @@ else
 				?>
 
                <!-- <input type="text" required placeholder="Father or Mother" value="" name="parent" class="txt">-->
+<<<<<<< HEAD
+                <select style="width:100%; height:45px; margin-bottom:10px" name="title" required>
+              <option value="Please Select" placeholder="Select Title">Select Title</option>
+              <option value="MR">MR</option>
+              <option value="MRS">MRS</option>
+              <option value="MRS">MISS</option>
+=======
 
                <select style="width:100%; height:45px; margin-bottom:10px" name="title" required>
 				 <option value="Please Select" placeholder="Select Title">Select Title</option>
                  <option value="MR">MR</option>
                  <option value="MRS">MRS</option>
                  <option value="MRS">MISS</option>
+>>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
               </select>
               
                <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->

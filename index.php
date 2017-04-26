@@ -7,7 +7,10 @@ session_start();
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
 
+<<<<<<< HEAD
 require ("signin.php");
+=======
+>>>>>>> 8edadf9d139763a8016eda64b6c634a8c23acc72
 ?>
 
 <!DOCTYPE html>
