@@ -57,6 +57,18 @@ if(isset($_POST['stream']))
 	$Eng = 'English First Additional Language';
 	$IsiZ = 'IsiZulu Home Language';
 	
+//Defualt subjects for returning Grade 11's
+if(isset($_SESSION["returning"]))
+{
+	$prevsubjects = $con -> query ("select * from Subjects101112 where StudID = '$_SESSION[ID_number]'");
+	$output = $prevsubjects -> fetch_array(MYSQLI_BOTH);
+	$_SESSION['subj1'] = $output['subj1'];
+	$_SESSION['subj2'] = $output['subj2'];
+	$_SESSION['subj3'] = $output['subj3'];
+	$_SESSION['subj4'] = $output['subj4'];
+}
+
+	
 if(isset($_POST['confirm']))
 {
 	if(isset($_SESSION['stream']))
@@ -71,13 +83,43 @@ if(isset($_POST['confirm']))
 				header('Location: index.php');
 			}
 		}
+		else
+		{
+			if(isset($_SESSION["non-returning"]))
+			{
+				$subjects = $con -> query ("insert into Subjects101112 values ('$_SESSION[ID_number]', '$_SESSION[stream]', '$_SESSION[subj1]', '$_SESSION[subj2]', '$_SESSION[subj3]', '$_SESSION[subj4]', '$LO', '$Eng', '$IsiZ')");
+				if($subjects)
+				{
+					$con -> query ("update learner set Register = 'Registered', Stream = '$_SESSION[stream]' where IDNumber = '$_SESSION[ID_number]'");
+					$_SESSION['Register'] == "Registered";
+					header('Location: index.php');
+				}
+			}
+			else if(isset($_SESSION["returning"]))
+			{
+				$con -> query ("update learner set Register = 'Registered' where IDNumber = '$_SESSION[ID_number]'");
+				$_SESSION['Register'] == "Registered";
+				header('Location: index.php');
+			}
+		}
 	}
 	else
 	{
-		$subjects = $con -> query ("insert into Subjects89 values ('$_SESSION[ID_number]', '$Maths', '$NS', '$SS', '$EMS', '$Art', '$Tech', '$LO', '$Eng', '$IsiZ')");
-		if($subjects)
+		if(isset($_SESSION["non-returning"]))
+		{
+			$subjects = $con -> query ("insert into Subjects89 values ('$_SESSION[ID_number]', '$Maths', '$NS', '$SS', '$EMS', '$Art', '$Tech', '$LO', '$Eng', '$IsiZ')");
+			if($subjects)
+			{
+				$con -> query ("update learner set Register = 'Registered', Stream = 'No stream' where IDNumber = '$_SESSION[ID_number]'");
+				$_SESSION['Register'] == "Registered";
+				header('Location: index.php');
+			}
+		}
+		else if(isset($_SESSION["returning"]))
 		{
 			$con -> query ("update learner set Register = 'Registered', Stream = 'No stream' where IDNumber = '$_SESSION[ID_number]'");
+			$_SESSION['Register'] == "Registered";
+			header('Location: index.php');
 		}
 	}
 }

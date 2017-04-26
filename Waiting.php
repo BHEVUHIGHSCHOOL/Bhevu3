@@ -1,15 +1,6 @@
 <?php require ('connection/conect.php')?>
 <?php
 session_start();
-if(isset($_SESSION["query2"]))
-	{
-	}
-	else
-	{
-		header('Location: After-Confirm.php');
-	}
-?>
-<?php
 if(isset($_POST['login']))
 {
 	$username = $_POST['username'];

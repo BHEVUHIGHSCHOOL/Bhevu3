@@ -1,6 +1,7 @@
 <?php require ('connection/conect.php');?>
 <?php
 session_start();
+echo unicid();
 $doc_name2 = "ID/Certeficate".$_SESSION["ID_number"];
 $pic = $con -> query ("select * from images where imagename = '$doc_name2'");
 while ($res = $pic ->fetch_array(MYSQLI_BOTH))

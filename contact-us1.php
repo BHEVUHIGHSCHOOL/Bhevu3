@@ -1,14 +1,12 @@
 <?php 
 require ('connection/conect.php');
-
+require ("signin.php");
 ob_start();
 session_start();
 /*header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
-require ("signin.php");
 ?>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -91,7 +89,7 @@ require ("signin.php");
 
         <ul class="top-right pull-right ">
 
-        <?php
+       <?php
 
 		  if(isset($_SESSION['username']) || isset($_SESSION['userid']))
 
@@ -163,6 +161,7 @@ require ("signin.php");
 				
 				if(isset($error)){echo $error;}
 		  ?>
+
         </ul>
 
       </div>
@@ -225,7 +224,7 @@ require ("signin.php");
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
+            </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -433,9 +432,9 @@ require ("signin.php");
 
               </li>-->
 
-              <li><a href="about-us.php">About Us</a></li>
+              <li><a href="#">About Us</a></li>
 
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="contact-us.php">Contact Us</a></li>
               
               <!--Registerd Learner-->
 			  <?php
@@ -443,23 +442,11 @@ require ("signin.php");
 			  {
               	if($_SESSION['Register'] == "Registered")
 				{
-					echo '<li><a href="#">View Portal</a></li>';
+					echo '<li><a href="contact-us.php">View Portal</a></li>';
 				}
 				else if($_SESSION['Register'] == "Not Registered")
 				{
-					$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-					while ($res = $pic ->fetch_array(MYSQLI_BOTH))
-					{
-						$_SESSION["availablereport"]=$res['docname'];
-						if(($_SESSION["availablereport"]) == '')
-						{
-							echo '<li><a href="After-Confirm.php">upload report</a></li>';
-						}
-						else
-						{
-							echo '<li><a href="Waiting.php">Application Status</a></li>';
-						}
-					}
+					echo '<li><a href="contact-us.php">Application Status</a></li>';
 				}
 			  }
 			  ?>
@@ -490,7 +477,7 @@ require ("signin.php");
 
     <div class="col-sm-12">
 
-      <h2>Contact Us</h2>
+      <h2>About Us</h2>
 
     </div>
 
@@ -500,7 +487,7 @@ require ("signin.php");
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Contact Us</li>
+        <li>About Us</li>
 
       </ul>
 
@@ -512,75 +499,401 @@ require ("signin.php");
 
 <!-- Inner Banner Wrapper End -->
 
-<section class="inner-wrapper contact-wrapper">
+<section class="inner-wrapper">
 
   <div class="container">
 
     <div class="row">
 
-      <div class="inner-wrapper-main">
+      <div class="inner-wrapper-main about-edu">
 
-        <div class="contact-address">
+        <div class="col-sm-8">
 
-          <div class="col-sm-12 col-md-6 no-space-right">
+          <h2>About Bhevu High School</h2>
 
-            <div class="col-sm-6 contact"> <i class="fa fa-map-marker"></i>
+          <p><em><strong><h4>Bhevu High School: Ladysmith KZN</h4></strong></em></p>
 
-              <p><span>Address</span><br>
+          <p>I am very proud to tell you about Bhevu High School Ladysmith, KZN, South Africa. Bhevu is proof that hard work and perseverance
 
-                Department of State, USA</p>
+          	  can overcome all pdds. Under the guidence of the principal, Gugu Ntshangase, the school has grown from literally learners sitting
 
-            </div>
+              on the rocks with lap desks, to what it is now. She and her team of dedicated teachers provide a stable environment where teaching
 
-            <div class="col-sm-6 contact white"> <i class="fa fa-phone"></i>
+              and learning continues even under very severe conditions. Her learners are dedicated, well-behaved young poeple who appriciate what thier
 
-              <p><span>Phone Number</span><br>
+              teachers do for them.</p>
 
-                0800 123 46 0000</p>
+          <p><em><strong><h4>Here is a bit history of the school:</h4></strong></em>
 
-            </div>
+             Late in 2008, Gugu was told that a new high school would be opening in the rural area of Roosboom, just outside Ladysmith.
 
-            <div class="col-sm-6 contact white"> <i class="fa fa-volume-control-phone"></i>
+          	 She was shocked to hear that there were would be no school buildings by the time the learners arrived in January 2009. The new year began with learners sitting
 
-              <p><span>Customer Care</span><br>
+             in the sun (there are very few trees and none near the site of hte schhol) using lap desks. There were a total of 64 learnes in the first grade 8 class.</p>
 
-                0800 123 46 0000</p>
+          <p>A few months into the term, Gugu managed to persuad a <strong><a href="javascript:void(0)" data-toggle="modal" data-target="#2"><em style="color:#3460ED">local church</em></a></strong> to allow the leaners to use their building for teaching and learnign purposes. 
 
-            </div>
+              That was the only permanent structure available to the learners. A local copmpany donated some desks and chairs and the learners began a difficult year
 
-            <div class="col-sm-6 contact"> <i class="fa fa-envelope"></i>
+              cramped 4 to a desk in a very old, dilapidated building which leaks in the rain and allows the cold air in during winter. 
 
-              <p><span>Email</span><br>
+              There is no available electricity or water.</p>
 
-                <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
+           <p>2010 saw an increase in the number of the learners and the addition of a grade 9 class. It was only half way through this year
+
+              	 that the Department gave the school two <a href="javascript:void(0)" data-toggle="modal" data-target="#3"><strong><em style="color:#3460ED">prefabricated temporarl classrooms</em></strong></a> which were only for teaching and learning late in the
+
+                 year. Desks and chairs received by the school had to be housed in the church. One permanent toilet serves the children and staff,
+
+                 as the other 5 portable toilets are some distance from the school in the neighbour's yard.</p>
+
+           <p>Various local companies and churches have assisted where they can, providing everything from land and <strong><a href="javascript:void(0)" data-toggle="modal" data-target="#7"><em style="color:#3460ED">canvas tents</em></a></strong> which are used
+
+               as classrooms, to <a href="javascript:void(0)" data-toggle="modal" data-target="#8"><strong><em style="color:#3460ED">blankets</em></strong></a> and food for the children. In 2011, there were 170 Grade 8 learners,
+
+               159 Grade 9s &amp; 50 Grade 10 learners. There were two grade 8 "classrooms" (the church
+
+               with 70 learners and one prefab class with 100 learners); 3 grade 9 "classrooms" (the three canvas tents which were donated
+
+               each have about 53 learners in, three and four to a desk!) and the other prefab houses all 50 Grade 10 learners.</p>
+
+           <p>In December 2011 the Department of Education built <a href="javascript:void(0)" data-toggle="modal" data-target="#1"><strong><em style="color:#3460ED">three permanent classrooms</em></strong></a> which are used by the grade 11
+
+           	  learners in 2012. The school has also acquired a very big water tank which holds all the water that is needed at school. It is very 
+
+              difficult to get water to refill the tanks. The Department also put a wire fence around the school property. The school now has a
+
+              total of 520 learners in total!</p>
+
+           <p>The ground around the school is not safe or conductive to sport other activities (there are many ditches and holes and there are muddy areas
+
+           	  on an uneven slope). The toilets are kept apart from the school so when learners have to use them lose lots of teaching learning time
+
+              because they have to walk far. All the school administration is done from back of the teacher's <a href="javascript:void(0)" data-toggle="modal" data-target="#4"><strong><em style="color:#3460ED">cars</em></strong></a> (those who have them) 
+
+              &amp; the principal's office is a desk in the shade of the cars, outside! The notes and other school admin
+
+              are put in a bookshelf at the <a href="javascript:void(0)" data-toggle="modal" data-target="#5"><strong><em style="color:#3460ED">back of the church</em></strong></a>.</p>
+
+           <p>The school is in pesperate need of text books, library books, a photocopier for all their notes and exams; desks chairs,science 
+
+           	  equipment ,sporting equipment etc. All things many schools in South Africa take for grantec. They also need a safe place to keep 
+
+              these treasures.</p>
+
+           <p>The Staff and children in this school need to know that people out there care and are willing to help. Those learners are the future
+
+           	  of this country and if they see adults caring, helping, they will learn to do the same. We need to give them a chance in life. The 
+
+              community is an extremly poor one and alomost all learners are part of the feeding scheme at the school (previously run by a church in town
+
+              before the Government reinstituted a high school feeding programme). How will these children ever get the chance to feed themselves if their education
+
+              is so lacking? They are really hard working children and only need a kick start to achieve. Their parents and the commmunity in general (both
+
+              business/churches in town and individuals in the area) are extremly supportive of the principal and all her efforts. They know what
+
+              this school can mean to their children and they are willing to do whatever it takes. They even asked local businesses for their packing 
+
+              crates in order to build more classrooms for the children. <a href="javascript:void(0)" data-toggle="modal" data-target="#6"><strong><em style="color:#3460ED">They are willing to go work themselves</em></strong></a>. Let us help them too!
+
+              The financial resources of the school are very limited as allocations from the department are based on the previous years' learner number.
+
+              With the school growing an extra grade each year this simply not good enough. Other money (if parents can pay at all)! comes from 
+
+              the poor famillies in the poverty stricken area. Business has been a great help but in the small town of Ladysmith there is only so much
+
+              that can be done.</p>
+
+           <p>Below are some photos of the school and thier staff. It will hopefully give you an idea of how special thes children are and how 
+
+           	   deserving they are of a very bit of help they can get!</p>
+
+        </div>
+
+        <div class="gal-container full-width">
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box"> 
+
+              <div class="modal fade" id="1" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/School/three classrooms.jpg" alt="Permanent Classrooms"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>3 Permanent Classrooms</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
 
           </div>
 
-          <div class="col-sm-12 col-md-6 no-space-left">
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
 
-            <div class="form">
+            <div class="box">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm">
+              <div class="modal fade" id="2" tabindex="-1" role="dialog">
 
-                <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
+                <div class="modal-dialog" role="document">
 
-                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
+                  <div class="modal-content">
 
-                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/School/church.jpg" alt="Local church"> </div>
 
-                <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
+                    <div class="col-md-12 description">
 
-                <input type="submit" value="submit" name="submit" class="txt2">
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Local Church</strong></em></a></h4>
 
-              </form>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
 
           </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="3" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/School/prefebs.jpg" alt="Prefebs"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Temporal Prefebs</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="4" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/School/office 2009.jpg" alt="office 2009"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Bhevu Office (2009)</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="5" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/4th CD/Bhevu High School 2009/SV104281.JPG" alt="2009"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Back of the church</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="6" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/4th CD/Bhevu High School 2009/Bhevu High School - DES CD/SV102233.JPG" alt="2009"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Hard working pupils(2009)</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="7" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/3rd CD/DSCN0746.JPG" alt="2009"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4>Canvas Tents</h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+
+            <div class="box">
+
+              <div class="modal fade" id="8" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                  <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    <div class="modal-body"> <img src="Bhevu Pics/3rd CD/DSCN0856.JPG" alt="2009"> </div>
+
+                    <div class="col-md-12 description">
+
+                      <h4><a href="#"><em style="color:#3460ED"><strong>Blankets</strong></em></a></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="about-callouts">
+
+          <div class="col-sm-12 col-md-8 no-space-right">
+
+            <div class="col-sm-6 about-callout">
+
+              <h4>Teachers used their cars as the office</h4>
+
+              <p><a href="grid-gallery.html"><img src="Bhevu Pics/4th CD/Bhevu High School 2009/SV104246.JPG" alt="2009 office" width="1000px auto" height="1100px"></a></p>
+
+            </div>
+
+            <div class="col-sm-6 about-callout white">
+
+              <h4>Lorem Ipsum is simply</h4><br/>
+
+              <p><a><img src="Bhevu Pics/4th CD/Bhevu High School 2009/Bhevu High School - DES CD/SV101592.JPG" width="1000px" height="1100px" alt="Building school(2009)"></a></p>
+
+            </div>
+
+            <div class="col-sm-6 about-callout white">
+
+              <h4>Lorem Ipsum is simply</h4>
+
+              <p>Lorem Ipsum is simply dummy text of the printing.</p>
+
+            </div>
+
+            <div class="col-sm-6 about-callout">
+
+              <h4>Lorem Ipsum is simply</h4>
+
+              <p>Lorem Ipsum is simply dummy text of the printing.</p>
+
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 col-md-4 no-space-left"><img src="Bhevu Pics/Edited/Principal/principal2.jpg" alt="Principal"></div>
 
         </div>
 
@@ -590,12 +903,6 @@ require ("signin.php");
 
   </div>
 
-  <div id="google-map">
-
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
-
-        </div>
-
 </section>
 
 <!-- Call to Action start -->
@@ -604,11 +911,11 @@ require ("signin.php");
 
   <div class="container">
 
-    <h3>Lorem Ipsum is simply dummy text</h3>
+    <!--<h3>Lorem Ipsum is simply dummy text</h3>
 
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing and typesetting industry.</p>
 
-    <a href="javascript:void(0)">Sign Up</a> </div>
+    <a href="javascript:void(0)">Sign Up</a>--> </div>
 
 </div>
 
@@ -620,7 +927,7 @@ require ("signin.php");
 
   <div class="container">
 
-    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
+    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="World Education"> </div>
 
     <div class="col-sm-5">
 
@@ -680,7 +987,7 @@ require ("signin.php");
 
 	</script> 
 
-      Education World | All Rights Reserved.</p>
+      Bhevu High School | All Rights Reserved.</p>
 
   </div>
 
@@ -695,6 +1002,8 @@ require ("signin.php");
 <script src="assets/jquery/jquery-3.1.1.min.js"></script> 
 
 <script src="assets/jquery/jquery.animateNumber.min.js"></script> 
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
 
 <script src="assets/easing/jquery.easing.min.js"></script> 
 
@@ -727,4 +1036,6 @@ require ("signin.php");
 </script>
 
 </body>
+
 </html>
+

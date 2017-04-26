@@ -1,13 +1,13 @@
-<?php require ('connection/conect.php');
+<?php
+require ('connection/conect.php');
+require ("signin.php");
 
 	$sql = "SELECT * FROM images";
 
 	$res = $con -> query($sql);
-
-?>
-<?php
 ob_start();
 session_start();
+require ("signin.php");
 if(isset($_SESSION['Register']))
 {
 	if($_SESSION['Register'] == "Registered")
@@ -18,131 +18,7 @@ if(isset($_SESSION['Register']))
 /*header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
-
-if(isset($_POST['login']))
-
-{
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0)
-
-	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userid'];
-
-
-			header("Location:Admin-Page.php");
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
-	}
-	else if($resultlearner>0)
-	{
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-		
-		$_SESSION['Register'] = $querylearner['Register'];
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-			//Approved learner
-			if($_SESSION['Status'] == "Approved" && $_SESSION['Register'] == "Not Registered")
-			{
-				$_SESSION['Grade'] = $querylearner['Grade'];
-				if($_SESSION['Grade'] == "10")
-				{
-					header('Location: RegisterSubj.php');
-				}
-				else
-				{
-					header('Location: ConfirmSubj.php');
-				}
-				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-			}
-			//Registered learner
-			else if($_SESSION['Register'] == "Registered")
-			{
-				header('Location: index.php');
-			}
-			else
-			{
-				$pic = $con -> query ("select * from images where username = '$username'");
-				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
-				{
-					$_SESSION["query2"]=$res['docname'];
-					if(($_SESSION["query2"]) == '')
-					{
-						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-						header('Location: After-Confirm.php');
-					}
-					else
-					{
-						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-						header('Location: Waiting.php');
-					}
-				}
-			}
-
-		}
-	}
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-
-}
-
-?>
-
-<?php
-
+//==============================NEXT=============================
 if(isset($_POST['next']))
 
 {
@@ -497,15 +373,16 @@ if(isset($_POST['next']))
 						move_uploaded_file($tmp_name,"document/".$myfile);
 						$check = $con -> query("SELECT * FROM images username = '$username'");
 						$number = mysqli_num_rows($check);
-						if($number<0)
+						
+						if( $number < 1)
 						{
 							$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
 							$_SESSION["doc_name"] = $doc_name;
 							$_SESSION["report"] = "Report".$id;
+							header('Location: Parent-details.php');
 						}
 					}					
-					
-					header('Location: Parent-details.php');
+		
 				 }
 
 				 else

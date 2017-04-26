@@ -7,126 +7,7 @@ session_start();
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
 
-if(isset($_POST['login']))
-
-{
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0)
-
-	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userid'];
-
-
-			header("Location:Admin-Page.php");
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
-	}
-	else if($resultlearner>0)
-	{
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-		
-		$_SESSION['Register'] = $querylearner['Register'];
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-			//Approved learner
-			if($_SESSION['Status'] == "Approved" && $_SESSION['Register'] == "Not Registered")
-			{
-				$_SESSION['Grade'] = $querylearner['Grade'];
-				if($_SESSION['Grade'] == "10")
-				{
-					header('Location: RegisterSubj.php');
-				}
-				else
-				{
-					header('Location: ConfirmSubj.php');
-				}
-				$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-			}
-			//Registered learner
-			else if($_SESSION['Register'] == "Registered")
-			{
-				header('Location: index.php');
-			}
-			else
-			{
-				$pic = $con -> query ("select * from images where username = '$username'");
-				while ($res = $pic ->fetch_array(MYSQLI_BOTH))
-				{
-					$_SESSION["query2"]=$res['docname'];
-					if(($_SESSION["query2"]) == '')
-					{
-						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-						header('Location: After-Confirm.php');
-					}
-					else
-					{
-						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
-						header('Location: Waiting.php');
-					}
-				}
-			}
-
-		}
-	}
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-
-}
-
+require ("signin.php");
 ?>
 
 <!DOCTYPE html>
@@ -297,7 +178,7 @@ if(isset($_POST['login']))
 
       <div class="row">
 
-        <div class="col-sm-4"><a href="index.html"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
+        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
 
         <div class="col-sm-8">
 
@@ -343,7 +224,7 @@ if(isset($_POST['login']))
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.html"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Education World"/></a> </div>
+            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Education World"/></a> </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -351,7 +232,7 @@ if(isset($_POST['login']))
 
             <ul class="nav navbar-nav">
 
-              <li class="active"><a href="index.html">Home</a></li>
+              <li class="active"><a href="index.php">Home</a></li>
 
               <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
 
@@ -543,14 +424,30 @@ if(isset($_POST['login']))
 			  <?php
 			  if(isset($_SESSION['Register']))
 			  {
-              	if($_SESSION['Register'] == "Registered")
-				{
-					echo '<li><a href="contact-us.php">View Portal</a></li>';
-				}
-				else if($_SESSION['Register'] == "Not Registered")
-				{
-					echo '<li><a href="contact-us.php">Application Status</a></li>';
-				}
+				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
+					while ($resul = $reg ->fetch_array(MYSQLI_BOTH))
+					{
+						if($resul['Register'] == "Registered")
+						{
+							echo '<li><a href="#">View Portal</a></li>';
+						}
+						else if($resul['Register'] == "Not Registered")
+						{
+							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
+							while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+							{
+								$_SESSION["availablereport"]=$res['docname'];
+								if(($_SESSION["availablereport"]) == '')
+								{
+									echo '<li><a href="After-Confirm.php">upload report</a></li>';
+								}
+								else
+								{
+									echo '<li><a href="Waiting.php">Application Status</a></li>';
+								}
+							}
+						}
+					}
 			  }
 			  ?>
 
@@ -1103,197 +1000,101 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 <!-- Gallery Start -->
 
 <div class="gal-container full-width">
-
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
-
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#1">
-
               <div class="caption">
-
                 <h4>Netball Team</h4>
-
                 <p><strong>.........</strong></p>
-
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-
               <img src="Bhevu Pics/Edited/Gallery/netball.jpg" alt="Netbal Team"> </a>
-
               <div class="modal fade" id="1" tabindex="-1" role="dialog">
-
                 <div class="modal-dialog" role="document">
-
                   <div class="modal-content">
-
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
                     <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/netball full.jpg" alt="Gallery Image"> </div>
-
                     <div class="col-md-12 description">
-
                       <h4>Netball Team</h4>
-
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
-
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#2">
-
               <div class="caption">
-
-                <h4>Soccer Team</h4>
-
-                <p>........</p>
-
-                <i class="fa fa-search" aria-hidden="true"></i> </div>
-
-              <img src="Bhevu Pics/Edited/Gallery/Soccer.jpg" alt="Soccer Team"> </a>
-
-              <div class="modal fade" id="2" tabindex="-1" role="dialog">
-
-                <div class="modal-dialog" role="document">
-
-                  <div class="modal-content">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/SoccerFull.JPG" alt="Soccer Team"> </div>
-
-                    <div class="col-md-12 description">
-
-                      <h4>Soccer Team Players</h4>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
-
-            <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#3">
-
-              <div class="caption">
-
                 <h4>Indlamu Dance</h4>
-
-                <p>......</p>
-
+                <p>...........</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-
-              <img src="Bhevu Pics/Edited/Gallery/Indlamu.JPG" alt="Indlamu Dance"> </a>
-
-              <div class="modal fade" id="3" tabindex="-1" role="dialog">
-
+              <img src="Bhevu Pics/Edited/Gallery/Indlamu.jpg" alt="Netbal Team"> </a>
+              <div class="modal fade" id="2" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
-
                   <div class="modal-content">
-
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.JPG" alt="Indlamu Dance"> </div>
-
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.jpg" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-
-                      <h4>Indlamu Dance</h4>
-
+                      <h4></h4>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
-
-            <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#4">
-
+            <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#3">
               <div class="caption">
-
-                <h4>Matric Dance</h4>
-
-                <p>......</p>
-
+                <h4>School Soccer Team</h4>
+                <p>............</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-
-              <img src="Bhevu Pics/Edited/Gallery/MatriDance.JPG" alt="Matric Dance"> </a>
-
-              <div class="modal fade" id="4" tabindex="-1" role="dialog">
-
+              <img src="Bhevu Pics/Edited/Gallery/Soccer.jpg" alt="Soccer Team"> </a>
+              <div class="modal fade" id="3" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
-
                   <div class="modal-content">
-
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                  <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/MatricDanceFull.JPG" alt="Matric Dance"> </div>
-
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/SoccerFull.jpg" alt="Soocer Team"> </div>
                     <div class="col-md-12 description">
-
-                      <h4>Matric Dance 2015</h4>
-
+                      <h4></h4>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
-
-            <div class="box"> 
-
-              <div class="modal fade" id="5" tabindex="-1" role="dialog">
-
+            <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#4">
+              <div class="caption">
+                <h4>Matric Dance Event</h4>
+                <p>..........</p>
+                <i class="fa fa-search" aria-hidden="true"></i> </div>
+              <img src="Bhevu Pics/Edited/Gallery/MatricDance.jpg" alt="Matric Dance Event"></a>
+              <div class="modal fade" id="4" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
-
                   <div class="modal-content">
-
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Principal/principal2.jpg" alt="Mrs. Ntshangase(Principal)"> </div>
-
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/MatricDanceFull.jpg" alt="Matric Dance Event"> </div>
                     <div class="col-md-12 description">
-
-                      <h4>Mrs. G. F. Ntshangase (Principal)</h4>
-
+                      <h4></h4>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
+          </div>
+          <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
+            <div class="box"> 
+              <div class="modal fade" id="5" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Principal/principal2.jpg" alt="Mrs. Ntshangase(Principal)"> </div>
+                    <div class="col-md-12 description">
+                      <h4>Mrs. G. F. Ntshangase (Principal)</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>          
-
         </div>
 
 <!-- Gallery End -->
