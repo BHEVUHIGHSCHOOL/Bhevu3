@@ -13,11 +13,7 @@
 			
 			if($tbimages)
 			{
-<<<<<<< HEAD
-				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text)");
-=======
 				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text, Register text, Stream text)");
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 				
 				if($tblearner)
 				{
@@ -29,31 +25,26 @@
 						
 						if($tbqazwsxedc)
 						{
-<<<<<<< HEAD
-=======
 							$con -> query ("insert into qazwsxedc values('01', 'admin01', 'cdexswzaq01')");
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 							$tbrejected = $con -> query ("CREATE TABLE rejected(Citizenship text, DOB text, Elder text, ElderID text, Firstname text, Gender text, HomeLanguage text, IDNumber text, Initials text, LastName text, LearnersAddress text, Mobilenumber text, Password text, Relative text, Status text, Surname text, Username text)");
 							
 							if($tbrejected)
 							{
 								$tbstaff = $con -> query ("CREATE TABLE staff(Initials text, Firstname text, Lastname text, Surname text, DOB text, Gender text, IDNumber text, Email text, Citizenship text, Username text, Password text, Mobilenumber text, Phase text, Position text)");
-<<<<<<< HEAD
-								//Ends here with the table of the staff
-=======
 								
 								if($tbstaff)
 								{
 									$tbsubj8 = $con -> query ("CREATE TABLE Subjects89(StudID text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text, subj8 text, subj9 text)");
 									$tbsubj10 = $con -> query ("CREATE TABLE Subjects101112(StudID text, Stream text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text)");
 								
-									//Ends here with the tables of the Subjects
+									$questionpapers = $con -> query ("CREATE TABLE Question_pprs(Year int, Subject varchar(200), QuestionPaper blob, QuetionPath varchar(200), QuestionName varchar(200), Grade varchar(200))");
+									$year = $con -> query ("CREATE TABLE Year(Year varchar(200))");
+									//Ends here
 								}
 								else
 								{
 									echo 'Table of statt not created.'.mysqli_error();
 								}
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 							}
 							else
 							{
