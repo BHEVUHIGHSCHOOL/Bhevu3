@@ -3,131 +3,6 @@
 <?php
 ob_start();
 session_start();
-if(isset($_SESSION["query2"]))
-
-	{
-
-	}
-
-	else
-
-	{
-
-		header('Location: After-Confirm.php');
-
-	}
-
-?>
-
-<?php
-
-if(isset($_POST['login']))
-
-{
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
-
-	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userId'];
-
-		
-
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-
-		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
-			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
-			}
-
-			else
-
-			{
-
-				header('Location: After-Confirm.php');
-
-			}
-
-		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
-	}
-
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -143,6 +18,8 @@ if(isset($_POST['login']))
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Bhevu High&reg;</title>
+
+
 
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -677,82 +554,12 @@ if(isset($_POST['login']))
 
 </div>
 
-<!-- After upload popup form-->
-
-<!-- Inner Banner Wrapper End -->
-
-<section class="inner-wrapper contact-wrapper">
-
-  <div class="container">
-
-    <div class="row">
-
-      <div class="inner-wrapper-main">
-
-        <div class="contact-address">
-
-        <div class="container">
-
-        <div class="col-sm-12">
-
-        </div>
-
-        </div>
-
-          <div class="col-sm-12 col-md-12 no-space-right">
-
-          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
-
-            <div class="form"  style="text-align:center; border-radius:10px;">
-
-<?php
-    if( $posted ) {
-      if( $result ) 
-        echo "<script type='text/javascript'>alert('submitted successfully!')</script>";
-      else
-        echo "<script type='text/javascript'>alert('failed!')</script>";
-    }
-  ?>
-
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
-
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
-
-                	<tr>
-
-                    	<td>
-
-                        	<?php echo $_SESSION["query2"];?>
-									
-                        </td>
-
-                    </tr>
-
-                </table>
-
-              </form>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div id="google-map">
-
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
-
-        </div>
-
-        </div>
-
-</section>
+<!-- Portal nav start-->
+<ul class="nav nav-tabs" role="tablist">
+	<li class="active">View Marks</li>
+    <li>Question Papers</li>
+</ul>
+<!-- Portal nav End -->
 
 <!-- Call to Action start -->
 

@@ -7,10 +7,7 @@ session_start();
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
 
-<<<<<<< HEAD
 require ("signin.php");
-=======
->>>>>>> 8edadf9d139763a8016eda64b6c634a8c23acc72
 ?>
 
 <!DOCTYPE html>
@@ -172,45 +169,27 @@ require ("signin.php");
     </div>
 
   </div>
-
+  
   <div class="logo-bar hidden-xs">
-
     <div class="container">
-
       <!-- Logo -->
-
       <div class="row">
-
         <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
-
-        <div class="col-sm-8">
-
+        <div class="col-sm-7">
           <ul class="contact-info pull-right">
-
             <li><i class="fa fa-phone"></i>
-
               <p> <span>Call us</span><br>
-
                062 569 8372</p>
-
             </li>
-
             <li><i class="fa fa-envelope"></i>
-
               <p><span>Email Us</span><br>
-
-                <a href="mailto:support@sbtechnosoft.com">lenjabulothabiso@gmail.com</a></p>
-
+                <a href="mailto:lenjabulothabiso@gmail.com">lenjabulothabiso@gmail.com</a></p>
             </li>
-
           </ul>
-
         </div>
-
+        <div class="col-sm-1"><a href=""><img src="Bhevu Pics/P.P's/17362372_1955905461304830_1811470495680181031_n.jpg" alt="Bhevu Logo" style="width:60px; height:60px;"></a> </div>
       </div>
-
     </div>
-
   </div>
 
   <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
