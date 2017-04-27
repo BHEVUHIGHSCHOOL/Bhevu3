@@ -114,45 +114,8 @@ if(isset($_POST['login']))
 ?>
 
 <?php
-if(isset($_SESSION["username"]) && isset($_SESSION['report']))
-
-	{
-		$username = $_SESSION["username"];
-
-<<<<<<< HEAD
-		$checkreport = $con -> query ("SELECT * FROM images where username = '$username' and imagename = '$report' ");
-
-		$result = $checkreport -> fetch_array(MYSQLI_BOTH);
-
-		$reportname = $result['imagename'];
-
-		if($reportname<1)
-
-		{
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-		}
-
-		else if ($reportname>1)
-
-		{
-
-			$_SESSION["query2"] = "<p style='color:#fff;'><h2><em>Thank you for registering your application is in progress.</em></h2></p>";
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
-
-			$_SESSION["query"] = "<p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p>";
-
-	}
-
 	if(isset($_POST['upload']))
 		{
-<<<<<<< HEAD
-			if($reportname<1)
-			{
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 				//Inserting documents
 				$doc_name = "Report".$_SESSION["ID_number"];
 				$myfile = $_FILES['myfile']['name'];
@@ -161,15 +124,13 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 				{
 					$location = $myfile;
 					move_uploaded_file($tmp_name,"document/".$myfile);
-					$query = $con -> query("UPDATE images SET docname = '{$doc_name}', docpath = '{$location}',doc = '{$tmp_name}' where username = '$username'");
-					//$query = $con -> query("INSERT INTO reports (Report, Reportname, Reportpath, username)VALUES('{$tmp_name}', '{$doc_name}' , '{$location}' , '{$username}')");
-					$_SESSION["query2"] = "";
-					header('location: Waiting.php');
+					$query = $con -> query("UPDATE images SET docname = '{$doc_name}', docpath = '{$location}',doc = '{$tmp_name}' where username = '$_SESSION[username]'");
+					if($query)
+					{
+						$_SESSION["query2"] = "";
+						header('location: Waiting.php');
+					}
 				}
-<<<<<<< HEAD
-			}
-=======
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 		}
 ?>
 
@@ -745,39 +706,24 @@ if(isset($_SESSION["username"]) && isset($_SESSION['report']))
 
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
+                <table class="table col-sm-12" style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
 
                 	<tr>
 
-                    	<th colspan="12" style="text-align:center;"><?php if(isset($_SESSION["query"])){echo $_SESSION["query"];} ?></th>
+                    	<th colspan="2" style="text-align:center;"><p style='color:#fff;'><h1><em>Please Upload your Report.....</em></h1></p></th>
 
                     </tr>
+                    <tr>
 
-                    <?php 
+						<td class="col-sm-6">Upload Report</td>
 
-					if(isset($_SESSION["query"]))
+                        <td class="col-sm-6" style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
 
-					{
-
-						echo "<tr>
-
-								<td>.</td>
-
-								<td>Upload Report</td>
-
-                        		<td colspan='12' style='color:#fff;text-align:center;'><input type='file' required placeholder='Insert image' value='Upload Report' name='myfile' class='txt'></td>
-
-                        	 </tr>
-
-							 <tr><td>.</td></tr>";
-
-					}
-
-					?>
+                      </tr>
 
                 </table>
-
-                <?php if(isset($_SESSION["query"])){echo "<input type='submit' value='Upload Report' name='upload' class='txt2'>";}?>
+                
+                <input type='submit' value='Upload Report' name='upload' class='txt2'>
 
               </form>
 

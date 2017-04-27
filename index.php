@@ -407,7 +407,7 @@ require ("signin.php");
 			  if(isset($_SESSION['Register']))
 			  {
 				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					while ($resul = $reg ->fetch_array(MYSQLI_BOTH))
+					$resul = $reg ->fetch_array(MYSQLI_BOTH);
 					{
 						if($resul['Register'] == "Registered")
 						{
@@ -416,7 +416,7 @@ require ("signin.php");
 						else if($resul['Register'] == "Not Registered")
 						{
 							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-							while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+							$res = $pic ->fetch_array(MYSQLI_BOTH);
 							{
 								$_SESSION["availablereport"]=$res['docname'];
 								if(($_SESSION["availablereport"]) == '')

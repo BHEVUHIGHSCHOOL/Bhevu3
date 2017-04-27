@@ -369,24 +369,18 @@ if(isset($_POST['next']))
 					$tmp_name = $_FILES['myfile']['tmp_name'];
 					if($myfile&&$doc_name)
 					{
-						$location = $myfile;
-						move_uploaded_file($tmp_name,"document/".$myfile);
-<<<<<<< HEAD
-						$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
-						$_SESSION["doc_name"] = $doc_name;
-						$_SESSION["report"] = "Report".$id;
-=======
 						$check = $con -> query("SELECT * FROM images username = '$username'");
 						$number = mysqli_num_rows($check);
 						
 						if( $number < 1)
 						{
+							$location = $myfile;
+							move_uploaded_file($tmp_name,"document/".$myfile);
 							$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
 							$_SESSION["doc_name"] = $doc_name;
 							$_SESSION["report"] = "Report".$id;
 							header('Location: Parent-details.php');
 						}
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
 					}					
 		
 				 }
@@ -939,11 +933,7 @@ if(isset($_POST['next']))
                 <br><br>
                 <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
-<<<<<<< HEAD
-              <option value="Please_Select">Select Your Home Language</option>
-=======
              	  <option value="Please_Select">Select Your Home Language</option>
->>>>>>> f793c041e1e9ca0505e4a7bb00af3b82afcc68a2
                   <option value="Zulu">Zulu</option>
                   <option value="English">English</option>
                   <option value="Afrikaans">Afrikaans</option>

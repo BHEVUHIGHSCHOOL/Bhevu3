@@ -122,6 +122,7 @@ if(isset($_POST['login']))
 					$_SESSION["query2"]=$res['docname'];
 					if(($_SESSION["query2"]) == '')
 					{
+						$_SESSION['Empty'] = "";
 						$_SESSION['report'] = "Report".$_SESSION["ID_number"];
 						header('Location: After-Confirm.php');
 					}
