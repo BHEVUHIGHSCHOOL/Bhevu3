@@ -1,12 +1,8 @@
-<?php 
-require ('connection/conect.php');
+<?php require ('connection/conect.php');
 
 ob_start();
-session_start();
-/*header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');*/
-require ("signin.php");
+//session_start();
+require('ViewDownload.php');
 ?>
 
 <!DOCTYPE html>
@@ -23,29 +19,17 @@ require ("signin.php");
 
 <title>Bhevu High&reg;</title>
 
-<!-- Bootstrap CSS -->
-
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Font Awesome CSS-->
 
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
-
 <link href="css/style.css" rel="stylesheet">
 
-<!-- Animate CSS -->
-
 <link href="assets/animate/animate.css" rel="stylesheet">
-
-<!-- Owl Carousel -->
 
 <link href="assets/owl-carousel/css/owl.carousel.css" rel="stylesheet">
 
 <link href="assets/owl-carousel/css/owl.theme.css" rel="stylesheet">
-
-<!-- Favicon -->
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
@@ -53,11 +37,8 @@ require ("signin.php");
 
 <body>
 
-<!-- Pre Loader -->
-
 <div id="dvLoading"></div>
 
-<!-- Header Start -->
 
 <header>
 
@@ -90,10 +71,11 @@ require ("signin.php");
       <div class="col-md-8 col-sm-6">
 
         <ul class="top-right pull-right ">
+        
 
         <?php
 
-		  if(isset($_SESSION['username']) || isset($_SESSION['userid']))
+		  if(isset($_SESSION['username']))
 
 		  {
 
@@ -116,6 +98,49 @@ require ("signin.php");
             </div>
 
           </li>";}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+				echo "
+
+			  <!-- Lgout -->
+
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
+
+            <div class='register-form'>
+
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
+
+              </form>
+
+            </div>
+
+          </li>";
+
+			}
+
+		  ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
 		  else
 
 		  {
@@ -134,35 +159,78 @@ require ("signin.php");
 
                 <input type='text' name='username' placeholder='Username'>
 
-                <input type='password' name='password' placeholder='Password'>
-				<!--Button-->
-				<button type='submit' name='login' class='btn'>Login</button>
+                <input type='password' name='password' placeholder='Password'>";}?>
+
+                <?php if(isset($error)){echo $error;}?>
+
+           <?php
+
+           if(isset($_SESSION['username']))
+
+		  	{
+
+		 	}
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}
+
+		  	else
+
+		  	{
+
+			  echo "  
+
+                <button type='submit' name='login' class='btn'>Login</button>
 
               </form>
 
             </div>
 
-          </li>
-		  <!-- Apply -->
+          </li>";
+
+			}
+
+          ?>
+
+          <?php
+
+		  if(isset($_SESSION['username']))
+
+		  {
+
+		  }
+
+			else if (isset($_SESSION['userid']))
+
+			{
+
+			}		  
+
+		  else
+
+		  {
+
+		  echo "
+
+          <!-- Apply -->
 
           <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
 
             <div class='register-form'>
 
               <h4>Apply</h4>
-			  
-			  <form action='Apply.php' method='post'>
-				<!--Button-->
-				<button type='submit' name='Apply' class='btn'>Apply</button>
-
-              </form>
 
             </div>
 
-           </li>";}
-				
-				if(isset($error)){echo $error;}
-		  ?>
+           </li>";
+
+		  }
+
+		   ?>
+
         </ul>
 
       </div>
@@ -351,7 +419,7 @@ require ("signin.php");
 
                           <li><span>Pages</span></li>
 
-                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
+                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
 
                           <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
 
@@ -421,7 +489,7 @@ require ("signin.php");
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="about-us.html">About Us</a></li>
+                  <li><a href="about-us.php">About Us</a></li>
 
                   <li><a href="coming-soon.html">Coming Soon</a></li>
 
@@ -433,40 +501,9 @@ require ("signin.php");
 
               </li>-->
 
-              <li><a href="about-us.php">About Us</a></li>
+              <li><a href="about-us.php">About us</a></li>
 
-              <li><a href="#">Contact Us</a></li>
-              
-              <!--Registerd Learner-->
-			  <?php
-			  if(isset($_SESSION['Register']))
-			  {
-				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					$resul = $reg ->fetch_array(MYSQLI_BOTH);
-					{
-						if($resul['Register'] == "Registered")
-						{
-							echo '<li><a href="#">View Portal</a></li>';
-						}
-						else if($resul['Register'] == "Not Registered")
-						{
-							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-							$res = $pic ->fetch_array(MYSQLI_BOTH);
-							{
-								$_SESSION["availablereport"]=$res['docname'];
-								if(($_SESSION["availablereport"]) == '')
-								{
-									echo '<li><a href="After-Confirm.php">upload report</a></li>';
-								}
-								else
-								{
-									echo '<li><a href="Waiting.php">Application Status</a></li>';
-								}
-							}
-						}
-					}
-			  }
-			  ?>
+              <li><a href="contact-us.php">Contact Us</a></li>
 
             </ul>
 
@@ -484,6 +521,7 @@ require ("signin.php");
 
 </header>
 
+
 <!-- Header End -->
 
 <!-- Inner Banner Wrapper Start -->
@@ -494,7 +532,7 @@ require ("signin.php");
 
     <div class="col-sm-12">
 
-      <h2>Contact Us</h2>
+      <h2>Application</h2>
 
     </div>
 
@@ -504,7 +542,7 @@ require ("signin.php");
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Contact Us</li>
+        <li>Apply</li>
 
       </ul>
 
@@ -513,6 +551,8 @@ require ("signin.php");
   </div>
 
 </div>
+
+<!-- After upload popup form-->
 
 <!-- Inner Banner Wrapper End -->
 
@@ -526,59 +566,68 @@ require ("signin.php");
 
         <div class="contact-address">
 
-          <div class="col-sm-12 col-md-6 no-space-right">
+        <div class="container">
 
-            <div class="col-sm-6 contact"> <i class="fa fa-map-marker"></i>
+        <div class="col-sm-12">
 
-              <p><span>Address</span><br>
+        </div>
 
-                Department of State, USA</p>
+        </div>
 
-            </div>
+          <div class="col-sm-12 col-md-12 no-space-right">
 
-            <div class="col-sm-6 contact white"> <i class="fa fa-phone"></i>
+          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
 
-              <p><span>Phone Number</span><br>
+            <div class="form col-sm-6"  style="text-align:center; border-radius:10px;">
 
-                0800 123 46 0000</p>
+              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-            </div>
-
-            <div class="col-sm-6 contact white"> <i class="fa fa-volume-control-phone"></i>
-
-              <p><span>Customer Care</span><br>
-
-                0800 123 46 0000</p>
-
-            </div>
-
-            <div class="col-sm-6 contact"> <i class="fa fa-envelope"></i>
-
-              <p><span>Email</span><br>
-
-                <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
-
-            </div>
-
-          </div>
-
-          <div class="col-sm-12 col-md-6 no-space-left">
-
-            <div class="form">
-
-              <form action="" method="post" id="contactFrm" name="contactFrm">
-
-                <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
-
-                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
-
-                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt">
-
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
-
-                <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
-
-                <input type="submit" value="submit" name="submit" class="txt2">
+                <table class="col-sm-6 table" style="color:#000; width:100%; border-radius:5px; background-color:#fff;">
+					<thead>
+                        <tr>
+    
+                            <td colspan="2">
+                                    <h1>Search Question Paper</h1>									
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>Year</td>
+                            <td>Subject</td>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-sm-4" >
+                                <select name="Year" style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                                    <option value="Select">Select</option>
+                                    <?php
+                                        while($result = mysqli_fetch_array($Year))
+                                        {
+                                            echo "<option value='".$result['Year']."'>".$result['Year']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </td>
+                            <td class="col-sm-4">
+                                <select name="Subject" style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                                    <option value="Select">Select</option>
+                                    <?php
+                                        while($result = mysqli_fetch_array($Papers))
+                                        {
+                                            echo "<option value='".$result['Year']."'>".$result['Year']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2">
+                            	<input type="submit" name="search" value="Search" class="txt2">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
               </form>
 
@@ -594,14 +643,9 @@ require ("signin.php");
 
   </div>
 
-  <div id="google-map">
-
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
-
-        </div>
+ </div>
 
 </section>
-
 <!-- Call to Action start -->
 
 <div class="call-to-action">
@@ -700,6 +744,8 @@ require ("signin.php");
 
 <script src="assets/jquery/jquery.animateNumber.min.js"></script> 
 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+
 <script src="assets/easing/jquery.easing.min.js"></script> 
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script> 
@@ -718,17 +764,18 @@ require ("signin.php");
 
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
-  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
-
-
+  })
+  
+  	(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-83282272-2', 'auto');
 
   ga('send', 'pageview');
 
-
-
 </script>
 
 </body>
+
+<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
+
 </html>

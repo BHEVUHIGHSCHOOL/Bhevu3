@@ -368,7 +368,7 @@ if(isset($_POST['next']))
 					$tmp_name = $_FILES['myfile']['tmp_name'];
 					if($myfile&&$doc_name)
 					{
-						$check = $con -> query("SELECT * FROM images username = '$username'");
+						$check = $con -> query("SELECT * FROM images where username = '$username'");
 						$number = mysqli_num_rows($check);
 						
 						if( $number < 1)
