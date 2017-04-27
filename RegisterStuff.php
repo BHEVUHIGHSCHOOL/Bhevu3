@@ -318,39 +318,28 @@ if(isset($_POST['next']))
 					$passwordt = $password;
 
 					$Mobile_numbert = $_POST["Mobile_number"];
-
-					if(empty($_POST["Phase"]))
+					
+					if(!isset($_POST["Phase"]))
 
 					{
 
-						$error = "<p style='color:red;'>PLease select phase.</p>";
+						$phase = "<p style='color:red;'>PLease select phase.</p>";
 
 					}
 
-					else 
+					else  if (!isset($_POST["position"]))
 
 					{
-
+						$pos = "<p style='color:red;'>PLease select position.</p>";
+					}
+					else
+					{
 						$Phase = ($_POST["Phase"]);
+						$position = ($_POST["position"]);
+						$query = $con -> query("INSERT INTO staff(Initials, Firstname, Lastname, Surname, DOB,Gender, IDNumber, Email, Citizenship, Username, Password, Mobilenumber, Phase, Position)VALUES('{$initialst}', '{$namet}', '{$lnamet}', '{$snamet}', '{$dobt}', '{$gendert}', '{$idt}', '{$emailt}', '{$citizenshipt}', '{$usernamet}', '{$passwordt}', '{$Mobile_numbert}', '{$Phase}', '{$position}')");
 
+						header('Location: Admin-Page.php');	
 					}
-
-					if(empty($_POST["position"]))
-
-					{
-
-						$error = "<p style='color:red;'>PLease select Position.</p>";
-
-					}
-
-					else 
-
-					{
-
-						$Phase = ($_POST["position"]);
-
-					}
-
 					//Inserting Qualification
 
 					$doc_nameq = "Qualification".$id;
@@ -391,41 +380,11 @@ if(isset($_POST['next']))
 
 						move_uploaded_file($tmp_namei,"document/".$myfilei);
 
-						$queryi = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_namei}', '{$locationi}', '{$tmp_name}','{$username}')");
+						$queryi = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_namei}', '{$locationi}', '{$tmp_namei}','{$username}')");
 
 						$_SESSION["doc_name"] = $doc_namei;
 
-					}	
-
-					
-
-					//Inserting p.p
-
-					$doc_namep = "p.p".$id;
-
-					$myfilep = $_FILES['p.p']['name'];
-
-					$tmp_namep = $_FILES['p.p']['tmp_name'];
-
-					if($myfilep&&$doc_namep)
-
-					{
-
-						$locationp = $myfilep;
-
-						move_uploaded_file($tmp_namep,"document/".$myfilep);
-
-						$queryp = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_namep}', '{$locationp}', '{$tmp_namep}','{$username}')");
-
-						$_SESSION["doc_name"] = $doc_namep;
-
-					}				
-
-					
-
-					$query = $con -> query("INSERT INTO staff(Initials, Firstname, Lastname, Surname, DOB,Gender, IDNumber, Email, Citizenship, Username, Password, Mobilenumber, Phase, Position)VALUES('{$initialst}', '{$namet}', '{$lnamet}', '{$snamet}', '{$dobt}', '{$gendert}', '{$idt}', '{$emailt}', '{$citizenshipt}', '{$usernamet}', '{$passwordt}', '{$Mobile_numbert}', '{$Phase}', '{$position}')");
-
-					header('Location: Admin-Page.php');
+					}
 
 				 }
 
@@ -939,14 +898,18 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Junior") {$Phase="Junior";}?> value="Junior">Junior</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Junior") {$Phase="Junior";}?> value="Junior">Junior</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Sinior") {$Phase="Sinior";}?> value="Sinior">Sinior</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Sinior") {$Phase="Sinior";}?> value="Sinior">Sinior</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Both") {$Phase="Both";}?> value="Both">Both</td>
-
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Both") {$Phase="Both";}?> value="Both">Both</td>
                     </tr>
-
+					<?php
+							if(isset($phase))
+							{
+								echo '<tr><td>'.$phase.'</td></tr>';
+							}
+						?>
                     <hr/>
 
                 	<tr>
@@ -957,16 +920,20 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="Teacher") {$position="Teacher";}?> value="Teacher">Teacher</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Teacher") {$position="Teacher";}?> value="Teacher">Teacher</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="Principal") {$position="Principal";}?> value="Principal">Principal</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Principal") {$position="Principal";}?> value="Principal">Principal</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="HOD") {$position="HOD";}?> value="HOD">HOD</td>
-
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="HOD") {$position="HOD";}?> value="HOD">HOD</td>
                     </tr>
+                    <?php
+							if(isset($pos))
+							{
+								echo '<tr><td>'.$pos.'</td></tr>';
+							}
+						?>
 
                 </table>
-
                 <!--<hr/>
 
                 <table style="width:100%;">
@@ -1001,25 +968,7 @@ if(isset($_POST['next']))
 
                 </table>
 
-                <hr/>
-
-                <table style="width:100%;">
-
-                	<tr>
-
-                    	<th style="text-align:center; color:#fff;"><em>Profile photo</em></th>
-
-                    </tr>
-
-                    <tr>
-
-                    	 <td style="color:#fff;"><input type="file" required placeholder="Profile photo" value="" name="p.p" class="txt"></td>
-
-                    </tr>
-
-                </table>
-
-                <hr/>
+                 <hr/>
 
                 <input type="submit" value="Submit" name="next" class="txt2">
 

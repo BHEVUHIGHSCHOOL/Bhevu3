@@ -1,6 +1,5 @@
 <?php
 require ('connection/conect.php');
-require ("signin.php");
 
 	$sql = "SELECT * FROM images";
 
