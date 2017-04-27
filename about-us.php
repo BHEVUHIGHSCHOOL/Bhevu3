@@ -441,26 +441,30 @@ require ("signin.php");
 			  <?php
 			  if(isset($_SESSION['Register']))
 			  {
-              	if($_SESSION['Register'] == "Registered")
-				{
-					echo '<li><a href="#">View Portal</a></li>';
-				}
-				else if($_SESSION['Register'] == "Not Registered")
-				{
-					$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-					while ($res = $pic ->fetch_array(MYSQLI_BOTH))
+				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
+					$resul = $reg ->fetch_array(MYSQLI_BOTH);
 					{
-						$_SESSION["availablereport"]=$res['docname'];
-						if(($_SESSION["availablereport"]) == '')
+						if($resul['Register'] == "Registered")
 						{
-							echo '<li><a href="After-Confirm.php">upload report</a></li>';
+							echo '<li><a href="#">View Portal</a></li>';
 						}
-						else
+						else if($resul['Register'] == "Not Registered")
 						{
-							echo '<li><a href="Waiting.php">Application Status</a></li>';
+							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
+							$res = $pic ->fetch_array(MYSQLI_BOTH);
+							{
+								$_SESSION["availablereport"]=$res['docname'];
+								if(($_SESSION["availablereport"]) == '')
+								{
+									echo '<li><a href="After-Confirm.php">upload report</a></li>';
+								}
+								else
+								{
+									echo '<li><a href="Waiting.php">Application Status</a></li>';
+								}
+							}
 						}
 					}
-				}
 			  }
 			  ?>
 
