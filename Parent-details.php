@@ -3,6 +3,14 @@
 <?php
 ob_start();
 session_start();
+if(isset($_SESSION["elder"]) || isset($_SESSION["elder"]))
+{
+}
+else
+{
+	$_SESSION['Eldererror'] = "<p style='color:red;'>Please Select</p>";
+	header('Location: Apply.php');
+}
 if(isset($_POST['next']))
 
 {

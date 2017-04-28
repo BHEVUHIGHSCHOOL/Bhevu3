@@ -63,6 +63,8 @@ if(isset($_POST['login']))
 		$_SESSION['Status'] = $querylearner['Status'];
 		
 		$_SESSION['Register'] = $querylearner['Register'];
+		$_SESSION['Firstname'] = $querylearner['Firstname'];
+		$_SESSION['Surname'] = $querylearner['Surname'];
 
 		if(isset($_SESSION['username']))
 

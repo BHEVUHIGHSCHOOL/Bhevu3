@@ -246,7 +246,7 @@ if(isset($_POST['login']))
                 <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
                 	<tr>
                     	<td>
-                        	<?php echo "<h1>Thank you for applying at <strong><em>Bhevu High School</em></strong>, you Application in progress.</h1>";?>
+                        	<?php echo "<h1>Thank you for applying at <strong><em>Bhevu High School</em></strong>, your application is in progress.</h1>";?>
                         </td>
                     </tr>
                 </table>

@@ -1,105 +1,87 @@
-<?php require ('connection/conect.php')?>
+<?php require ('connection/conect.php');
+
+	$sql = "SELECT * FROM images";
+
+	$res = $con -> query($sql);
+
+?>
 
 <?php
 ob_start();
 session_start();
-if(isset($_POST['save']))
-
+if(isset($_SESSION['Register']))
 {
-
-		//Saving Learner
-
-		$initials = $_SESSION["initials"];
-
-		$name = $_SESSION["name"];
-
-		$lname = $_SESSION["lname"];
-
-		$sname = $_SESSION["sname"];
-
-		$dob = $_SESSION["dob"];
-
-		$gender = $_SESSION["gender"];
-
-		$id = $_SESSION["ID_number"];
-
-		$present = $_SESSION["Present_school"];
-
-		$cell = $_SESSION["Mobile_number"];
-
-		$elder = $_SESSION["elder"];
-
-		$leaners_addr = $_SESSION["Learners_address"];
-
-		$home_lang = $_SESSION["Home_Language"];
-
-		$relative = $_SESSION["Relative"];
-
-		$citizesh = $_SESSION["citizenship"];
-
-		$username = $_SESSION["username"];
-
-		$password = $_SESSION["password"];
-
-		$elder_id = $_SESSION["ID_numberp"];
-
-		$status = "Waiting";
-
-		//$image = $_SESSION["image"];
-
-		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected')");
-
-	
-
-	//Saving Parent
-
-	$initialsp = $_SESSION["initialsp"];
-
-	$parent_gardien = $_SESSION["elder"];
-
-	$cellp = $_SESSION["Cellphone"];
-
-	$titlep = $_SESSION["titlep"];
-
-	$emailp = $_SESSION["emailp"];
-
-	$namep = $_SESSION["namep"];
-
-	$lnamep = $_SESSION["lnamep"];
-
-	$snamep = $_SESSION["snamep"];
-
-	$dobp = $_SESSION["dobp"] ;
-
-	$genderp = $_SESSION["genderp"];
-
-	$idp = $_SESSION["ID_numberp"];
-
-	$homeaddrp = $_SESSION["Home_Addressp"];
-
-	$postaladdrp = $_SESSION["Postal_Addressp"];
-
-	$citizeshp = $_SESSION["citizenshipp"];
-
-	$usernamep = $_SESSION["usernamep"];
-
-	$passwordp = $_SESSION["passwordp"];
-
-	$saveparent = $con -> query("INSERT INTO parent(Parent_Gardin, Title, First_Name, Second_Name, Surname, ID_Number, Email, Home_Address, Postal_Address, Gender, Password, Username, Citizenship, DOB, Initials, Cellphone)Values('{$parent_gardien}', '{$titlep}', '{$namep}', '{$lnamep}', '{$snamep}', '{$idp}', '{$emailp}', '{$homeaddrp}', '{$postaladdrp}', '{$genderp}', '{$passwordp}', '{$usernamep}', '{$citizeshp}', '{$dobp}', '{$initialsp}', '{$cellp}')");
-
-	
-
-	if($saveparent)
-
+	if($_SESSION['Register'] == "Registered")
 	{
-
-		header('Location: After-Confirm.php');
-
+		//header('Location: Print.php');
 	}
-
 }
-
-?>
+if(isset($_POST['stream']))
+{
+	if($_POST['stream'] == 'Please_Select')
+	{
+		$_SESSION['error']  = "Please choose stream.";
+		header('Location: RegisterSubj.php');
+	}
+	else if($_POST['stream'] == 'Commerce')
+	{
+		$_SESSION['subj1'] = 'Mathematics';
+		$_SESSION['subj2'] = 'Economics';
+		$_SESSION['subj3'] = 'Business Studies';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	else if($_POST['stream'] == 'History')
+	{
+		$_SESSION['subj1'] = 'Mathematics Literacy';
+		$_SESSION['subj2'] = 'Geography';
+		$_SESSION['subj3'] = 'History';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	else if($_POST['stream'] == 'Science')
+	{
+		$_SESSION['subj1'] = 'Mathematics';
+		$_SESSION['subj2'] = 'Physical Sciences';
+		$_SESSION['subj3'] = 'Business Studies';
+		$_SESSION['subj4'] = 'Life Sciences';
+	}
+	$_SESSION['stream'] = $_POST['stream'];
+} 
+//Default Subjects
+	$Maths = 'Mathematics';
+	$NS = 'Natural Sciences';
+	$SS = 'Social Sciences';
+	$EMS = 'Economic and Management Sciences';
+	$Art = 'Creative Arts';
+	$Tech = 'Technology';
+	$LO = 'Life Orientation';
+	$Eng = 'English First Additional Language';
+	$IsiZ = 'IsiZulu Home Language';
+	
+if(isset($_POST['confirm']))
+{
+	if(isset($_SESSION['stream']))
+	{
+		if($_SESSION['Grade'] == "10")
+		{
+			$subjects = $con -> query ("insert into Subjects101112 values ('$_SESSION[ID_number]', '$_SESSION[stream]', '$_SESSION[subj1]', '$_SESSION[subj2]', '$_SESSION[subj3]', '$_SESSION[subj4]', '$LO', '$Eng', '$IsiZ')");
+			if($subjects)
+			{
+				$con -> query ("update learner set Register = 'Registered', Stream = '$_SESSION[stream]' where IDNumber = '$_SESSION[ID_number]'");
+				$_SESSION['Register'] == "Registered";
+				header('Location: index.php');
+			}
+		}
+	}
+	else
+	{
+		$subjects = $con -> query ("insert into Subjects89 values ('$_SESSION[ID_number]', '$Maths', '$NS', '$SS', '$EMS', '$Art', '$Tech', '$LO', '$Eng', '$IsiZ')");
+		if($subjects)
+		{
+			$con -> query ("update learner set Register = 'Registered', Stream = 'No stream' where IDNumber = '$_SESSION[ID_number]'");
+		}
+	}
+}
+?>			
 
 <!DOCTYPE html>
 
@@ -129,6 +111,17 @@ if(isset($_POST['save']))
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
+<script>
+	function printContent(el)
+	{
+		var restorepage = document.body.innerHTML;
+		var printContent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = printContent;
+		window.print();
+		document.body.innerHTML = restorepage;
+	}
+</script>
+
 </head>
 
 <body>
@@ -153,6 +146,8 @@ if(isset($_POST['save']))
 
           <li class="pinterest"><a href="javascript:void(0)" target="_blank"><i class="fa fa-pinterest"></i></a></li>
 
+
+
           <li class="google-plus"><a href="javascript:void(0)" target="_blank"><i class="fa fa-google-plus"></i></a></li>
 
           <li class="youtube"><a href="javascript:void(0)" target="_blank"><i class="fa fa-youtube"></i></a></li>
@@ -167,27 +162,41 @@ if(isset($_POST['save']))
 
         <ul class="top-right pull-right ">
 
-          <!-- Login -->
+        <?php
 
-          <li class="login"><a href="javascript:void(0)"><i class="fa fa-lock"></i>Login</a>
+		  if(isset($_SESSION['username']))
 
-            <div class="login-form">
+		  {
 
-              <h4>Login</h4>
+			 echo "
 
-              <form action="#" method="post">
+			  <!-- Lgout -->
 
-                <input type="text" name="name" placeholder="Username">
+          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
 
-                <input type="password" name="password" placeholder="Password">
+            <div class='register-form'>
 
-                <button type="submit" class="btn">Login</button>
+              <h4>Logout</h4>
+
+              <form action='Logout.php' method='post'>
+
+                <button type='submit' class='btn'>Logout</button>
 
               </form>
 
             </div>
 
-          </li>
+          </li>";}
+
+		  else
+
+		  {
+
+			  //header('Location: index.php');
+
+		  }
+
+		  ?>
 
         </ul>
 
@@ -205,7 +214,7 @@ if(isset($_POST['save']))
 
       <div class="row">
 
-        <div class="col-sm-4"><a href="index.php"> <img src="images/logo.png" alt="Education World"></a> </div>
+        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Gallery/logo2.png" alt="Education World" style="width:218px; height:46px;"></a> </div>
 
         <div class="col-sm-8">
 
@@ -459,7 +468,7 @@ if(isset($_POST['save']))
 
               </li>
 
-              <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="contact-us.php">Register</a></li>
 
             </ul>
 
@@ -487,7 +496,7 @@ if(isset($_POST['save']))
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Register</h2>
 
     </div>
 
@@ -497,7 +506,7 @@ if(isset($_POST['save']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Register</li>
 
       </ul>
 
@@ -523,192 +532,90 @@ if(isset($_POST['save']))
 
         <div class="col-sm-12">
 
+          <h2>Proof of Registration</h2>
+
         </div>
 
         </div>
 
           <div class="col-sm-12 col-md-12 no-space-right">
 
-          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
+          <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
+          
+          <!--Printout-->
 
             <div class="form"  style="text-align:center; border-radius:10px;">
-
-              <form action="" method="post" id="contactFrm" name="contactFrm">
-
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
-
-                	<tr>
-
-                    	<th colspan="12" style="text-align:center;"><h4><em>Learner's Information</em></h4></th>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Initials</th>
-
-                        <th style="text-align:center;">First name</th>
-
-                        <th style="text-align:center;">Second name</th>
-
-                        <th style="text-align:center;">Surname</th>
-
-                        <th style="text-align:center;">Date of Birth</th>
-
-                        <th style="text-align:center;">Gander</th>
-
-                        <th style="text-align:center;">ID Number</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["initials"]?></td>
-
-                        <td><?php echo $_SESSION["name"]?></td>
-
-                        <td><?php echo $_SESSION["lname"]?></td>
-
-                        <td><?php echo $_SESSION["sname"]?></td>
-
-                        <td><?php echo $_SESSION["dob"]?></td>
-
-                        <td><?php echo $_SESSION["gender"]?></td>
-
-                        <td><?php echo $_SESSION["ID_number"]?></td>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Parent/Gaurdien</th>
-
-                        <th style="text-align:center;">Address</th>
-
-                        <th style="text-align:center;">Home Language</th>
-
-                        <th style="text-align:center;">Relative</th>
-
-                        <th style="text-align:center;">Present school</th>
-
-                        <th style="text-align:center;">Citizenship</th>
-
-                        <th style="text-align:center;">Grade</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["elder"]?></td>                        
-
-                        <td><?php echo $_SESSION["Learners_address"]?></td>
-
-                        <td><?php echo $_SESSION["Home_Language"]?></td>
-
-                        <td><?php echo $_SESSION["Relative"]?></td>
-
-                        <td><?php echo $_SESSION["Present_school"]?></td>
-
-                        <td><?php echo $_SESSION["citizenship"]?></td>
-                        
-                        <td><?php echo $_SESSION["grade"]?></td>
-
-                    </tr>
-
-                </table>
-
-                <br/>
-
+            
+            <div id="div1" style="text-align:center">
+			
+              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+              	<img src="Bhevu Pics/Edited/Gallery/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;">
                 <hr/>
-
-                <br/>
-
-                <table style="color:#fff; width:100%; border-radius:5px; background-color:#458CBF;">
-
-                	<tr>
-
-                    	<th colspan="12" style="text-align:center;"><h4><em>Parent's Information</em></h4></th>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Initials</th>
-
-                        <th style="text-align:center;">First name</th>
-
-                        <th style="text-align:center;">Second name</th>
-
-                        <th style="text-align:center;">Surname</th>
-
-                        <th style="text-align:center;">Date of Birth</th>
-
-                        <th style="text-align:center;">Gander</th>
-
-                        <th style="text-align:center;">ID Number</th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["initialsp"]?></td>
-
-                        <td><?php echo $_SESSION["namep"]?></td>
-
-                        <td><?php echo $_SESSION["lnamep"]?></td>
-
-                        <td><?php echo $_SESSION["snamep"]?></td>
-
-                        <td><?php echo $_SESSION["dobp"]?></td>
-
-                        <td><?php echo $_SESSION["genderp"]?></td>
-
-                        <td><?php echo $_SESSION["ID_numberp"]?></td>
-
-                    </tr>
-
-                    <tr style="background-color:#363FA3; text-align:center;">
-
-                    	<th style="text-align:center;">Title</th>
-
-                        <th style="text-align:center;">Home Address</th>
-
-                        <th style="text-align:center;">Postal Address</th>
-
-                        <th style="text-align:center;">Learner's ID</th>
-
-                        <th style="text-align:center;">Email</th>
-
-                        <th style="text-align:center;">Relationship</th>
-
-                        <th></th>
-
-                    </tr>
-
-                    <tr>
-
-                    	<td><?php echo $_SESSION["titlep"]?></td>                        
-
-                        <td><?php echo $_SESSION["Home_Addressp"]?></td>
-
-                        <td><?php echo $_SESSION["Postal_Addressp"]?></td>
-
-                        <td><?php echo $_SESSION["LearnersIDp"]?></td>
-
-                        <td><?php echo $_SESSION["emailp"]?></td>
-
-                        <td><?php echo $_SESSION["elder"]?></td>
-
-                    </tr>
-
-                </table>
-
-                <input type="submit" value="Submit Form" name="save" class="txt2">
-
+                	<h3 style="color:#FFF"><?php echo $_SESSION['Surname']. $_SESSION['Firstname'].$_SESSION[			    					'ID_number']?></h3><br/>
+                <hr/>
+                
+                <h2>Your Subjecs</h2><br/>
+              	<?php
+                	if($_SESSION['Grade'] == "10")
+					{
+						echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$_SESSION['subj1'].'</br>'.
+										$_SESSION['subj2'].'</br>'.
+										$_SESSION['subj3'].'</br>'.
+										$_SESSION['subj4'].'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
+					}
+					else
+					{
+						if($_SESSION['Grade'] == "8" || $_SESSION['Grade'] == "9")
+						{
+							echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$Maths.'</br>'.
+										$NS.'</br>'.
+										$SS.'</br>'.
+										$Art.'</br>'.
+										$EMS.'</br>'.
+										$Tech.'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
+						}
+						else
+						{
+							echo '<table class="col-sm-12 txt" style="color:#000; background:#fff">
+							  	<tr>
+									<th>'.
+										$_SESSION['subj1'].'</br>'.
+										$_SESSION['subj2'].'</br>'.
+										$_SESSION['subj3'].'</br>'.
+										$_SESSION['subj4'].'</br>'.
+										$LO.'</br>'.
+										$Eng.'</br>'.
+										$IsiZ.'</br>'
+								  .'</th>
+								</tr>
+							  </table>';
+						}
+					}
+				?>
               </form>
-
+			</div>
+            <input type="submit" onClick="printContent('div1')" value="Print" name="confirm" class="txt2">
+            <!--<button class="txt2" onClick="printContent('div1')">Print</button>-->
             </div>
-
+                
           </div>
 
         </div>

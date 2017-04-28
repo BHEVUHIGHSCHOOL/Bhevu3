@@ -411,6 +411,7 @@ require ("signin.php");
 					{
 						if($resul['Register'] == "Registered")
 						{
+							echo '<li><a href="Print.php">Proof of Reg.</a></li>';
 							echo '<li><a href="#">View Portal</a></li>';
 						}
 						else if($resul['Register'] == "Not Registered")
@@ -582,7 +583,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
             <p>Coccaecat cupidatat aliqu proident sunt.</p>
 
           </div>
-
+				
         </div>
 
       </div>
