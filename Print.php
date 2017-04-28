@@ -16,35 +16,35 @@ if(isset($_SESSION['Register']))
 		//header('Location: Print.php');
 	}
 }
-if(isset($_POST['stream']))
+if(isset($_SESSION['stream']))
 {
-	if($_POST['stream'] == 'Please_Select')
+	if($_SESSION['stream'] == 'Please_Select')
 	{
 		$_SESSION['error']  = "Please choose stream.";
 		header('Location: RegisterSubj.php');
 	}
-	else if($_POST['stream'] == 'Commerce')
+	else if($_SESSION['stream'] == 'Commerce')
 	{
 		$_SESSION['subj1'] = 'Mathematics';
 		$_SESSION['subj2'] = 'Economics';
 		$_SESSION['subj3'] = 'Business Studies';
 		$_SESSION['subj4'] = 'Life Sciences';
 	}
-	else if($_POST['stream'] == 'History')
+	else if($_SESSION['stream'] == 'History')
 	{
 		$_SESSION['subj1'] = 'Mathematics Literacy';
 		$_SESSION['subj2'] = 'Geography';
 		$_SESSION['subj3'] = 'History';
 		$_SESSION['subj4'] = 'Life Sciences';
 	}
-	else if($_POST['stream'] == 'Science')
+	else if($_SESSION['stream'] == 'Science')
 	{
 		$_SESSION['subj1'] = 'Mathematics';
 		$_SESSION['subj2'] = 'Physical Sciences';
 		$_SESSION['subj3'] = 'Business Studies';
 		$_SESSION['subj4'] = 'Life Sciences';
 	}
-	$_SESSION['stream'] = $_POST['stream'];
+	$_SESSION['stream'] = $_SESSION['stream'];
 } 
 //Default Subjects
 	$Maths = 'Mathematics';
