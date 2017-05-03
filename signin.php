@@ -67,6 +67,7 @@ if(isset($_POST['login']))
 		$_SESSION['Surname'] = $querylearner['Surname'];
 		
 		$_SESSION['stream'] = $querylearner['Stream'];
+		$_SESSION['Grade'] = $querylearner['Grade'];
 
 		if(isset($_SESSION['username']))
 

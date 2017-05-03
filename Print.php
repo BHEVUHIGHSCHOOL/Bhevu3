@@ -551,7 +551,7 @@ if(isset($_POST['confirm']))
               <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
               	<img src="Bhevu Pics/Edited/Gallery/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;">
                 <hr/>
-                	<h3 style="color:#FFF"><?php echo $_SESSION['Surname']. $_SESSION['Firstname'].$_SESSION[			    					'ID_number']?></h3><br/>
+                	<h3 style="color:#FFF"><?php echo "Surname : ". $_SESSION['Surname']."<br/> Firstname : ". $_SESSION['Firstname']."<br/> ID Number : ".$_SESSION['ID_number']."<br/> Grade : ".$_SESSION['Grade']?></h3><br/>
                 <hr/>
                 
                 <h2>Your Subjecs</h2><br/>
