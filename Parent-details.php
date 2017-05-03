@@ -3,10 +3,7 @@
 <?php
 ob_start();
 session_start();
-if(isset($_SESSION["elder"]))
-{
-}
-else
+if(!isset($_SESSION["elder"]))
 {
 	$_SESSION['Eldererror'] = "<p style='color:red;'>Please Select</p>";
 	header ("Location: Apply.php");
@@ -387,6 +384,9 @@ if(isset($_POST['next']))
 								$_SESSION["passwordp"] = $password;
 
 								$_SESSION["Cellphone"] = $cellnump;
+								
+								$_SESSION["Workphone"] = $_POST['work'];
+								$_SESSION["Homephone"] = $_POST['home'];
 
 								$_SESSION["LearnersIDp"] = $_SESSION["ID_number"];
 
@@ -571,203 +571,6 @@ else
 
               <li><a href="index.php">Home</a></li>
 
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid.html">Grid</a></li>
-
-                  <li><a href="table.html">Tables</a></li>
-
-                  <li><a href="tabs.html">Tabs</a></li>
-
-                  <li><a href="accordions.html">Accordions</a></li>
-
-                  <li><a href="forms.html">Forms</a></li>
-
-                  <li><a href="buttons.html">Buttons</a></li>
-
-                  <li><a href="lists.html">Lists</a></li>
-
-                  <li><a href="typography.html">Typography</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown mega-menu"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <div class="row">
-
-                      <div class="col-md-2 col-md-offset-1">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Eliments</span></li>
-
-                          <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
-
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
-
-                          <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
-
-                          <li><a href="accordions.html"><span class="fa fa-angle-right menu-icon"></span>Accordions</a></li>
-
-                          <li><a href="forms.html"><span class="fa fa-angle-right menu-icon"></span>Forms</a></li>
-
-                          <li><a href="buttons.html"><span class="fa fa-angle-right menu-icon"></span>Buttons</a></li>
-
-                          <li><a href="lists.html"><span class="fa fa-angle-right menu-icon"></span>Lists</a></li>
-
-                          <li><a href="typography.html"><span class="fa fa-angle-right menu-icon"></span>Typography</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Courses</span></li>
-
-                          <li><a href="course-list.html"><span class="fa fa-angle-right menu-icon"></span>Course List</a></li>
-
-                          <li><a href="course-grid.html"><span class="fa fa-angle-right menu-icon"></span>Course Grid</a></li>
-
-                          <li><a href="course-details.html"><span class="fa fa-angle-right menu-icon"></span>Course Details</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>News</span></li>
-
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
-
-                          <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
-
-                          <li><a href="masonry-news.html"><span class="fa fa-angle-right menu-icon"></span>Masonry News</a></li>
-
-                          <li><a href="news-post-page.html"><span class="fa fa-angle-right menu-icon"></span>News Post Page</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Gallery</span></li>
-
-                          <li><a href="grid-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Grid Gallery</a></li>
-
-                          <li><a href="full-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Full Width Gallery</a></li>
-
-                          <li><a href="masonry-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Masonry Gallery</a></li>
-
-                          <li><a href="modern-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Modern Gallery</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Pages</span></li>
-
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
-
-                          <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
-                          <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
-
-                          <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
-
-                        </ul>
-
-                      </div>
-
-                    </div>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="course-list.html">Course List</a></li>
-
-                  <li><a href="course-grid.html">Course Grid</a></li>
-
-                  <li><a href="course-details.html">Course Details</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="classic-news.html">Classic News</a></li>
-
-                  <li><a href="grid-news.html">Grid News</a></li>
-
-                  <li><a href="masonry-news.html">Masonry News</a></li>
-
-                  <li><a href="news-post-page.html">News Post Page</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gallery <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid-gallery.html">Grid Gallery</a></li>
-
-                  <li><a href="full-gallery.html">Full Width Gallery</a></li>
-
-                  <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
-
-                  <li><a href="modern-gallery.html">Modern Gallery</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="about-us.php">About Us</a></li>
-
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>
-
-              </li>-->
-
               <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
@@ -895,13 +698,13 @@ else
               
                <!-- <input type="text" required placeholder="Tittle(e.g Mr or Mrs)" value="" name="title" class="txt">-->
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="First name" value="<?=((isset($_SESSION["namep"]))?$_SESSION["namep"]:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Last name" value="<?=((isset($_SESSION["lnamep"]))?$_SESSION["lnamep"]:'');?>" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Surname" value="<?=((isset($_SESSION["snamep"]))?$_SESSION["snamep"]:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
+                <input type="text" required placeholder="ID Number" value="<?=((isset($_SESSION["ID"]))?$_SESSION["ID"]:'');?>" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
 
                 <?php
 
@@ -936,7 +739,7 @@ else
 						input.value = input.value.replace(regex, "");
 					}
                 </script>
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
+                <input type="text" required placeholder="Email" value="<?=((isset($_SESSION["ID"]))?$_SESSION["ID"]:'');?>" name="email" class="txt">
 
                 <textarea placeholder="Physical/Home Address" name="Home_Address" type="text" class="txt_3"></textarea>
 
@@ -956,11 +759,11 @@ else
 
                         <tr style="color:black;">
 
-                            <td><input type="text"  placeholder="Home(036.....)" value="" name="home" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
+                            <td><input type="text"  placeholder="Home(036.....)" value="<?=((isset($_SESSION["Homephone"]))?$_SESSION["Homephone"]:'');?>" name="home" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
-                            <td><input type="text"  placeholder="Work(036...)" value="" name="work" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
+                            <td><input type="text"  placeholder="Work(036...)" value="<?=((isset($_SESSION["Workphone"]))?$_SESSION["Cellphone"]:'');?>" name="work" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
-                            <td><input type="text" required placeholder="Cell(086....)" value="" name="cell" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
+                            <td><input type="text" required placeholder="Cell(086....)" value="<?=((isset($_SESSION["Cellphone"]))?$_SESSION["Cellphone"]:'');?>" name="cell" class="txt" onKeyUp="numbersonly(this)" maxlength="10"></td>
 
                         </tr>	
 
@@ -1142,6 +945,6 @@ else
 
 
 
-<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
+
 
 </html>

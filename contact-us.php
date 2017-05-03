@@ -447,7 +447,7 @@ require ("signin.php");
 						if($resul['Register'] == "Registered")
 						{
 							echo '<li><a href="Print.php">Proof of Reg.</a></li>';
-							echo '<li><a href="#">View Portal</a></li>';
+							echo '<li><a href="Portal.php">View Portal</a></li>';
 						}
 						else if($resul['Register'] == "Not Registered")
 						{

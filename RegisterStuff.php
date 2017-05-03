@@ -347,7 +347,19 @@ if(isset($_POST['next']))
 
 					{
 
-						$Phase = ($_POST["position"]);
+						$Phase = $_POST["position"];
+						if($Phase == "Senior")
+						{
+							$teachingGrade = "8&9";
+						}
+						else if($Phase == "FET")
+						{
+							$teachingGrade = "10,11&12";
+						}
+						else
+						{
+							$teachingGrade = "All";
+						}
 
 					}
 
@@ -397,33 +409,7 @@ if(isset($_POST['next']))
 
 					}	
 
-					
-
-					//Inserting p.p
-
-					$doc_namep = "p.p".$id;
-
-					$myfilep = $_FILES['p.p']['name'];
-
-					$tmp_namep = $_FILES['p.p']['tmp_name'];
-
-					if($myfilep&&$doc_namep)
-
-					{
-
-						$locationp = $myfilep;
-
-						move_uploaded_file($tmp_namep,"document/".$myfilep);
-
-						$queryp = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_namep}', '{$locationp}', '{$tmp_namep}','{$username}')");
-
-						$_SESSION["doc_name"] = $doc_namep;
-
-					}				
-
-					
-
-					$query = $con -> query("INSERT INTO staff(Initials, Firstname, Lastname, Surname, DOB,Gender, IDNumber, Email, Citizenship, Username, Password, Mobilenumber, Phase, Position)VALUES('{$initialst}', '{$namet}', '{$lnamet}', '{$snamet}', '{$dobt}', '{$gendert}', '{$idt}', '{$emailt}', '{$citizenshipt}', '{$usernamet}', '{$passwordt}', '{$Mobile_numbert}', '{$Phase}', '{$position}')");
+					$query = $con -> query("INSERT INTO staff(Initials, Firstname, Lastname, Surname, DOB,Gender, IDNumber, Email, Citizenship, Username, Password, Mobilenumber, Phase, Position, TeachingGrade)VALUES('{$initialst}', '{$namet}', '{$lnamet}', '{$snamet}', '{$dobt}', '{$gendert}', '{$idt}', '{$emailt}', '{$citizenshipt}', '{$usernamet}', '{$passwordt}', '{$Mobile_numbert}', '{$Phase}', '{$position}', '$teachingGrade')");
 
 					header('Location: Admin-Page.php');
 
@@ -609,204 +595,6 @@ if(isset($_POST['next']))
 
               <li><a href="index.php">Home</a></li>
 
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid.html">Grid</a></li>
-
-                  <li><a href="table.html">Tables</a></li>
-
-                  <li><a href="tabs.html">Tabs</a></li>
-
-                  <li><a href="accordions.html">Accordions</a></li>
-
-                  <li><a href="forms.html">Forms</a></li>
-
-                  <li><a href="buttons.html">Buttons</a></li>
-
-                  <li><a href="lists.html">Lists</a></li>
-
-                  <li><a href="typography.html">Typography</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown mega-menu"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <div class="row">
-
-                      <div class="col-md-2 col-md-offset-1">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Eliments</span></li>
-
-                          <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
-
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
-
-                          <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
-
-                          <li><a href="accordions.html"><span class="fa fa-angle-right menu-icon"></span>Accordions</a></li>
-
-                          <li><a href="forms.html"><span class="fa fa-angle-right menu-icon"></span>Forms</a></li>
-
-                          <li><a href="buttons.html"><span class="fa fa-angle-right menu-icon"></span>Buttons</a></li>
-
-                          <li><a href="lists.html"><span class="fa fa-angle-right menu-icon"></span>Lists</a></li>
-
-                          <li><a href="typography.html"><span class="fa fa-angle-right menu-icon"></span>Typography</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Courses</span></li>
-
-                          <li><a href="course-list.html"><span class="fa fa-angle-right menu-icon"></span>Course List</a></li>
-
-                          <li><a href="course-grid.html"><span class="fa fa-angle-right menu-icon"></span>Course Grid</a></li>
-
-                          <li><a href="course-details.html"><span class="fa fa-angle-right menu-icon"></span>Course Details</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>News</span></li>
-
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
-
-                          <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
-
-                          <li><a href="masonry-news.html"><span class="fa fa-angle-right menu-icon"></span>Masonry News</a></li>
-
-                          <li><a href="news-post-page.html"><span class="fa fa-angle-right menu-icon"></span>News Post Page</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Gallery</span></li>
-
-                          <li><a href="grid-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Grid Gallery</a></li>
-
-                          <li><a href="full-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Full Width Gallery</a></li>
-
-                          <li><a href="masonry-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Masonry Gallery</a></li>
-
-                          <li><a href="modern-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Modern Gallery</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Pages</span></li>
-
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
-
-                          <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
-
-                          <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
-
-                          <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
-
-                        </ul>
-
-                      </div>
-
-                    </div>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="course-list.html">Course List</a></li>
-
-                  <li><a href="course-grid.html">Course Grid</a></li>
-
-                  <li><a href="course-details.html">Course Details</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="classic-news.html">Classic News</a></li>
-
-                  <li><a href="grid-news.html">Grid News</a></li>
-
-                  <li><a href="masonry-news.html">Masonry News</a></li>
-
-                  <li><a href="news-post-page.html">News Post Page</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gallery <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid-gallery.html">Grid Gallery</a></li>
-
-                  <li><a href="full-gallery.html">Full Width Gallery</a></li>
-
-                  <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
-
-                  <li><a href="modern-gallery.html">Modern Gallery</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="about-us.php">About Us</a></li>
-
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>
-
-              </li>-->
-
               <li><a href="qazwsxedc.php">Applicants</a></li>
 
               <li><a href="#">Register Staff</a></li>
@@ -939,11 +727,11 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Junior") {$Phase="Junior";}?> value="Junior">Junior</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Senior") {$Phase="Senior";}?> value="Senior">Senior</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Sinior") {$Phase="Sinior";}?> value="Sinior">Sinior</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="FET") {$Phase="FET";}?> value="FET">FET</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Both") {$Phase="Both";}?> value="Both">Both</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Both") {$Phase="Both";}?> value="Both">Both</td>
 
                     </tr>
 
@@ -957,31 +745,19 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="Teacher") {$position="Teacher";}?> value="Teacher">Teacher</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Teacher") {$position="Teacher";}?> value="Teacher">Teacher</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="Principal") {$position="Principal";}?> value="Principal">Principal</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Principal") {$position="Principal";}?> value="Principal">Principal</td>
 
-                        <td style=" text-align:center; color:blue;"><input type="radio" name="position" <?php if (isset($position) && $position=="HOD") {$position="HOD";}?> value="HOD">HOD</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="HOD") {$position="HOD";}?> value="HOD">HOD</td>
 
                     </tr>
 
                 </table>
 
-                <!--<hr/>
-
-                <table style="width:100%;">
-
-                	<tr>
-
-                    	<th style=" color:blue;"><h4><em>Subjects</em></h4></th>
-
-                    </tr>
-
-                </table>-->
-
                 <hr/>
-
-                <table style="width:100%;">
+                
+                <table class="col-sm-12" style="margin-left:-4%;">
 
                 	<tr>
 
@@ -993,35 +769,17 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                        <td style="color:#fff;"><input type="file" required placeholder="Qualification Copy" value="" name="qual" class="txt"></td>
+                        <td style="color:#fff;" class="col-sm-6"><input type="file" required placeholder="Qualification Copy" value="" name="qual" class="txt"></td>
 
-                        <td style="color:#fff;"><input type="file" required placeholder="ID Copy" value="" name="id" class="txt"></td>
+                        <td style="color:#fff;" class="col-sm-6"><input type="file" required placeholder="ID Copy" value="" name="id" class="txt"></td>
 
                     </tr>
+                    
+                    <tr><td colspan="2"><hr/></td></tr>
 
                 </table>
 
-                <hr/>
-
-                <table style="width:100%;">
-
-                	<tr>
-
-                    	<th style="text-align:center; color:#fff;"><em>Profile photo</em></th>
-
-                    </tr>
-
-                    <tr>
-
-                    	 <td style="color:#fff;"><input type="file" required placeholder="Profile photo" value="" name="p.p" class="txt"></td>
-
-                    </tr>
-
-                </table>
-
-                <hr/>
-
-                <input type="submit" value="Submit" name="next" class="txt2">
+                <input type="submit" value="Submit" name="" class="txt2" data-toggle="modal" data-target="#details-1">
 
               </form>
 
@@ -1046,6 +804,54 @@ if(isset($_POST['next']))
         </div>
 
 </section>
+
+<!-- Modal Start-->
+<div class="modal fade details-1" id="details-1" tabindex="-1" role="dialog" aria-labelledby="details-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+    	<div class="modal-content">
+    	<div class="modal-header">
+        	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">Staff Details</h4>
+        </div>
+        <form action="" method="post">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="center-block">
+                                INfo
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <h4>SUBJECTS</h4>
+                            <table class="col-sm-12">
+                                <tr>
+                                    <td>
+                                        <label for="InputEnglish">English</label><input class="checkbox" type="checkbox" value="English">	
+                                    </td>
+                                    <td>
+                                        <label for="InputIsiZulu">IsiZulu</label><input class="checkbox" type="checkbox" value="IsiZulu">	
+                                    </td>
+                                    <td>
+                                        <label for="InputLO">Life Orientation</label><input class="checkbox" type="checkbox" value="LO">	
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg" data-dismiss="modal">Back</button>
+                <button class="btn btn-success btn-lg" type="submit" name="next">Save</button>
+            </div>
+        </form>
+    </div>
+   </div>
+</div>
+<!-- Modal end -->
 
 <!-- Call to Action start -->
 
@@ -1181,6 +987,6 @@ if(isset($_POST['next']))
 
 
 
-<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
+
 
 </html>

@@ -1,6 +1,4 @@
-<?php require ('connection/conect.php');?>
-
-<?php
+<?php require ('connection/conect.php');
 ob_start();
 session_start();
 /*header('Access-Control-Allow-Origin: *');
@@ -187,11 +185,22 @@ require ("signin.php");
             </li>
           </ul>
         </div>
-        <div class="col-sm-1"><a href=""><img src="Bhevu Pics/P.P's/17362372_1955905461304830_1811470495680181031_n.jpg" alt="Bhevu Logo" style="width:60px; height:60px;"></a> </div>
+        <?php
+			  if(isset($_SESSION['Register']))
+			  {
+				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
+					$resul = $reg ->fetch_array(MYSQLI_BOTH);
+					{
+						if($resul['Register'] == "Registered")
+						{
+							echo "<div class='col-sm-1'><a href=''><img src='Bhevu Pics/P.Ps/17362372_1955905461304830_1811470495680181031_n.jpg' alt='Profile Pic' style='width:60px; height:60px;' class='img-thumbnail'></a> </div>";
+						}
+					}
+			  }
+		?>
       </div>
     </div>
   </div>
-
   <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
 
     <div class="container">
@@ -206,7 +215,7 @@ require ("signin.php");
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 
-            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Education World"/></a> </div>
+            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Bhevu Logo"/></a> </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -215,188 +224,6 @@ require ("signin.php");
             <ul class="nav navbar-nav">
 
               <li class="active"><a href="index.php">Home</a></li>
-
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid.html">Grid</a></li>
-
-                  <li><a href="table.html">Tables</a></li>
-
-                  <li><a href="tabs.html">Tabs</a></li>
-
-                  <li><a href="accordions.html">Accordions</a></li>
-
-                  <li><a href="forms.html">Forms</a></li>
-
-                  <li><a href="buttons.html">Buttons</a></li>
-
-                  <li><a href="lists.html">Lists</a></li>
-
-                  <li><a href="typography.html">Typography</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown mega-menu"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <div class="row">
-
-                      <div class="col-md-2 col-md-offset-1">
-
-                        <ul class="list-unstyled">
-
-                          <li><a href="Apply.php"><span>Apply</span></a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Courses</span></li>
-
-                            <li><a href="course-list.html"><span class="fa fa-angle-right menu-icon"></span>Course List</a></li>
-
-                  			<li><a href="course-grid.html"><span class="fa fa-angle-right menu-icon"></span>Course Grid</a></li>
-
-                  			<li><a href="course-details.html"><span class="fa fa-angle-right menu-icon"></span>Course Details</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>News</span></li>
-
-                            <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
-
-                  			<li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
-
-                  			<li><a href="masonry-news.html"><span class="fa fa-angle-right menu-icon"></span>Masonry News</a></li>
-
-                  			<li><a href="news-post-page.html"><span class="fa fa-angle-right menu-icon"></span>News Post Page</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                         <li><span>Gallery</span></li>
-
-                          <li><a href="grid-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Grid Gallery</a></li>
-
-                          <li><a href="full-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Full Width Gallery</a></li>
-
-                          <li><a href="masonry-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Masonry Gallery</a></li>
-
-                          <li><a href="modern-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Modern Gallery</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Pages</span></li>
-
-                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
-
-                          <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
-
-                          <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
-
-                          <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
-
-						 </ul>
-
-                      </div>
-
-                    </div>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="course-list.html">Course List</a></li>
-
-                  <li><a href="course-grid.html">Course Grid</a></li>
-
-                  <li><a href="course-details.html">Course Details</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="classic-news.html">Classic News</a></li>
-
-                  <li><a href="grid-news.html">Grid News</a></li>
-
-                  <li><a href="masonry-news.html">Masonry News</a></li>
-
-                  <li><a href="news-post-page.html">News Post Page</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gallery <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid-gallery.html">Grid Gallery</a></li>
-
-                  <li><a href="full-gallery.html">Full Width Gallery</a></li>
-
-                  <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
-
-                  <li><a href="modern-gallery.html">Modern Gallery</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="about-us.html">About Us</a></li>
-
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>
-
-              </li>-->
 
               <li><a href="about-us.php">About us</a></li>
 
@@ -412,7 +239,7 @@ require ("signin.php");
 						if($resul['Register'] == "Registered")
 						{
 							echo '<li><a href="Print.php">Proof of Reg.</a></li>';
-							echo '<li><a href="#">View Portal</a></li>';
+							echo '<li><a href="Portal.php">View Portal</a></li>';
 						}
 						else if($resul['Register'] == "Not Registered")
 						{
@@ -431,6 +258,10 @@ require ("signin.php");
 							}
 						}
 					}
+			  }
+			  else if(isset($_SESSION['userid']))
+			  {
+				  echo '<li><a href="Admin-Page.php">Admin</a></li>';
 			  }
 			  ?>
 

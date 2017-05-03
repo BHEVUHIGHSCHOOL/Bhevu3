@@ -1,0 +1,210 @@
+/* CSS Document */
+#HeaderWrapper
+{
+	position:relative;
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	height:1000px;
+	/*background-image:url(../Bhevu%20Pics/Edited/Logo/Bhevu%20Logo.jpg);*/
+	background-repeat:no-repeat;
+	background-size:100% 2000px;
+	background-position:top center;
+	background-attachment:fixed;
+	background-color:#E5E0E0;
+}
+#sbject-table
+{
+	position:absolute;
+	width:78%;
+	height:180px;
+	/*background-image:url(../../../images/Pictures/Facebook/dorito.jpg);*/
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:70% 180px;
+	top:2%;
+	margin-left:1%;
+}
+#single-subject
+{
+	position:absolute;
+	width:18%;
+	height:180px;
+	background-size:auto 400px;
+	background-repeat:no-repeat;
+	background-position:right;
+	right:-21%;
+}
+#Overall-performance
+{
+	position:absolute;
+	width:100%;
+	height:180px;
+	background-size:auto 400px;
+	background-repeat:no-repeat;
+	background-position:right;
+	top:180px;
+}
+#learner-info
+{
+	position:absolute;
+	width:48%;
+	height:180px;
+	background-size:auto 400px;
+	background-repeat:no-repeat;
+	background-position:left;
+	top:2%;
+	left:1%;
+	right:1%;
+}
+#administration-info
+{
+	position:absolute;
+	width:48%;
+	height:180px;
+	background-size:auto 400px;
+	background-repeat:no-repeat;
+	background-position:right;
+	top:1%;
+	right:1%;
+}
+#Level-of-Overall-performance
+{
+	position:absolute;
+	width:98%;
+	height:180px;
+	background-size:auto 400px;
+	background-repeat:no-repeat;
+	background-position:center;
+	top:100%;
+	margin-top:15%;
+	right:1%;
+	margin-left:2%;
+}
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+body {
+  background: #F1F3FA;
+}
+#HeaderWrapper2
+{
+	width:100%;
+	top:5px;
+	margin-top:5%;
+	background-color:#E5E0E0;
+}
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+    
+.profile-usermenu {
+  margin-top: 30px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 460px;
+}
+#records
+{
+	width:100%;
+	height:150px;
+	background-color:#552728;
+}
+
+

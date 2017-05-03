@@ -316,50 +316,9 @@ if(isset($_POST['next']))
 
 					$_SESSION["Mobile_number"] = $_POST["Mobile_number"];
 					
-					//============RELATIVE==============
-					if($_POST['grade_rel'] == 'Please_Select')
-					{
-						$errorG = "Please Select Grade";
-					}
-					else
-					{
-						$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["grade_rel"]."-".$_POST["section_rel"];
-					}
-					//============END RELATIVE==========
-					//================Grade dropdown list
-					if($_POST['grade'] == 'Please_Select')
-					{
-						$errorG = "Please Select Grade";
-					}
-					else
-					{
-						$_SESSION['grade'] = $_POST['grade'];
-					}
-					//================Language dropdown list======
-					if($_POST['Language'] == 'Please_Select')
-					{
-						$errorG = "Please Select Grade";
-					}
-					else
-					{
-						$_SESSION["Home_Language"] = $_POST['Language'];
-					}
-	
-					if(empty($_POST["elder"]))
+					$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["grade_rel"]."-".$_POST["section_rel"];
 
-					{
-
-						$error = "<p style='color:red;'>PLease select your elder.</p>";
-
-					}
-
-					else 
-
-					{
-
-						$_SESSION["elder"] = ($_POST["elder"]);
-
-					}
+					$_SESSION['grade'] = $_POST['grade'];
 
 					//Inserting documents
 
@@ -371,7 +330,7 @@ if(isset($_POST['next']))
 						$check = $con -> query("SELECT * FROM images username = '$username'");
 						$number = mysqli_num_rows($check);
 						
-						if( $number < 1)
+						if( $number < 1 && isset($_POST['next']))
 						{
 							$location = $myfile;
 							move_uploaded_file($tmp_name,"document/".$myfile);
@@ -576,202 +535,6 @@ if(isset($_POST['next']))
 
               <li><a href="index.php">Home</a></li>
 
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid.html">Grid</a></li>
-
-                  <li><a href="table.html">Tables</a></li>
-
-                  <li><a href="tabs.html">Tabs</a></li>
-
-                  <li><a href="accordions.html">Accordions</a></li>
-
-                  <li><a href="forms.html">Forms</a></li>
-
-                  <li><a href="buttons.html">Buttons</a></li>
-
-                  <li><a href="lists.html">Lists</a></li>
-
-                  <li><a href="typography.html">Typography</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown mega-menu"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <div class="row">
-
-                      <div class="col-md-2 col-md-offset-1">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Eliments</span></li>
-
-                          <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
-
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
-
-                          <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
-
-                          <li><a href="accordions.html"><span class="fa fa-angle-right menu-icon"></span>Accordions</a></li>
-
-                          <li><a href="forms.html"><span class="fa fa-angle-right menu-icon"></span>Forms</a></li>
-
-                          <li><a href="buttons.html"><span class="fa fa-angle-right menu-icon"></span>Buttons</a></li>
-
-                          <li><a href="lists.html"><span class="fa fa-angle-right menu-icon"></span>Lists</a></li>
-
-                          <li><a href="typography.html"><span class="fa fa-angle-right menu-icon"></span>Typography</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Courses</span></li>
-
-                          <li><a href="course-list.html"><span class="fa fa-angle-right menu-icon"></span>Course List</a></li>
-
-                          <li><a href="course-grid.html"><span class="fa fa-angle-right menu-icon"></span>Course Grid</a></li>
-
-                          <li><a href="course-details.html"><span class="fa fa-angle-right menu-icon"></span>Course Details</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>News</span></li>
-
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
-
-                          <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
-
-                          <li><a href="masonry-news.html"><span class="fa fa-angle-right menu-icon"></span>Masonry News</a></li>
-
-                          <li><a href="news-post-page.html"><span class="fa fa-angle-right menu-icon"></span>News Post Page</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Gallery</span></li>
-
-                          <li><a href="grid-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Grid Gallery</a></li>
-
-                          <li><a href="full-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Full Width Gallery</a></li>
-
-                          <li><a href="masonry-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Masonry Gallery</a></li>
-
-                          <li><a href="modern-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Modern Gallery</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Pages</span></li>
-
-                          <li><a href="about-us.php"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
-
-                          <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
-
-                          <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
-
-                          <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
-
-                        </ul>
-
-                      </div>
-
-                    </div>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="course-list.html">Course List</a></li>
-
-                  <li><a href="course-grid.html">Course Grid</a></li>
-
-                  <li><a href="course-details.html">Course Details</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="classic-news.html">Classic News</a></li>
-
-                  <li><a href="grid-news.html">Grid News</a></li>
-
-                  <li><a href="masonry-news.html">Masonry News</a></li>
-
-                  <li><a href="news-post-page.html">News Post Page</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gallery <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid-gallery.html">Grid Gallery</a></li>
-
-                  <li><a href="full-gallery.html">Full Width Gallery</a></li>
-
-                  <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
-
-                  <li><a href="modern-gallery.html">Modern Gallery</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="about-us.php">About Us</a></li>
-
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>-->
-
               </li>
 
               <li><a href="about-us.php">About Us</a></li>
@@ -860,11 +623,11 @@ if(isset($_POST['next']))
 
               <form action="Apply.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 <!--MUST CHANGE-->
-                <input type="text" required placeholder="Surname" value="<?=((isset($sname))?$sname:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Surname" value="<?=((isset($_SESSION["sname"]))?$_SESSION["sname"]:(isset($sname))?$sname:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="First name" value="<?=((isset($name))?$name:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="First name" value="<?=((isset($_SESSION["name"]))?$_SESSION["name"]:(isset($name))?$name:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Last name" value="<?=((isset($_SESSION["lname"]))?$_SESSION["lname"]:(isset($lname))?$lname:'');?>" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
                 <script>
                 	function numbersonly(input)
@@ -873,7 +636,25 @@ if(isset($_POST['next']))
 						input.value = input.value.replace(regex, "");
 					}
                 </script>
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
+                <input type="text" required placeholder="ID Number" value="<?=((isset($_SESSION["ID_number"]))?$_SESSION["ID_number"]:(isset($id))?$id:'');?>" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
+                 <?php
+
+                	if(isset($validity))
+
+					{
+
+						echo "<p style='color:red'>".$validity."You can not proceed</p>";
+
+					}
+					else
+					if(isset($errorid))
+
+					{
+
+						echo "<p style='color:red'>".$errorid."</p>"."You can not proceed.";
+
+					}
+					?>
                  <select style="width:100%; height:45px; margin-bottom:10px;margin-top:10px"  name="grade" required>
                   <option value="">Select Grade</option>
                   <option value="08">8</option>
@@ -886,28 +667,10 @@ if(isset($_POST['next']))
 						{
 							echo "<p style='color:red'>".$errorG."</p>";
 						}
-				?>
-                <?php
-
-                	if(isset($validity))
-
-					{
-
-						echo "<p style='color:red'>".$validity."</p>"."You can not proceed.";
-
-					}
-
-					if(isset($errorid))
-
-					{
-
-						echo "<p style='color:red'>".$errorid."</p>"."You can not proceed.";
-
-					}
 
 				?>
 
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
+                <input type="text" required placeholder="Mobile Number" value="<?=((isset($_SESSION["Mobile_number"]))?$_SESSION["Mobile_number"]:(isset($_POST["Mobile_number"]))?$_POST["Mobile_number"]:'');?>" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
 
                 <table>
 
@@ -925,11 +688,10 @@ if(isset($_POST['next']))
 
                 </table>
 
-                <input type="text" required placeholder="Present School" value="" name="Present_school" class="txt">
+                <input type="text" required placeholder="Present School" value="<?=((isset($_SESSION["Present_school"]))?$_SESSION["Present_school"]:(isset($_POST["Present_school"]))?$_POST["Present_school"]:'');?>" name="Present_school" class="txt">
 
-                <textarea placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
+                <textarea value="<?=((isset($_SESSION["Learners_address"]))?$_SESSION["Learners_address"]:'');?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
                 <br><br>
-                <!--<input type="text" required placeholder="Home Language" value="" name="Home_Language" class="txt">-->
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
              	  <option value="">Select Your Home Language</option>
                   <option value="Zulu">Zulu</option>
@@ -958,9 +720,9 @@ if(isset($_POST['next']))
 
                     <tr style="color:black;">
 
-                    	<td><input type="text" placeholder="First name" value="" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
+                    	<td><input type="text" placeholder="First name" value="<?=((isset($_POST["rel_First_name"]))?$_POST["rel_First_name"]:'');?>" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Surname" value="" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
+                        <td><input type="text" placeholder="Surname" value="<?=((isset($_POST["rel_Surname"]))?$_POST["rel_Surname"]:'');?>" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
                         <td class="col-sm-3">
                         	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;" name="grade_rel">
@@ -997,7 +759,7 @@ if(isset($_POST['next']))
 
                     	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="PARENT">Parent</td>
 
-                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAUDIEN">Gardien</td>
+                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAUDIEN">Gaurdien</td>
 
                     </tr>
                     <tr>
@@ -1171,6 +933,6 @@ if(isset($_POST['next']))
 
 
 
-<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
+
 
 </html>

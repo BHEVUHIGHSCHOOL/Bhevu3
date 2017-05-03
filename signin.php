@@ -67,7 +67,6 @@ if(isset($_POST['login']))
 		$_SESSION['Surname'] = $querylearner['Surname'];
 		
 		$_SESSION['stream'] = $querylearner['Stream'];
-
 		if(isset($_SESSION['username']))
 
 		{
@@ -81,6 +80,7 @@ if(isset($_POST['login']))
 				if($_SESSION['Grade'] == "10" || $_SESSION['Grade'] == "11")
 				{
 					$retuning101112 = $con -> query ("select * from Subjects101112 where StudID = '$_SESSION[ID_number]'");
+					 
 					$resultretuning101112 = mysqli_num_rows($retuning101112);
 					
 					if($resultretuning101112<1)
@@ -97,6 +97,10 @@ if(isset($_POST['login']))
 				else
 				{
 					$retuning89 = $con -> query ("select * from Subjects89 where StudID = '$_SESSION[ID_number]'");
+					
+					$maths = $retuning89 -> fetch_array(MYSQLI_BOTH);
+					 $Subj = $maths['sibj1'];
+					 
 					$resultretuning89 = mysqli_num_rows($retuning89);
 					
 					if($resultretuning89<1)

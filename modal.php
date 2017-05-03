@@ -18,7 +18,7 @@ require('connection/conect.php');
            <div class="modal-content">
              <div class="modal-header">
                <button type="button" class="close" onclick="closeModal();"><span>&times;</span></button>
-               <h4 class="modal-title text-center" aria-label="modal-label">Approved applicant</h4>
+               <h4 class="modal-title text-center" aria-label="modal-label"><?php echo $result['Status'] ?> applicant</h4>
              </div>
              <div class="modal-body">
              <?php

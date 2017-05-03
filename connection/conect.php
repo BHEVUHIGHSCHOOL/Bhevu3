@@ -30,7 +30,7 @@
 							
 							if($tbrejected)
 							{
-								$tbstaff = $con -> query ("CREATE TABLE staff(Initials text, Firstname text, Lastname text, Surname text, DOB text, Gender text, IDNumber text, Email text, Citizenship text, Username text, Password text, Mobilenumber text, Phase text, Position text)");
+								$tbstaff = $con -> query ("CREATE TABLE staff(Initials text, Firstname text, Lastname text, Surname text, DOB text, Gender text, IDNumber text, Email text, Citizenship text, Username text, Password text, Mobilenumber text, Phase text, Position text, TeachingGrade text)");
 								
 								if($tbstaff)
 								{
