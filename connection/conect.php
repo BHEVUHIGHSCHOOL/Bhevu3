@@ -9,7 +9,7 @@
 		if($dababase)
 		{
 			$con -> select_db("Bhevu");
-			$tbimages = $con -> query ("CREATE TABLE images(imagename varchar(200), imagepath varchar(400), image blob, id int(11), username text, docname text, doc text, docpath text)");
+			$tbimages = $con -> query ("CREATE TABLE images(imagename varchar(200), imagepath varchar(400), image blob, username text, docname text, doc text, docpath text)");
 			
 			if($tbimages)
 			{
@@ -39,6 +39,8 @@
 								
 									$questionpapers = $con -> query ("CREATE TABLE Question_pprs(Year int, Subject varchar(200), QuestionPaper blob, QuetionPath varchar(200), QuestionName varchar(200), Grade varchar(200))");
 									$year = $con -> query ("CREATE TABLE Year(Year varchar(200))");
+									
+									$Subjects = $con -> query("CREATE TABLE Subjects (TeachersID varchar(13), 1st_Subject text, 2nd_Subject text, 3rd_Subject text)");
 									//Ends here
 								}
 								else

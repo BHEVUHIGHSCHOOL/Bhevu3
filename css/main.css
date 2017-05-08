@@ -203,8 +203,13 @@ body {
 #records
 {
 	width:100%;
-	height:150px;
-	background-color:#552728;
+	height:500px;
+	/*background-color:#552728;*/
+	top:10px;
+}
+.form-group .head
+{
+	text-align:center;
 }
 
 

@@ -28,6 +28,11 @@ if(isset($_POST['login']))
 	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
 
 	$resultparent = mysqli_num_rows($parent);
+	
+	//Staff
+	
+	$staff = $con -> query ("select * from staff where Username = '$username' and Password = '$password'");
+	$resultstaff = mysqli_num_rows($staff);
 
 	
 
@@ -65,8 +70,9 @@ if(isset($_POST['login']))
 		$_SESSION['Register'] = $querylearner['Register'];
 		$_SESSION['Firstname'] = $querylearner['Firstname'];
 		$_SESSION['Surname'] = $querylearner['Surname'];
-		
-		$_SESSION['stream'] = $querylearner['Stream'];
+
+		$_SESSION['Grade'] = $querylearner['Grade'];
+
 		if(isset($_SESSION['username']))
 
 		{
@@ -120,6 +126,10 @@ if(isset($_POST['login']))
 			//Registered learner
 			else if($_SESSION['Register'] == "Registered")
 			{
+				if($_SESSION['Grade'] > 9)
+				{
+					$_SESSION['stream'] = $querylearner['Stream'];
+				}
 				header('Location: index.php');
 			}
 			else
@@ -143,6 +153,11 @@ if(isset($_POST['login']))
 			}
 
 		}
+	}
+	else if($resultstaff>0)
+	{
+		$querystaff = $staff -> fetch_array(MYSQLI_BOTH);
+		$_SESSION['id_stuff'] = $querystaff['IDNumber'];
 	}
 	else
 

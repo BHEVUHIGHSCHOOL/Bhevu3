@@ -3,18 +3,12 @@
 	$sql = "SELECT * FROM images";
 
 	$res = $con -> query($sql);
-
-?>
-
-
-
-<?php
 ob_start();
 session_start();
 if(isset($_SESSION['userid']))
 
 {
-
+	include ("Controller/Staff Controller/Save.php");
 }
 
 else
@@ -24,409 +18,6 @@ else
 	header('Location: index.php');
 
 }
-
-if(isset($_POST['next']))
-
-{
-
-   			$id = $_POST["ID_number"];
-
-            $name = $_POST["First_name"];
-
-            $lname = $_POST["Last_name"];
-
-            $sname = $_POST["Surname"];
-
-
-
-            //initials
-
-            $iname = substr($name,0,1);
-
-			$inameUp = strtoupper($iname);
-
-            $ilname = substr($lname,0,1);
-
-			$ilnameUp = strtoupper($ilname);
-
-            $isname1 = substr($sname,0,1);
-
-			$isname1Up = strtoupper($isname1);
-
-            $isname2 = substr($sname,1);
-
-			$isname2Low = strtolower($isname2);
-
-			
-
-            $initials = "Initials :" . " " . $inameUp. "." . " " . $ilnameUp . "." . " " . $isname1Up . $isname2Low . "<br/>";
-
-            //fullnames
-
-            $fname2 = substr($name,1);
-
-			$fname2Low = strtolower($fname2);
-
-            $flname2 = substr($lname,1);
-
-			$flname2Low = strtolower($flname2);
-
-
-
-            $fullnames = "First Name :" . " " . $inameUp . $fname2Low . "<br/>" . "Second Name :" . " " . $ilnameUp . $flname2Low . "<br/>" . "Surname :" . " " . $isname1Up . $isname2Low . "<br/>";
-
-
-
-            $length = strlen($id);
-
-            $months = substr($id,2,2);
-
-			$password = $inameUp.$ilnameUp.$months;
-
-			$username = $months.$isname1Up.$isname2Low;
-
-            if ($length == 13 && $months > 0 && $months < 13)
-
-            {
-
-                //Date of birth
-
-                //get day
-
-                $day = substr($id,4,2);
-
-                if ($day <= 10)
-
-                {
-
-                    $getday = "0" . $day . " ";
-
-                }
-
-                else
-
-				{
-
-                    $getday = $day . " ";
-
-				}
-
-                //get month
-
-                //array
-
-                $month = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-
-                $montha = array( 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12);
-
-                for ($i = 0; $i <12; $i++)
-
-                {
-
-                    if($months == $montha[$i])
-
-                    {
-
-                        $getmongth = $month[$i] . " ";
-
-                    }
-
-                }
-
-
-
-                //get year
-
-                $year = substr($id,0,2);
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $getyear = "19" . $year;
-
-                }
-
-                else if ($year < 18)
-
-                {
-
-                    if ($year < 10)
-
-                    {
-
-                        $getyear = "200" . $year;
-
-                    }
-
-                    else
-
-                    {
-
-                        $getyear = "20" . $year;
-
-                    }
-
-                }
-
-
-
-                //Age
-
-                //90's
-
-                if ($year > 17 && $year <= 99)
-
-                {
-
-                    $age = 2017 - (1900 + $year);
-
-                    if ($age <= 25)
-
-                    {
-
-                        $getage = "Age :" . " " . $age . "<br>";
-
-                    }
-
-                    else
-
-                    {
-
-                        $getage = "Your age does not allow you to create account as a learner." . "<br/>" . "Age : " . $age . "<br>";
-
-                    }
-
-                }
-
-                //2000's
-
-                else if ($year < 18)
-
-                {
-
-                    $age = 2017 - (2000 + $year);
-
-                    if($age>13)
-
-                    {
-
-                        $getage = "Age :" . " " . $age . "<br>";
-
-                    }
-
-                    else
-
-                    {
-
-                        $getage = "Your age does not allow you to create account as a learner." . "<br/>" . "Age :" . " " . $age . "<br>";
-
-                    }
-
-                }
-
-
-
-                //get gender
-
-                $output = substr($id,6,1);
-
-                if ($output >= 5)
-
-                {
-
-                    $gender = "Male";
-
-                }
-
-                else
-
-                {
-
-                    $gender = "Female";
-
-                }
-
-
-
-                //Citizenship
-
-                $citizen = substr($id,10,1);
-
-                if($citizen == 0)
-
-                {
-
-                    $citizenship = "SA Citizen";
-
-                }
-
-                else
-
-                {
-
-                    $citizenship = "Non SA Citizen";
-
-                }
-
-            }
-
-            else
-
-            {
-
-                $validity = "Invalid ID number!!!!";
-
-            }
-
-			//processing
-
-			if(isset($getday))
-
-			{
-
-				$exist = $con -> query ("SELECT * FROM learner where IDNumber = '$id'");
-
-				$result = $exist -> fetch_array(MYSQLI_BOTH);
-
-				if($result<1)
-
-				{
-
-					//to the database
-
-					$initialst = $inameUp.$ilnameUp;
-
-					$namet = $name;
-
-					$lnamet = $lname;
-
-					$snamet = $sname;
-
-					$dobt = $getday."/".$getmongth."/".$getyear;
-
-					$gendert = $gender;
-
-					$idt = $_POST["ID_number"];
-
-					$emailt = $_POST["email"];
-
-					$citizenshipt = $citizenship;
-
-					$usernamet = $username;
-
-					$passwordt = $password;
-
-					$Mobile_numbert = $_POST["Mobile_number"];
-
-					if(empty($_POST["Phase"]))
-
-					{
-
-						$error = "<p style='color:red;'>PLease select phase.</p>";
-
-					}
-
-					else 
-
-					{
-
-						$Phase = ($_POST["Phase"]);
-
-					}
-
-					if(empty($_POST["position"]))
-
-					{
-
-						$error = "<p style='color:red;'>PLease select Position.</p>";
-
-					}
-
-					else 
-
-					{
-
-						$Phase = $_POST["position"];
-						if($Phase == "Senior")
-						{
-							$teachingGrade = "8&9";
-						}
-						else if($Phase == "FET")
-						{
-							$teachingGrade = "10,11&12";
-						}
-						else
-						{
-							$teachingGrade = "All";
-						}
-
-					}
-
-					//Inserting Qualification
-
-					$doc_nameq = "Qualification".$id;
-
-					$myfileq = $_FILES['qual']['name'];
-
-					$tmp_nameq = $_FILES['qual']['tmp_name'];
-
-					if($myfileq&&$doc_nameq)
-
-					{
-
-						$locationq = $myfileq;
-
-						move_uploaded_file($tmp_nameq,"document/".$myfileq);
-
-						$queryq = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_nameq}', '{$locationq}', '{$tmp_nameq}','{$username}')");
-
-						$_SESSION["doc_name"] = $doc_nameq;
-
-					}
-
-					
-
-					//Inserting Id
-
-					$doc_namei = "id".$id;
-
-					$myfilei = $_FILES['id']['name'];
-
-					$tmp_namei = $_FILES['id']['tmp_name'];
-
-					if($myfilei&&$doc_namei)
-
-					{
-
-						$locationi = $myfilei;
-
-						move_uploaded_file($tmp_namei,"document/".$myfilei);
-
-						$queryi = $con -> query("INSERT INTO images(imagename, imagepath,image,username) VALUES ('{$doc_namei}', '{$locationi}', '{$tmp_name}','{$username}')");
-
-						$_SESSION["doc_name"] = $doc_namei;
-
-					}	
-
-					$query = $con -> query("INSERT INTO staff(Initials, Firstname, Lastname, Surname, DOB,Gender, IDNumber, Email, Citizenship, Username, Password, Mobilenumber, Phase, Position, TeachingGrade)VALUES('{$initialst}', '{$namet}', '{$lnamet}', '{$snamet}', '{$dobt}', '{$gendert}', '{$idt}', '{$emailt}', '{$citizenshipt}', '{$usernamet}', '{$passwordt}', '{$Mobile_numbert}', '{$Phase}', '{$position}', '$teachingGrade')");
-
-					header('Location: Admin-Page.php');
-
-				 }
-
-				 else
-
-				 {
-
-					 $error = "Your alreadey exist in the system";
-
-				 }
-
-			}
-
-			}
-
 ?>			
 
 <!DOCTYPE html>
@@ -663,7 +254,7 @@ if(isset($_POST['next']))
 
         <div class="col-sm-12">
 
-          <h2>Register of Staff</h2>
+          <h2>Registration of Staff</h2>
 
         </div>
 
@@ -675,47 +266,43 @@ if(isset($_POST['next']))
 
             <div class="form"  style="text-align:center; border-radius:10px;">
 
-              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+            <?php if(!isset($_GET['Details']))
+				{
+					echo
+					'
+              <form action="RegisterStuff.php?Details='.'Staff'.'" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-                <input type="text" required placeholder="Surname" value="" name="Surname" class="txt">
+                <input type="text" required placeholder="Surname" value="'; if(isset($_SESSION["surname"])){ echo $_SESSION["surname"];} else if(isset($_POST["Surname"])){echo $_POST["Surname"];}else { echo '';}echo'" name="Surname" class="txt">
 
-                <input type="text" required placeholder="First name" value="" name="First_name" class="txt">
+                <input type="text" required placeholder="First name" value="'; if(isset($_SESSION["firstname"])){ echo $_SESSION["firstname"];} else if(isset($_POST["First_name"])){echo $_POST["First_name"];}else { echo '';}echo'" name="First_name" class="txt">
 
-                <input type="text" required placeholder="Last name" value="" name="Last_name" class="txt">
+                <input type="text" required placeholder="Last name" value="'; if(isset($_SESSION["lastname"])){ echo $_SESSION["lastname"];} else if(isset($_POST["Last_name"])){echo $_POST["Last_name"];}else { echo '';}echo'" name="Last_name" class="txt">
 
-                <input type="text" required placeholder="ID Number" value="" name="ID_number" class="txt">
+                <input type="text" required placeholder="ID Number" value="'; if(isset($_SESSION["id"])){ echo $_SESSION["id"];} else if(isset($_POST["ID_number"])){echo $_POST["ID_number"];}else { echo '';}echo'" name="ID_number" class="txt">
+				';
 
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
-
-                <p>
-
-                <?php
-
-                	if(isset($validity))
-
-					{
-
-						echo "<p style='color:red'>".$validity."</p>"."You can not proceed.";
-
-					}
-
-					if(isset($error))
+                	if(isset($_SESSION['validity']))
 
 					{
 
-						echo "<p style='color:red'>".$error."</p>"."You can not proceed.";
+						echo "<p style='color:red'>".$_SESSION['validity'].", You can not proceed.</p>";
 
 					}
 
-				?>
+					 if(isset($_SESSION['existerror']))
 
-                </p>
+					{
 
-                <input type="text" required placeholder="Mobile Number" value="" name="Mobile_number" class="txt">
+						echo "<p style='color:red'>".$_SESSION['existerror']."You can not proceed.</p>";
 
-                <!--<input type="text" required placeholder="Phase" value="" name="Phase" class="txt">-->
+					}
 
-                <!--<textarea placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>-->
+				echo
+				'
+
+                <input style="width:100%; height:45px; margin-bottom:10px;margin-top:10px" type="email" required placeholder="Email" value="'; if(isset($_SESSION["email"])){ echo $_SESSION["email"];} else if(isset($_POST["email"])){echo $_POST["email"];}else { echo '';}echo'" name="email" class="txt">
+
+                <input type="text" required placeholder="Mobile Number" value="'; if(isset($_SESSION["mobilenumber"])){ echo $_SESSION["mobilenumber"];} else if(isset($_POST["Mobile_number"])){echo $_POST["Mobile_number"];}else { echo '';}echo'" name="Mobile_number" class="txt">
 
                 <table style="width:100%;">
 
@@ -727,15 +314,19 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Senior") {$Phase="Senior";}?> value="Senior">Senior</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="Phase"'; if (isset($Phase) && $Phase=="Senior") {$Phase="Senior";} echo ' value="Senior">Senior</td>
 
-                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="FET") {$Phase="FET";}?> value="FET">FET</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase"'; if (isset($Phase) && $Phase=="FET") {$Phase="FET";} echo ' value="FET">FET</td>
 
-                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase" <?php if (isset($Phase) && $Phase=="Both") {$Phase="Both";}?> value="Both">Both</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="Phase"'; if (isset($Phase) && $Phase=="Both") {$Phase="Both";} echo ' value="Both">Both</td>
 
-                    </tr>
-
-                    <hr/>
+                    </tr>';
+					if(isset($_SESSION['PhaseError']))
+						{
+							echo $_SESSION['PhaseError'];
+						}
+					echo
+                    '<hr/>
 
                 	<tr>
 
@@ -745,19 +336,23 @@ if(isset($_POST['next']))
 
                     <tr>
 
-                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Teacher") {$position="Teacher";}?> value="Teacher">Teacher</td>
+                    	<td style=" text-align:center; color:#fff;"><input type="radio" name="position"';if (isset($position) && $position=="Teacher") {$position="Teacher";} echo 'value="Teacher">Teacher</td>
 
-                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="Principal") {$position="Principal";}?> value="Principal">Principal</td>
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position"'; if (isset($position) && $position=="Principal") {$position="Principal";} echo ' value="Principal">Principal</td>
 
-                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position" <?php if (isset($position) && $position=="HOD") {$position="HOD";}?> value="HOD">HOD</td>
-
-                    </tr>
-
+                        <td style=" text-align:center; color:#fff;"><input type="radio" name="position"'; if (isset($position) && $position=="HOD") {$position="HOD";} echo' value="HOD">HOD</td>
+					</tr>';
+					if(isset($_SESSION['PositionError']))
+					{
+						echo $_SESSION['PositionError'];
+					}
+					
+				echo'
                 </table>
 
                 <hr/>
                 
-                <table class="col-sm-12" style="margin-left:-4%;">
+                <table class="col-sm-12" style="margin-right:55%; left:-6%;">
 
                 	<tr>
 
@@ -779,9 +374,26 @@ if(isset($_POST['next']))
 
                 </table>
 
-                <input type="submit" value="Submit" name="" class="txt2" data-toggle="modal" data-target="#details-1">
-
-              </form>
+				<input type="submit" value="Submit" name="" class="txt2">
+                
+              </form>';
+				}
+				else if(isset($_GET['Details']) && !isset($_POST['Phase']))
+				{
+					$_SESSION['PhaseError'] = "<tr><td colspan='3' style='text-align:center;'><p style='color:red;'>Please select Phase.</p></td></tr>";
+					header('Location: RegisterStuff.php');
+				}
+				else if(isset($_GET['Details']) && !isset($_POST['position']))
+				{
+					$_SESSION['PositionError'] = "<tr><td colspan='3' style='text-align:center;'><p style='color:red;'>Please select Position.</p></td></tr>";
+					header('Location: RegisterStuff.php');
+				}				
+			  else if(isset($_GET['Details']))
+			  {
+				  echo'
+              		<input type="submit" value="Confirm Details" name="" class="txt2" data-toggle="modal" data-target="#details-1">';
+			  }
+			  ?>
 
             </div>
 
@@ -805,53 +417,9 @@ if(isset($_POST['next']))
 
 </section>
 
-<!-- Modal Start-->
-<div class="modal fade details-1" id="details-1" tabindex="-1" role="dialog" aria-labelledby="details-1" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-    	<div class="modal-content">
-    	<div class="modal-header">
-        	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            	<span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title text-center">Staff Details</h4>
-        </div>
-        <form action="" method="post">
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div class="center-block">
-                                INfo
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <h4>SUBJECTS</h4>
-                            <table class="col-sm-12">
-                                <tr>
-                                    <td>
-                                        <label for="InputEnglish">English</label><input class="checkbox" type="checkbox" value="English">	
-                                    </td>
-                                    <td>
-                                        <label for="InputIsiZulu">IsiZulu</label><input class="checkbox" type="checkbox" value="IsiZulu">	
-                                    </td>
-                                    <td>
-                                        <label for="InputLO">Life Orientation</label><input class="checkbox" type="checkbox" value="LO">	
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger btn-lg" data-dismiss="modal">Back</button>
-                <button class="btn btn-success btn-lg" type="submit" name="next">Save</button>
-            </div>
-        </form>
-    </div>
-   </div>
-</div>
-<!-- Modal end -->
+<?php 
+	require "modals/StaffModal.php";
+?>
 
 <!-- Call to Action start -->
 

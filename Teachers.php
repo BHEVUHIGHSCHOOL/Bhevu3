@@ -396,13 +396,25 @@ Licensed under MIT
 							<i class="glyphicon glyphicon-home"></i>
 							Overview </a>
 						</li>
+                        <nav class="nav navbar-default " style="background-color:#97A3BF; margin-left:-15px;">
+                            <div class="container">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Record Marks<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a  href="Teachers.php?subj='Records'">Grade 8</a>
+                                                <a href="#">Pents</a>
+                                                <a href="#">Shoes</a>
+                                                <a href="#">Excesories</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                             </div>
+                        </nav>
 						<li>
-							<a href="Teachers.php?subj='Records'">
-							<i class="glyphicon glyphicon-user"></i>
-							Record Marks </a>
-						</li>
-						<li>
-							<a href="#" target="_blank">
+							<a href="Teachers.php?upload='Upload'">
 							<i class="glyphicon glyphicon-ok"></i>
 							Upload Questions Papers </a>
 						</li>
@@ -422,13 +434,42 @@ Licensed under MIT
 			</div>
 		</div>
 		<div class="col-md-9">
-            <div class="profile-content">  
-				   <div id='records'>
-						<h3>Learner</h3>
-                        <h4>Subject Test 1 Mark</h4>
-                        <label for="mark">Learner's Mark</label>
-                        <input type="text" name="test"><label for="">100</label>
-                        <button class="txt2">Submit</button>
+        <div class='profile-content col-sm-12'>  
+				   <div id='records' class='col-sm-12'>
+				   
+				   	<hr>
+                    <?php
+                        if(isset($_GET['subj']))
+                        {
+                            echo
+                            "
+                        <form class='form'>
+							<a href='TeacherS.php?grade=".'dfgh'."'>Grade 8 A</a>";
+						}
+                        if(isset($_GET['grade']))
+                        {
+                            echo
+                            "	<table class='col-sm-12'>
+                                            <tr>
+                                                <th  style='text-align:center' colspan='2'><h2>Learner</h2></th>
+                                            </tr>
+                                            <tr>
+                                                <th  style='text-align:center' colspan='2'><h3>Subject Test 1 Mark</h3></th>
+                                            </tr>
+                                            <tr>
+                                                <td class='col-sm-1'><label for='InputEmail2'>Test 1</label></td>
+                                                <td class='col-sm-1'><input type='text' class='form-control input-sm' id='exampleInputEmail2'></td>
+                                                <td class='col-sm-2'><label for='Inputtest'> / 100</label></td>
+                                            </tr>
+                                            <tr>
+                                                <td  style='text-align:center' colspan='2'><button type='botton' class='btn btn-success btn-sm profile-userbuttons'>Submit</button></td>
+                                            </tr>
+                                        </table>                         
+                                    ";
+                        }
+						include "Controller/Question Papers Controller/Upload/Layout.php";
+                        ?>
+                        </form>
 				   </div>
             </div>
 		</div>

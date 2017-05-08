@@ -319,6 +319,11 @@ if(isset($_POST['next']))
 					$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["grade_rel"]."-".$_POST["section_rel"];
 
 					$_SESSION['grade'] = $_POST['grade'];
+					
+					if(isset($_POST['elder']))
+					{
+						$_SESSION["elder"] = $_POST['elder'];
+					}
 
 					//Inserting documents
 
@@ -327,7 +332,7 @@ if(isset($_POST['next']))
 					$tmp_name = $_FILES['myfile']['tmp_name'];
 					if($myfile&&$doc_name)
 					{
-						$check = $con -> query("SELECT * FROM images username = '$username'");
+						$check = $con -> query("SELECT * FROM images WHERE username = '$username'");
 						$number = mysqli_num_rows($check);
 						
 						if( $number < 1 && isset($_POST['next']))
@@ -337,8 +342,8 @@ if(isset($_POST['next']))
 							$query = $con -> query("INSERT INTO images(imagename, imagepath,image,username,docname,doc,docpath) VALUES ('{$doc_name}', '{$location}', '{$tmp_name}','{$username}','','','')");
 							$_SESSION["doc_name"] = $doc_name;
 							$_SESSION["report"] = "Report".$id;
-							header('Location: Parent-details.php');
 						}
+						header('Location: Parent-details.php');
 					}					
 		
 				 }
@@ -623,11 +628,11 @@ if(isset($_POST['next']))
 
               <form action="Apply.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 <!--MUST CHANGE-->
-                <input type="text" required placeholder="Surname" value="<?=((isset($_SESSION["sname"]))?$_SESSION["sname"]:(isset($sname))?$sname:'');?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Surname" value="<?php if(isset($_SESSION["sname"])){echo $_SESSION["sname"];}else if(isset($sname)){echo $sname;}else { echo '';}?>" name="Surname" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="First name" value="<?=((isset($_SESSION["name"]))?$_SESSION["name"]:(isset($name))?$name:'');?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="First name" value="<?php if(isset($_SESSION["name"])){ echo $_SESSION["name"];} else if(isset($name)){echo $name;}else { echo '';}?>" name="First_name" class="txt" onKeyUp="charsonly(this)">
 
-                <input type="text" required placeholder="Last name" value="<?=((isset($_SESSION["lname"]))?$_SESSION["lname"]:(isset($lname))?$lname:'');?>" name="Last_name" class="txt" onKeyUp="charsonly(this)">
+                <input type="text" required placeholder="Last name" value="<?php if(isset($_SESSION["lname"])){ echo $_SESSION["lname"];} else if(isset($lname)){echo $lname;}else { echo '';}?>" name="Last_name" class="txt" onKeyUp="charsonly(this)">
 
                 <script>
                 	function numbersonly(input)
@@ -636,7 +641,7 @@ if(isset($_POST['next']))
 						input.value = input.value.replace(regex, "");
 					}
                 </script>
-                <input type="text" required placeholder="ID Number" value="<?=((isset($_SESSION["ID_number"]))?$_SESSION["ID_number"]:(isset($id))?$id:'');?>" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
+                <input type="text" required placeholder="ID Number" value="<?php if(isset($_SESSION["ID_number"])){ echo $_SESSION["ID_number"];} else if(isset($id)){echo $id;}else { echo '';}?>" name="ID_number" class="txt" onKeyUp="numbersonly(this)" maxlength="13">
                  <?php
 
                 	if(isset($validity))
@@ -670,7 +675,7 @@ if(isset($_POST['next']))
 
 				?>
 
-                <input type="text" required placeholder="Mobile Number" value="<?=((isset($_SESSION["Mobile_number"]))?$_SESSION["Mobile_number"]:(isset($_POST["Mobile_number"]))?$_POST["Mobile_number"]:'');?>" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
+                <input type="text" required placeholder="Mobile Number" value="<?php if(isset($_SESSION["Mobile_number"])){ echo $_SESSION["Mobile_number"];} else if(isset($_POST["Mobile_number"])){echo $_POST["Mobile_number"];}else { echo '';}?>" name="Mobile_number" class="txt" onKeyUp="numbersonly(this)" maxlength="10">
 
                 <table>
 
@@ -688,9 +693,9 @@ if(isset($_POST['next']))
 
                 </table>
 
-                <input type="text" required placeholder="Present School" value="<?=((isset($_SESSION["Present_school"]))?$_SESSION["Present_school"]:(isset($_POST["Present_school"]))?$_POST["Present_school"]:'');?>" name="Present_school" class="txt">
+                <input type="text" required placeholder="Present School" value="<?php if(isset($_SESSION["Present_school"])){ echo $_SESSION["Present_school"];} else if(isset($_POST["Present_school"])){echo $_POST["Present_school"];}else { echo '';}?>" name="Present_school" class="txt">
 
-                <textarea value="<?=((isset($_SESSION["Learners_address"]))?$_SESSION["Learners_address"]:'');?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
+                <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
                 <br><br>
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
              	  <option value="">Select Your Home Language</option>
@@ -720,9 +725,9 @@ if(isset($_POST['next']))
 
                     <tr style="color:black;">
 
-                    	<td><input type="text" placeholder="First name" value="<?=((isset($_POST["rel_First_name"]))?$_POST["rel_First_name"]:'');?>" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
+                    	<td><input type="text" placeholder="First name" value="<?php if(isset($_POST["rel_First_name"])){echo $_POST["rel_First_name"];}else { echo '';}?>" name="rel_First_name" class="txt" onKeyUp="charsonly(this)"></td>
 
-                        <td><input type="text" placeholder="Surname" value="<?=((isset($_POST["rel_Surname"]))?$_POST["rel_Surname"]:'');?>" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
+                        <td><input type="text" placeholder="Surname" value="<?php if(isset($_POST["rel_Surname"])){echo $_POST["rel_Surname"];}else { echo '';}?>" name="rel_Surname" class="txt" onKeyUp="charsonly(this)"></td>
 
                         <td class="col-sm-3">
                         	<select style="width:125px; height:44px; margin-left:-30px; margin-top:1px;" name="grade_rel">
@@ -759,7 +764,7 @@ if(isset($_POST['next']))
 
                     	<td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Parent") {$elder="Parent";}?> value="PARENT">Parent</td>
 
-                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAUDIEN">Gaurdien</td>
+                        <td style="color:#fff;"><input type="radio" name="elder" <?php if (isset($elder) && $elder=="Gardien") {$elder="Gardien";}?> value="GAURDIEN">Gaurdien</td>
 
                     </tr>
                     <tr>
@@ -767,6 +772,11 @@ if(isset($_POST['next']))
                         	if(isset($_SESSION['Eldererror']))
 							{
 								echo "<td colspan='2'>".$_SESSION['Eldererror']."</td>";
+							}
+							else if (isset($_SESSION['Eldererror']) && isset($_POST['next']))
+							{
+								session_destroy();
+								unset($_SESSION['Eldererror']);
 							}
 						?>
                     </tr>
