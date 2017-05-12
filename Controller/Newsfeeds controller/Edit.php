@@ -156,7 +156,8 @@
 		
 		if(isset($_POST['title-search']))
 		{
-			$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
+			//$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
+			$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
 			$numcheck = mysqli_num_rows($title);
 			if($numcheck>0)
 			{
