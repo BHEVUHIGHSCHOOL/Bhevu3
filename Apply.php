@@ -320,6 +320,7 @@ if(isset($_POST['next']))
 					$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["grade_rel"]."-".$_POST["section_rel"];
 
 					$_SESSION['grade'] = $_POST['grade'];
+					$_SESSION['Email'] = $_POST['Email'];
 					
 					if(isset($_POST['elder']))
 					{
@@ -695,6 +696,11 @@ if(isset($_POST['next']))
 
                 <input type="text" required placeholder="Present School" value="<?php if(isset($_SESSION["Present_school"])){ echo $_SESSION["Present_school"];} else if(isset($_POST["Present_school"])){echo $_POST["Present_school"];}else { echo '';}?>" name="Present_school" class="txt">
 
+<<<<<<< HEAD
+                    <td><input type="email" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
+
+=======
+>>>>>>> 8eea49e0a104b66a89b6462460afea63eef1fe79
                 <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3" required></textarea>
                 <br><br>
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Home_Language">

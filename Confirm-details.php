@@ -47,9 +47,21 @@ if(isset($_POST['save']))
 
 		//$image = $_SESSION["image"];
 
-		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected')");
+		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream, Email) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected', '$_SESSION[Email]')");
 
+	//sending email
 	
+		$user= $_SESSION["username"];
+		$passw= $_SESSION["password"];
+		$toquery= $con->query("SELECT * from learner where '$_SESSION[ID_number]' = IDNumber ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Thank you for applying at bhevu  .</br>Your username:'.$user . '</br>Your password:'.$passw;
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
 
 	//Saving Parent
 

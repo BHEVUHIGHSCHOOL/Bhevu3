@@ -13,7 +13,7 @@
 			
 			if($tbimages)
 			{
-				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text, Register text, Stream text)");
+				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text, Register text, Stream text, Email text)");
 				
 				if($tblearner)
 				{
