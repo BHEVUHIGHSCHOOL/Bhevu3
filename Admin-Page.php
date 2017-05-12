@@ -88,7 +88,7 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Education World</title>
+<title>Bhevu High&reg;</title>
 
 <!-- Bootstrap CSS -->
 
@@ -262,7 +262,7 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 
               <li><a href="RegisterStuff.php">Register Staff</a></li>
               
-              <li><a href="SendSMS.php">Send SMS</a></li>
+              <li><a href="Send.php">Send SMS</a></li>
 
               <li><a href="Admin-Page.php">Admin</a></li>
 

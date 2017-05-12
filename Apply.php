@@ -344,9 +344,8 @@ if(isset($_POST['next']))
 							$_SESSION["doc_name"] = $doc_name;
 							$_SESSION["report"] = "Report".$id;
 						}
-						header('Location: Parent-details.php');
-					}					
-		
+					}	
+						header('Location:Parent-details.php');
 				 }
 
 				 else

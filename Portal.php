@@ -73,165 +73,8 @@ session_start();
       <div class="col-md-8 col-sm-6">
 
         <ul class="top-right pull-right ">
-        
-
-        <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-			 echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-				echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-		  ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-			  echo "
-
-          <!-- Login -->
-
-          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
-
-            <div class='login-form'>
-
-              <h4>Login</h4>
-
-              <form action='' method='post'>
-
-                <input type='text' name='username' placeholder='Username'>
-
-                <input type='password' name='password' placeholder='Password'>";}?>
-
-                <?php if(isset($error)){echo $error;}?>
-
-           <?php
-
-           if(isset($_SESSION['username']))
-
-		  	{
-
-		 	}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}
-
-		  	else
-
-		  	{
-
-			  echo "  
-
-                <button type='submit' name='login' class='btn'>Login</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-          ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-		  echo "
-
-          <!-- Apply -->
-
-          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
-
-            <div class='register-form'>
-
-              <h4>Apply</h4>
-
-            </div>
-
-           </li>";
-
-		  }
-
-		   ?>
+      
+        <?php include ("signin.php");?> 
 
         </ul>
 
@@ -400,7 +243,7 @@ session_start();
         </ul>
         <ul class="nav navbar-nav">
         	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Question Papers</a>
+            	<a href="ViewQuestionPapers.php">Question Papers</a>
             </li>
         </ul>
         <ul class="nav navbar-nav">
@@ -453,7 +296,8 @@ session_start();
     	<div id="sbject-table">
         	<table class="table table-bordered table-hover table-striped col-sm-12" style="text-align:center">
             	<?php
-                	$retuning89 = $con -> query ("select * from Subjects89 where StudID = '$_SESSION[ID_number]'");			
+                	$retuning89 = $con -> query ("select * from Subjects89 where StudID = '$_SESSION[ID_number]'");
+					$retuning89 = $con -> query ("select * from Subjects101112 where StudID = '$_SESSION[ID_number]'");			
 					$subj = $retuning89 -> fetch_array(MYSQLI_BOTH);
 					
 					if(isset($_GET['subj'])){

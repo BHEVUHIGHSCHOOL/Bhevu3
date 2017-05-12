@@ -263,7 +263,7 @@ session_start();
 
                           <li><span>News</span></li>
 
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
+                          <li><a href="Controller/Newsfeeds controller/classic-news.php"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
 
                           <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
 
@@ -337,7 +337,7 @@ session_start();
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="classic-news.html">Classic News</a></li>
+                  <li><a href="Controller/Newsfeeds controller/classic-news.php">Classic News</a></li>
 
                   <li><a href="grid-news.html">Grid News</a></li>
 

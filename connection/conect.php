@@ -36,12 +36,23 @@
 								{
 									$tbsubj8 = $con -> query ("CREATE TABLE Subjects89(StudID text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text, subj8 text, subj9 text)");
 									$tbsubj10 = $con -> query ("CREATE TABLE Subjects101112(StudID text, Stream text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text)");
+
+									
+									$query = $con -> query("CREATE TABLE News(catname text, newstitle text,
+									story text , timestamp datetime, Attachments text, Type text)");
+									
+									$query = $con -> query("CREATE TABLE NewsOld(catname text, newstitle text,
+									story text , timestamp datetime, Attachments text)");
+									
+									//Ends here with the tables of the Subjects
+									
 								
 									$questionpapers = $con -> query ("CREATE TABLE Question_pprs(Year int, Subject varchar(200), QuestionPaper blob, QuetionPath varchar(200), QuestionName varchar(200), Grade varchar(200))");
 									$year = $con -> query ("CREATE TABLE Year(Year varchar(200))");
 									
 									$Subjects = $con -> query("CREATE TABLE Subjects (TeachersID varchar(13), 1st_Subject text, 2nd_Subject text, 3rd_Subject text)");
 									//Ends here
+
 								}
 								else
 								{
