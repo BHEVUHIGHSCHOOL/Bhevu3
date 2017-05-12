@@ -3,114 +3,6 @@
 <?php
 ob_start();
 session_start();
-if(isset($_POST['login']))
-
-{
-
-	$username = $_POST['username'];
-
-	$password = $_POST['password'];
-
-	
-
-	$admin = $con -> query ("SELECT * FROM qazwsxedc WHERE username = '$username' and password = '$password'");
-
-	$resultadmin = mysqli_num_rows($admin);
-
-	
-
-	//Learner
-
-	$learner = $con -> query ("SELECT * FROM learner WHERE Username = '$username' and Password = '$password'");
-
-	$resultlearner = mysqli_num_rows($learner);
-
-	
-
-	//Parent
-
-	$parent = $con -> query ("SELECT * FROM parent WHERE Username = '$username' and Password = '$password'");
-
-	$resultparent = mysqli_num_rows($parent);
-
-	
-
-	if($resultadmin>0 || $resultlearner>0 || $resultparent>0)
-
-	{
-
-		$queryadmin = $admin -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['usernamea'] = $queryadmin['username'];
-
-		$_SESSION['userid'] = $queryadmin['userId'];
-
-		
-
-		//Learner
-
-		$querylearner = $learner -> fetch_array(MYSQLI_BOTH);
-
-		$_SESSION['username'] = $querylearner['Username'];
-
-		$_SESSION["ID_number"] = $querylearner['IDNumber'];
-
-		$_SESSION['Status'] = $querylearner['Status'];
-
-		
-
-		if(isset($_SESSION['userid']))
-
-		{
-
-			header('Location: Admin-Page.php');
-
-		}
-
-		if(isset($_SESSION['username']))
-
-		{
-
-			//learner
-
-			if($_SESSION['Status'] == "Aproved")
-
-			{
-
-				header('Location: RegisterSubj.php');
-
-				$_SESSION["report"] = "Report".$_SESSION["ID_number"];
-
-			}
-
-			else
-
-			{
-
-				header('Location: After-Confirm.php');
-
-			}
-
-		}
-
-		
-
-		//parent
-
-		$queryparent = $parent -> fetch_array(MYSQLI_BOTH);
-
-	}
-
-	else
-
-	{
-
-		$error = "<p style='color:red'>User Account not found.....</p>";
-
-	}
-
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +17,7 @@ if(isset($_POST['login']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Education World</title>
+<title>Bhevu High&reg;</title>
 
 <!-- Bootstrap CSS -->
 
@@ -195,135 +87,10 @@ if(isset($_POST['login']))
 
         <ul class="top-right pull-right ">
 
-        <?php
-			if (isset($_SESSION['userid']))
-
-			{
-
-				echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-		  ?>
-
-         <?php
-
-		 if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-			  echo "
-
-          <!-- Login -->
-
-          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
-
-            <div class='login-form'>
-
-              <h4>Login</h4>
-
-              <form action='' method='post'>
-
-                <input type='text' name='username' placeholder='Username'>
-
-                <input type='password' name='password' placeholder='Password'>";}?>
-
-                <?php if(isset($error)){echo $error;}?>
-
-           <?php
-
-           if(isset($_SESSION['username']))
-
-		  	{
-
-		 	}
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}
-
-		  	else
-
-		  	{
-
-			  echo "  
-
-                <button type='submit' name='login' class='btn'>Login</button>
-
-              </form>
-
-            </div>
-
-          </li>";
-
-			}
-
-          ?>
-
-          <?php
-
-		  if(isset($_SESSION['username']))
-
-		  {
-
-		  }
-
-			else if (isset($_SESSION['userid']))
-
-			{
-
-			}		  
-
-		  else
-
-		  {
-
-		  echo "
-
-          <!-- Apply -->
-
-          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
-
-            <div class='register-form'>
-
-              <h4>Apply</h4>
-
-            </div>
-
-           </li>";
-
-		  }
-
-		   ?>
-           <?php
-		   if(isset($_POST['sends']))
-		   {
+		<?php include ("Controller/sign in/logins.php");?>
+ <?php
+if(isset($_POST['sends']))
+{
 
 
 /*
@@ -338,7 +105,7 @@ $password = '0835954940';
 /*
 * Your phone number, including country code, i.e. +44123123123 in this case:
 */
-$msisdn = '27835954940';
+$msisdn = '+27835954940';
 
 /*
 * Please see the FAQ regarding HTTPS (port 443) and HTTP (port 80/5567)
@@ -783,203 +550,6 @@ function xml_to_wbxml( $msg_body ) {
 
               <li><a href="index.php">Home</a></li>
 
-              <!--<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid.html">Grid</a></li>
-
-                  <li><a href="table.html">Tables</a></li>
-
-                  <li><a href="tabs.html">Tabs</a></li>
-
-                  <li><a href="accordions.html">Accordions</a></li>
-
-                  <li><a href="forms.html">Forms</a></li>
-
-                  <li><a href="buttons.html">Buttons</a></li>
-
-                  <li><a href="lists.html">Lists</a></li>
-
-                  <li><a href="typography.html">Typography</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown mega-menu"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li>
-
-                    <div class="row">
-
-                      <div class="col-md-2 col-md-offset-1">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Eliments</span></li>
-
-                          <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
-
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
-
-                          <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
-
-                          <li><a href="accordions.html"><span class="fa fa-angle-right menu-icon"></span>Accordions</a></li>
-
-                          <li><a href="forms.html"><span class="fa fa-angle-right menu-icon"></span>Forms</a></li>
-
-                          <li><a href="buttons.html"><span class="fa fa-angle-right menu-icon"></span>Buttons</a></li>
-
-                          <li><a href="lists.html"><span class="fa fa-angle-right menu-icon"></span>Lists</a></li>
-
-                          <li><a href="typography.html"><span class="fa fa-angle-right menu-icon"></span>Typography</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Courses</span></li>
-
-                          <li><a href="course-list.html"><span class="fa fa-angle-right menu-icon"></span>Course List</a></li>
-
-                          <li><a href="course-grid.html"><span class="fa fa-angle-right menu-icon"></span>Course Grid</a></li>
-
-                          <li><a href="course-details.html"><span class="fa fa-angle-right menu-icon"></span>Course Details</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>News</span></li>
-
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
-
-                          <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
-
-                          <li><a href="masonry-news.html"><span class="fa fa-angle-right menu-icon"></span>Masonry News</a></li>
-
-                          <li><a href="news-post-page.html"><span class="fa fa-angle-right menu-icon"></span>News Post Page</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Gallery</span></li>
-
-                          <li><a href="grid-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Grid Gallery</a></li>
-
-                          <li><a href="full-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Full Width Gallery</a></li>
-
-                          <li><a href="masonry-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Masonry Gallery</a></li>
-
-                          <li><a href="modern-gallery.html"><span class="fa fa-angle-right menu-icon"></span>Modern Gallery</a></li>
-
-                        </ul>
-
-                      </div>
-
-                      <div class="col-md-2">
-
-                        <ul class="list-unstyled">
-
-                          <li><span>Pages</span></li>
-
-                          <li><a href="about-us.html"><span class="fa fa-angle-right menu-icon"></span>About Us</a></li>
-
-                          <li><a href="coming-soon.html"><span class="fa fa-angle-right menu-icon"></span>Coming Soon</a></li>
-
-                          <li><a href="404.html"><span class="fa fa-angle-right menu-icon"></span>404</a></li>
-
-                          <li><a href="faq.html"><span class="fa fa-angle-right menu-icon"></span>FAQ</a></li>
-
-                        </ul>
-
-                      </div>
-
-                    </div>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="course-list.html">Course List</a></li>
-
-                  <li><a href="course-grid.html">Course Grid</a></li>
-
-                  <li><a href="course-details.html">Course Details</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="classic-news.html">Classic News</a></li>
-
-                  <li><a href="grid-news.html">Grid News</a></li>
-
-                  <li><a href="masonry-news.html">Masonry News</a></li>
-
-                  <li><a href="news-post-page.html">News Post Page</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gallery <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="grid-gallery.html">Grid Gallery</a></li>
-
-                  <li><a href="full-gallery.html">Full Width Gallery</a></li>
-
-                  <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
-
-                  <li><a href="modern-gallery.html">Modern Gallery</a></li>
-
-                </ul>
-
-              </li>
-
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
-
-                <ul class="dropdown-menu">
-
-                  <li><a href="about-us.html">About Us</a></li>
-
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>
-
-              </li>-->
                   <li><a href="Admin-Page.php">Admin</a></li>
                   
               <li><a href="about-us.php">About Us</a></li>
@@ -1061,12 +631,6 @@ function xml_to_wbxml( $msg_body ) {
 
               <form action="" method="post" id="contactFrm" name="contactFrm">
 
-               <!-- <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
-
-                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
-
-                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt"> -->
-
                 <input type="text" required placeholder="Email" value="" name="email" class="txt">
 
                 <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
@@ -1074,7 +638,6 @@ function xml_to_wbxml( $msg_body ) {
                 <input type="submit" value="Send to Students" name="sends" class="txt2">
                  <input type="submit" value="Send to Staff" name="sendsf" class="txt2">
                   <input type="submit" value="Send to Parents" name="sendsp" class="txt2">
-                   
 
               </form>
 

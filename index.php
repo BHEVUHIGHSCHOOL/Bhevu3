@@ -70,16 +70,6 @@ require ("signin.php");
 
           <li class="twitter"><a href="javascript:void(0)" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
-          <!--<li class="linkedin"><a href="javascript:void(0)" target="_blank"><i class="fa fa-linkedin"></i></a></li>-->
-
-          <!--<li class="pinterest"><a href="javascript:void(0)" target="_blank"><i class="fa fa-pinterest"></i></a></li>-->
-
-          <!--<li class="google-plus"><a href="javascript:void(0)" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
-
-          <!--<li class="youtube"><a href="javascript:void(0)" target="_blank"><i class="fa fa-youtube"></i></a></li>-->
-
-         <!--<li class="dribbble"><a href="javascript:void(0)" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
-
         </ul>
 
       </div>
@@ -156,7 +146,7 @@ require ("signin.php");
               <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
-              
+              <li><a href="Controller/Newsfeeds controller/classic-news.php">School Newsfeeds</a></li>
               <!--Registerd Learner-->
 			  <?php include ("Controller/sign in/login_navs.php");?>
 
@@ -707,7 +697,6 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 <!-- sponsers End -->
 
 <!-- Gallery Start -->
-
 <div class="gal-container full-width">
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#1">
@@ -732,17 +721,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#2">
               <div class="caption">
-                <h4>Indlamu Dance</h4>
-                <p>...........</p>
+                <h4>Indlamu</h4>
+                <p>...............</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/Indlamu.jpg" alt="Netbal Team"> </a>
+              <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.JPG" alt="Gallery Image"> </a>
               <div class="modal fade" id="2" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.jpg" alt="Gallery Image"> </div>
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/Indlamu.JPG" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>Indlamu Dance</h4>
                     </div>
                   </div>
                 </div>
@@ -752,17 +741,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#3">
               <div class="caption">
-                <h4>School Soccer Team</h4>
-                <p>............</p>
+                <h4>Gallery Image3</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/Soccer.jpg" alt="Soccer Team"> </a>
+              <img src="images/gallery-img3.jpg" alt="Gallery Image"> </a>
               <div class="modal fade" id="3" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/SoccerFull.jpg" alt="Soocer Team"> </div>
+                    <div class="modal-body"> <img src="images/gallery-img3.jpg" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>This is the third one on my Gallery</h4>
                     </div>
                   </div>
                 </div>
@@ -772,17 +761,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#4">
               <div class="caption">
-                <h4>Matric Dance Event</h4>
-                <p>..........</p>
+                <h4>Gallery Image4</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/MatricDance.jpg" alt="Matric Dance Event"></a>
+              <img src="images/gallery-img4.jpg" alt="Gallery Image"> </a>
               <div class="modal fade" id="4" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/MatricDanceFull.jpg" alt="Matric Dance Event"> </div>
+                    <div class="modal-body"> <img src="images/gallery-img4.jpg" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>This is the fourth one on my Gallery</h4>
                     </div>
                   </div>
                 </div>
@@ -805,7 +794,6 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
             </div>
           </div>          
         </div>
-
 <!-- Gallery End -->
 
 <!-- Footer Links Start-->
