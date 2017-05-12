@@ -158,6 +158,7 @@ if(isset($_POST['login']))
 	{
 		$querystaff = $staff -> fetch_array(MYSQLI_BOTH);
 		$_SESSION['id_stuff'] = $querystaff['IDNumber'];
+		header("Location: index.php");
 	}
 	else
 

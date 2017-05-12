@@ -91,78 +91,8 @@ require ("signin.php");
 
         <ul class="top-right pull-right ">
 
-        <?php
-
-		  if(isset($_SESSION['username']) || isset($_SESSION['userid']))
-
-		  {
-
-			 echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";}
-		  else
-
-		  {
-
-			  echo "
-
-          <!-- Login -->
-
-          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
-
-            <div class='login-form'>
-
-              <h4>Login</h4>
-
-              <form action='' method='post'>
-
-                <input type='text' name='username' placeholder='Username'>
-
-                <input type='password' name='password' placeholder='Password'>
-				<!--Button-->
-				<button type='submit' name='login' class='btn'>Login</button>
-
-              </form>
-
-            </div>
-
-          </li>
-		  <!-- Apply -->
-
-          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
-
-            <div class='register-form'>
-
-              <h4>Apply</h4>
-			  
-			  <form action='Apply.php' method='post'>
-				<!--Button-->
-				<button type='submit' name='Apply' class='btn'>Apply</button>
-
-              </form>
-
-            </div>
-
-           </li>";}
-				
-				if(isset($error)){echo $error;}
-		  ?>
+        <?php include ("Controller/sign in/logins.php");?>
+        
         </ul>
 
       </div>
@@ -437,37 +367,7 @@ require ("signin.php");
 
               <li><a href="#">Contact Us</a></li>
               
-              <!--Registerd Learner-->
-			  <?php
-			  if(isset($_SESSION['Register']))
-			  {
-				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					$resul = $reg ->fetch_array(MYSQLI_BOTH);
-					{
-						if($resul['Register'] == "Registered")
-						{
-							echo '<li><a href="Print.php">Proof of Reg.</a></li>';
-							echo '<li><a href="Portal.php">View Portal</a></li>';
-						}
-						else if($resul['Register'] == "Not Registered")
-						{
-							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-							$res = $pic ->fetch_array(MYSQLI_BOTH);
-							{
-								$_SESSION["availablereport"]=$res['docname'];
-								if(($_SESSION["availablereport"]) == '')
-								{
-									echo '<li><a href="After-Confirm.php">upload report</a></li>';
-								}
-								else
-								{
-									echo '<li><a href="Waiting.php">Application Status</a></li>';
-								}
-							}
-						}
-					}
-			  }
-			  ?>
+              <?php include ("Controller/sign in/login_navs.php");?>
 
             </ul>
 
