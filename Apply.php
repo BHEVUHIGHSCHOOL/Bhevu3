@@ -313,6 +313,7 @@ if(isset($_POST['next']))
 					$_SESSION["username"] = $username;
 
 					$_SESSION["password"] = $password;
+					$_SESSION["Home_Language"] = $_POST['Home_Language'];
 
 					$_SESSION["Mobile_number"] = $_POST["Mobile_number"];
 					
@@ -695,9 +696,9 @@ if(isset($_POST['next']))
 
                 <input type="text" required placeholder="Present School" value="<?php if(isset($_SESSION["Present_school"])){ echo $_SESSION["Present_school"];} else if(isset($_POST["Present_school"])){echo $_POST["Present_school"];}else { echo '';}?>" name="Present_school" class="txt">
 
-                <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3"></textarea>
+                <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3" required></textarea>
                 <br><br>
-               <select style="width:100%; height:45px; margin-bottom:10px" required name="Language">
+               <select style="width:100%; height:45px; margin-bottom:10px" required name="Home_Language">
              	  <option value="">Select Your Home Language</option>
                   <option value="Zulu">Zulu</option>
                   <option value="English">English</option>

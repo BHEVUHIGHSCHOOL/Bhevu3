@@ -3,6 +3,7 @@
 <?php
 ob_start();
 session_start();
+require ("UploadQuestionPapers.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +20,6 @@ session_start();
 
 <title>Bhevu High&reg;</title>
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
-
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -33,7 +32,7 @@ session_start();
 
 <link href="assets/owl-carousel/css/owl.theme.css" rel="stylesheet">
 
-<link rel="shortcut icon" type="image/x-icon" href="Bhevu Pics/Edited/Logo/logo2.png">
+<link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
 </head>
 
@@ -534,7 +533,7 @@ session_start();
 
     <div class="col-sm-12">
 
-      <h2>Application</h2>
+      <h2>Upload Question Papers</h2>
 
     </div>
 
@@ -544,7 +543,7 @@ session_start();
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Apply</li>
+        <li>Question Papers</li>
 
       </ul>
 
@@ -554,124 +553,100 @@ session_start();
 
 </div>
 
-<!-- Portal nav start-->
-<nav class="nav navbar-default " style="background-color:#97A3BF;">
-	<div class="container">
-    	<ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div id="HeaderWrapper">
-	<div id="Back-flower">
-    	<div id="logotext">
-        	<table class="table table-bordered table-hover table-striped col-lg-12" style="text-align:center">
-            	<tr>
-                	<td class="col-sm-4">
-                    	<label for="">SUBJECTS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">SUBJECTS CODES</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">MAXIMUM MARKS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">LEARNER'S MAKRS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">LEVEL</label>
-                    </td>
-                </tr>
-                <tr>
-                	<td>
-                    	<a href="#">0</a>
-                    </td>
-                </tr>
-                <tr>
-                	<td>
-                    	0</td>
-                </tr>
-            </table>
-        	<div id="for-flower">
-            	<table class="table" style="text-align:center">
-                	<tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                    <tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                    <tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                </table>
-            </div>
+<!-- After upload popup form-->
+
+<!-- Inner Banner Wrapper End -->
+
+<section class="inner-wrapper contact-wrapper">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="inner-wrapper-main">
+
+        <div class="contact-address">
+
+        <div class="container">
+
+        <div class="col-sm-12">
+
         </div>
+
+        </div>
+
+          <div class="col-sm-12 col-md-12 no-space-right">
+
+          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
+
+            <div class="form"  style="text-align:center; border-radius:10px;">
+
+              <form method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
+
+                <table class="col-sm-12" style="color:#000; width:100%; border-radius:5px; background-color:#fff; text-align:center">
+
+                	<tr>
+
+                    	<td class="col-sm-12" colspan="4" style="text-align:center">                        	
+							<h1>UPLOAD QUESTION PAPERS</h1>
+                        </td>
+
+                    </tr>
+                    <tr>
+                    	<td class=" col-sm-3">Year</td>
+                        <td class=" col-sm-3">Subjects</td>
+                        <td class=" col-sm-3">Document</td>
+                        <td class=" col-sm-3">Grade</td>
+                    </tr>
+                    <tr>
+                    	<td class=" col-sm-3">
+                    		<input class="form-group" type="text" name="year" placeholder="e.g(2000)"/>
+                        </td>
+                        <td class=" col-sm-3">
+                        	<select class="form-group"  name="subjetcs">
+                            	<option value="Select">Select</option>
+                            </select>
+                        </td>
+                        <td class=" col-sm-3">
+                        	<input class="form-group"  type="file" name="document" />
+                        </td>
+                        <td class=" col-sm-3">
+                        	<select class="form-group"  name="grade">
+                            	<option value="Select">Select</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="4" class="col-sm-12">
+                        	<input type="submit" name="upload" class="txt2" value="UPLOAD">
+                        </td>
+                    </tr>
+
+                </table>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-</div>
-<!-- Portal nav End -->
+
+  </div>
+
+  <div id="google-map">
+
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198710.35112897935!2d-98.51489117772236!3d38.904562823631146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1471865832140" allowfullscreen></iframe>
+
+        </div>
+
+        </div>
+
+</section>
 
 <!-- Call to Action start -->
 
@@ -803,6 +778,6 @@ session_start();
 
 </body>
 
-
+<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
 
 </html>

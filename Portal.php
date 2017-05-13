@@ -359,7 +359,7 @@ session_start();
 <!-- Portal nav start-->
 <nav class="nav navbar-default " style="background-color:#97A3BF;">
 	<div class="container">
-    	<ul class="nav navbar-nav">
+    	<!--<ul class="nav navbar-nav">
         	<li class="dropdown">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -397,10 +397,10 @@ session_start();
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul>-->
         <ul class="nav navbar-nav">
         	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Question Papers</a>
+            	<a href="ViewQuestionPapers.php">Question Papers</a>
             </li>
         </ul>
         <ul class="nav navbar-nav">
@@ -436,15 +436,15 @@ session_start();
             <table class="table">
                 <tr>
                     <th>Administration Number</th>
-                    <td>fvgbhnj</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <th>Years in Grade</th>
-                    <td>fvgbhnj</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <th>School Re-opens</th>
-                    <td>fvgbhnj</td>
+                    <td>-</td>
                 </tr>
             </table>
         </blockquote>
@@ -485,154 +485,138 @@ session_start();
                     	<?php echo '<a href="Portal.php?subj='.$subj['subj1'].'">'.$subj['subj1'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj2'].'">'.$subj['subj2'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
+                    	
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj3'].'">'.$subj['subj3'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj4'].'">'.$subj['subj4'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj5'].'">'.$subj['subj5'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj6'].'">'.$subj['subj6'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj7'].'">'.$subj['subj7'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj8'].'">'.$subj['subj8'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
+                    	0</td>
+                    <td>
+                    	0</td>
+                    <td>
+                    	0</td>
+                    <td>
+                    	0</td>
+                </tr>
+                <tr>
+                	<td>
+                    	<?php echo '<a href="Portal.php?subj='.$subj['subj9'].'">'.$subj['subj9'].'</a>';?>
                     </td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                     <td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
+                    <td>
+                    	0</td>
                 </tr>
             </table>
         	<div id="single-subject">
                 <blockquote>
                     <table class="table" style="text-align:center; border-color:#E19596;">
                         <tr>
-                            <td><?php echo $subject_info['IDNumber'] ;?></td>
+                            <td><?php if(isset($_GET['subj'])){echo $subject_info['IDNumber'] ;}?></td>
                         </tr>
                         <tr>
-                            <td>fgbhjnkl,;.</td>
+                            <td>0.0</td>
                         </tr>
                         <tr>
-                            <td>fgbhjnkl,;.</td>
+                            <td>0.0</td>
                         </tr>
                     </table>
                 </blockquote>            
             </div>
         </div>
+        <hr>
+        <br><br>
         <div id="Level-of-Overall-performance">
             	<table class="table table-bordered col-sm-12">
                 	<tr>
@@ -640,7 +624,7 @@ session_start();
                     	<th class="col-sm-8">
                         	LEVELS OF OVERALL PERFORMENCE
                         </th>
-                        <th class="col-sm-3">
+                        <th class="col-sm-6">
                         	RATING CODE
                         </th>
                     </tr>
@@ -652,7 +636,7 @@ session_start();
                         	Outstaing Achievement
                         </td>
                         <td class="col-sm-3">
-                        	320 - 400
+                        	80 - 100
                         </td>
                     </tr>
                     <tr>
@@ -662,8 +646,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Meritorious Achievement
                         </td>
-                        <td class="col-sm-3">
-                        	280 - 319
+                        <td class="col-sm-6">
+                        	70 - 79
                         </td>
                     </tr>
                     <tr>
@@ -673,8 +657,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Substantial Achievement
                         </td>
-                        <td class="col-sm-3">
-                        	240 - 279
+                        <td class="col-sm-6">
+                        	60 - 69
                         </td>
                     </tr>
                     <tr>
@@ -684,8 +668,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Adequet Achievement
                         </td>
-                        <td class="col-sm-3">
-                        	200 - 239
+                        <td class="col-sm-6">
+                        	50 - 59
                         </td>
                     </tr>
                     <tr>
@@ -695,8 +679,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Moderate Achievement
                         </td>
-                        <td class="col-sm-3">
-                        	160 - 199
+                        <td class="col-sm-6">
+                        	40 - 49
                         </td>
                     </tr>
                     <tr>
@@ -706,8 +690,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Elementary Achievement
                         </td>
-                        <td class="col-sm-3">
-                        	120 - 159
+                        <td class="col-sm-6">
+                        	30 - 39
                         </td>
                     </tr>
                     <tr>
@@ -717,8 +701,8 @@ session_start();
                     	<td class="col-sm-8">
                         	Not Achieved
                         </td>
-                        <td class="col-sm-3">
-                        	0 - 119
+                        <td class="col-sm-6">
+                        	0 - 29
                         </td>
                     </tr>
                 </table>
@@ -733,16 +717,15 @@ session_start();
 
   <div class="container">
 
-    <h3>Lorem Ipsum is simply dummy text</h3>
+    <h3></h3>
 
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing and typesetting industry.</p>
+    <p></p>
 
-    <a href="javascript:void(0)">Sign Up</a> </div>
+    <a href="javascript:void(0)"></a> </div>
 
 </div>
 
 <!-- Call to Action End -->
-
 <!-- Footer Links Start-->
 
 <footer>
@@ -771,21 +754,7 @@ session_start();
 
     </div>
 
-    <div class="col-sm-4 subscirbe pull-right">
-
-      <h2>Newsletter</h2>
-
-      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
-
-      <div class="form">
-
-        <input type="text" placeholder="Enter your Email" id="exampleInputName" class="form-control first">
-
-        <input type="text" class="bttn" value="Subscribe">
-
-      </div>
-
-    </div>
+   
 
   </div>
 

@@ -1,8 +1,8 @@
-<?php require ('connection/conect.php')?>
+<?php require ('connection/conect.php');
 
-<?php
 ob_start();
-session_start();
+//session_start();
+require('ViewDownload.php');
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +19,6 @@ session_start();
 
 <title>Bhevu High&reg;</title>
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
-
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -33,7 +31,7 @@ session_start();
 
 <link href="assets/owl-carousel/css/owl.theme.css" rel="stylesheet">
 
-<link rel="shortcut icon" type="image/x-icon" href="Bhevu Pics/Edited/Logo/logo2.png">
+<link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
 </head>
 
@@ -554,180 +552,93 @@ session_start();
 
 </div>
 
-<!-- Portal nav start-->
-<nav class="nav navbar-default " style="background-color:#97A3BF;">
-	<div class="container">
-    	<ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav">
-        	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men 	<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                	<li>
-                    	<a href="#">Shirts</a>
-                        <a href="#">Pents</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Excesories</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div id="HeaderWrapper">
-	<div id="Back-flower">
-    	<div id="logotext">
-        	<table class="table table-bordered table-hover table-striped col-lg-12" style="text-align:center">
-            	<tr>
-                	<td class="col-sm-4">
-                    	<label for="">SUBJECTS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">SUBJECTS CODES</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">MAXIMUM MARKS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">LEARNER'S MAKRS</label>
-                    </td>
-                    <td class="col-sm-2">
-                    	<label for="">LEVEL</label>
-                    </td>
-                </tr>
-                <tr>
-                	<td>
-                    	<a href="#">0</a>
-                    </td>
-                </tr>
-                <tr>
-                	<td>
-                    	0</td>
-                </tr>
-            </table>
-        	<div id="for-flower">
-            	<table class="table" style="text-align:center">
-                	<tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                    <tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                    <tr>
-                    	<td>fgbhjnkl,;.</td>
-                    </tr>
-                </table>
-            </div>
+<!-- After upload popup form-->
+
+<!-- Inner Banner Wrapper End -->
+
+<section class="inner-wrapper contact-wrapper">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="inner-wrapper-main">
+
+        <div class="contact-address">
+
+        <div class="container">
+
+        <div class="col-sm-12">
+
         </div>
-    </div>
-</div>
-<!-- Portal nav End -->
 
-<!-- Call to Action start -->
+        </div>
 
-<div class="call-to-action">
+          <div class="col-sm-12 col-md-12 no-space-right">
 
-  <div class="container">
+          <div class="col-sm-12 col-md-12 no-space-left" style="text-align:center;">
 
-    <h3>Lorem Ipsum is simply dummy text</h3>
+            <div class="form col-sm-6"  style="text-align:center; border-radius:10px;">
 
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing and typesetting industry.</p>
+              <form action="" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 
-    <a href="javascript:void(0)">Sign Up</a> </div>
+                <table class="col-sm-6 table" style="color:#000; width:100%; border-radius:5px; background-color:#fff;">
+					<thead>
+                        <tr>
+    
+                            <td colspan="2">
+                                    <h1>Search Question Paper</h1>									
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>Year</td>
+                            <td>Subject</td>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-sm-4" >
+                                <select name="Year" style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                                    <option value="Select">Select</option>
+                                    <?php
+                                        while($result = mysqli_fetch_array($Year))
+                                        {
+                                            echo "<option value='".$result['Year']."'>".$result['Year']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </td>
+                            <td class="col-sm-4">
+                                <select name="Subject" style="width:100%; height:45px; margin-bottom:10px;margin-top:10px">
+                                    <option value="Select">Select</option>
+                                    <?php
+                                        while($result = mysqli_fetch_array($Papers))
+                                        {
+                                            echo "<option value='".$result['Subject']."'>".$result['Subject']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2">
+                            	<input type="submit" name="search" value="Search" class="txt2">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+				<?php
+				 include ("DownloadPaper.php"); 
+				 include ("DownloadFile.php");
+				 ?>
+              </form>
 
-</div>
+            </div>
 
-<!-- Call to Action End -->
+          </div>
 
-<!-- Footer Links Start-->
-
-<footer>
-
-  <div class="container">
-
-    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
-
-    <div class="col-sm-5">
-
-      <div class="contactus">
-
-        <h2>Contact Us</h2>
-
-        <ul class="list-ul">
-
-          <li><i class="fa fa-map-marker"></i>Department of State, 300 E-Block Building, USA</li>
-
-          <li><i class="fa fa-phone"></i>0800 123 46 0000</li>
-
-          <li><i class="fa fa-envelope"></i><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-    <div class="col-sm-4 subscirbe pull-right">
-
-      <h2>Newsletter</h2>
-
-      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
-
-      <div class="form">
-
-        <input type="text" placeholder="Enter your Email" id="exampleInputName" class="form-control first">
-
-        <input type="text" class="bttn" value="Subscribe">
+        </div>
 
       </div>
 
@@ -735,9 +646,16 @@ session_start();
 
   </div>
 
-</footer>
+ </div>
 
-<!-- Footer Links End -->
+</section>
+<!-- Call to Action start -->
+
+
+
+<!-- Call to Action End -->
+
+<?php include ("Controller/footer/footer.php");?>
 
 <!-- Copy Rights Start -->
 
@@ -803,6 +721,6 @@ session_start();
 
 </body>
 
-
+<!-- Mirrored from sbtechnosoft.com/education-world/multiple-pages/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Feb 2017 11:36:17 GMT -->
 
 </html>

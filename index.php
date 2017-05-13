@@ -54,234 +54,7 @@ require ("signin.php");
 
 <div id="dvLoading"></div>
 
-<!-- Header Start -->
-
-<header>
-
-  <div class="top-wrapper hidden-xs">
-
-    <div class="container">
-
-      <div class="col-md-4 col-sm-6 hidden-xs top-wraper-left no-padding">
-
-        <ul class="header-social-icons">
-
-          <li class="facebook"><a href="javascript:void(0)" target="_blank"><i class="fa fa-facebook"></i></a></li>
-
-          <li class="twitter"><a href="javascript:void(0)" target="_blank"><i class="fa fa-twitter"></i></a></li>
-
-          <!--<li class="linkedin"><a href="javascript:void(0)" target="_blank"><i class="fa fa-linkedin"></i></a></li>-->
-
-          <!--<li class="pinterest"><a href="javascript:void(0)" target="_blank"><i class="fa fa-pinterest"></i></a></li>-->
-
-          <!--<li class="google-plus"><a href="javascript:void(0)" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
-
-          <!--<li class="youtube"><a href="javascript:void(0)" target="_blank"><i class="fa fa-youtube"></i></a></li>-->
-
-         <!--<li class="dribbble"><a href="javascript:void(0)" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
-
-        </ul>
-
-      </div>
-
-      <div class="col-md-8 col-sm-6">
-
-        <ul class="top-right pull-right ">
-
-        <?php
-
-		  if(isset($_SESSION['username']) || isset($_SESSION['userid']))
-
-		  {
-
-			 echo "
-
-			  <!-- Lgout -->
-
-          <li class='register'><a href='javascript:void(0)'><i class='fa fa-user'></i>Logout</a>
-
-            <div class='register-form'>
-
-              <h4>Logout</h4>
-
-              <form action='Logout.php' method='post'>
-
-                <button type='submit' class='btn'>Logout</button>
-
-              </form>
-
-            </div>
-
-          </li>";}
-		  else
-
-		  {
-
-			  echo "
-
-          <!-- Login -->
-
-          <li class='login'><a href='javascript:void(0)'><i class='fa fa-lock'></i>Login</a>
-
-            <div class='login-form'>
-
-              <h4>Login</h4>
-
-              <form action='' method='post'>
-
-                <input type='text' name='username' placeholder='Username'>
-
-                <input type='password' name='password' placeholder='Password'>
-				<!--Button-->
-				<button type='submit' name='login' class='btn'>Login</button>
-
-              </form>
-
-            </div>
-
-          </li>
-		  <!-- Apply -->
-
-          <li class='register'><a href='Apply.php'><i class='fa fa-user'></i>Apply</a>
-
-            <div class='register-form'>
-
-              <h4>Apply</h4>
-			  
-			  <form action='Apply.php' method='post'>
-				<!--Button-->
-				<button type='submit' name='Apply' class='btn'>Apply</button>
-
-              </form>
-
-            </div>
-
-           </li>";}
-				
-				if(isset($error)){echo $error;}
-		  ?>
-          </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-  
-  <div class="logo-bar hidden-xs">
-    <div class="container">
-      <!-- Logo -->
-      <div class="row">
-        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
-        <div class="col-sm-7">
-          <ul class="contact-info pull-right">
-            <li><i class="fa fa-phone"></i>
-              <p> <span>Call us</span><br>
-               062 569 8372</p>
-            </li>
-            <li><i class="fa fa-envelope"></i>
-              <p><span>Email Us</span><br>
-                <a href="mailto:lenjabulothabiso@gmail.com">lenjabulothabiso@gmail.com</a></p>
-            </li>
-          </ul>
-        </div>
-        <?php
-			  if(isset($_SESSION['Register']))
-			  {
-				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					$resul = $reg ->fetch_array(MYSQLI_BOTH);
-					{
-						if($resul['Register'] == "Registered")
-						{
-							echo "<div class='col-sm-1'><a href=''><img src='Bhevu Pics/P.Ps/17362372_1955905461304830_1811470495680181031_n.jpg' alt='Profile Pic' style='width:60px; height:60px;' class='img-thumbnail'></a> </div>";
-						}
-					}
-			  }
-		?>
-      </div>
-    </div>
-  </div>
-  <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
-
-    <div class="container">
-
-      <nav class="navbar navbar-default">
-
-        <div class="row">
-
-          <!-- Brand and toggle get grouped for better mobile display -->
-
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-
-            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Bhevu Logo"/></a> </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav">
-
-              <li class="active"><a href="index.php">Home</a></li>
-
-              <li><a href="about-us.php">About us</a></li>
-
-              <li><a href="contact-us.php">Contact Us</a></li>
-              
-              <!--Registerd Learner-->
-			  <?php
-			  if(isset($_SESSION['Register']))
-			  {
-				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					$resul = $reg ->fetch_array(MYSQLI_BOTH);
-					{
-						if($resul['Register'] == "Registered")
-						{
-							echo '<li><a href="Print.php">Proof of Reg.</a></li>';
-							echo '<li><a href="Portal.php">View Portal</a></li>';
-						}
-						else if($resul['Register'] == "Not Registered")
-						{
-							$pic = $con -> query ("select * from images where username = '$_SESSION[username]'");
-							$res = $pic ->fetch_array(MYSQLI_BOTH);
-							{
-								$_SESSION["availablereport"]=$res['docname'];
-								if(($_SESSION["availablereport"]) == '')
-								{
-									echo '<li><a href="After-Confirm.php">upload report</a></li>';
-								}
-								else
-								{
-									echo '<li><a href="Waiting.php">Application Status</a></li>';
-								}
-							}
-						}
-					}
-			  }
-			  else if(isset($_SESSION['userid']))
-			  {
-				  echo '<li><a href="Admin-Page.php">Admin</a></li>';
-			  }
-			  ?>
-
-            </ul>
-
-          </div>
-
-          <!-- /.navbar-collapse -->
-
-        </div>
-
-      </nav>
-
-    </div>
-
-  </div>
-
-</header>
-
-<!-- Header End -->
+<?php include ("Controller/requirements/header/header.php");?>
 
 <!-- Banner Wrapper Start -->
 
@@ -607,7 +380,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Sarah Norris</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -623,7 +396,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Doris Wilson</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -639,7 +412,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Anne Kemper</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -655,7 +428,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Ruth Carman</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -671,7 +444,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Sarah Norris</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -687,7 +460,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Doris Wilson</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -703,7 +476,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Anne Kemper</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -719,7 +492,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Ruth Carman</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -913,55 +686,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
 <!-- Gallery End -->
 
-<!-- Footer Links Start-->
-
-<footer>
-
-  <div class="container">
-
-    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="World Education"> </div>
-
-    <div class="col-sm-5">
-
-      <div class="contactus">
-
-        <h2>Contact Us</h2>
-
-        <ul class="list-ul">
-
-          <li><i class="fa fa-map-marker"></i>Department of State, 300 E-Block Building, USA</li>
-
-          <li><i class="fa fa-phone"></i>0800 123 46 0000</li>
-
-          <li><i class="fa fa-envelope"></i><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-    <!--<div class="col-sm-4 subscirbe pull-right">
-
-      <h2>Newsletter</h2>
-
-      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
-
-      <div class="form">
-
-        <input type="text" placeholder="Enter your Email" id="exampleInputName" class="form-control first">
-
-        <input type="text" class="bttn" value="Subscribe">
-
-      </div>
-
-    </div>-->
-
-  </div>
-
-</footer>
-
-<!-- Footer Links End -->
+<?php include ("Controller/footer/footer.php");?>
 
 <!-- Copy Rights Start -->
 
