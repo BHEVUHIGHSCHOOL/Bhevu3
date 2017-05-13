@@ -100,6 +100,7 @@
               <li><a href="about-us.php">About us</a></li>
 
               <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="Controller/Newsfeeds controller/classic-news.php">School Newsfeeds</a></li>
               
               <!--Registerd Learner-->
 			  <?php include ("Controller/sign in/login_navs.php");?>

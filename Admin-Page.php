@@ -330,7 +330,7 @@ include ("Controller/Admin/Pagination/pagination.php");
 			<?php
 			  if(!isset($_GET['Search']) && !isset($_GET['Approved']) && !isset($_GET['Result']))
 			  {
-				  /*<!--=========these are waiting learners=========-->*/
+				  /*<!--==these are waiting learners==-->*/
 			  	if($number_of_learners>0)
 					{
 						echo"
@@ -416,7 +416,7 @@ include ("Controller/Admin/Pagination/pagination.php");
 						";
 					}
 
-				/*=========== these are approved learners=========-*/
+				/*==== these are approved learners==-*/
 			  	if($number_of_learners_approved>0)
 					{
 						echo"
@@ -502,7 +502,7 @@ include ("Controller/Admin/Pagination/pagination.php");
 						<br/>";
 					}
 					
-					/*=========== this is the staff=========-*/
+					/*==== this is the staff==-*/
 			  	if($number_of_staff>0)
 					{
 						echo"

@@ -1,5 +1,5 @@
 <?php
-/*====================Paginnation==================*/
+/*======Paginnation====*/
 //approved Learners
 $result_per_page_approved = 10;
 $learner_approved = $con -> query ("SELECT * FROM learner where Status = 'Approved'");

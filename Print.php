@@ -272,9 +272,9 @@ if(isset($_POST['confirm']))
 
 
 
-<<<<<<< HEAD
+
           
-=======
+
                   <li><a href="grid.html">Grid</a></li>
 
                   <li><a href="table.html">Tables</a></li>
@@ -448,7 +448,7 @@ if(isset($_POST['confirm']))
                   <li><a href="masonry-gallery.html">Masonry Gallery</a></li>
 
                   <li><a href="modern-gallery.html">Modern Gallery</a></li>
->>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
+
 
 
               </li>

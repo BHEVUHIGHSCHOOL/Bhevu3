@@ -629,12 +629,12 @@ require('ViewDownload.php');
                     </tbody>
                 </table>
 				<?php
-<<<<<<< HEAD
+
 				 include ("DownloadPaper.php"); 
 				 include ("DownloadFile.php");
-=======
+
 				 include ("DownloadPaper.php");
->>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
+
 				 ?>
               </form>
 
@@ -655,13 +655,13 @@ require('ViewDownload.php');
 </section>
 <!-- Call to Action start -->
 
-<<<<<<< HEAD
+
 
 
 <!-- Call to Action End -->
 
 <?php include ("Controller/footer/footer.php");?>
-=======
+
 <div class="call-to-action">
 
   <div class="container">
@@ -725,7 +725,7 @@ require('ViewDownload.php');
 </footer>
 
 <!-- Footer Links End -->
->>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
+
 
 <!-- Copy Rights Start -->
 
