@@ -93,7 +93,8 @@ if(isset($_GET['upload']))
 </tr>
 <tr>
 <td colspan="4" class="col-sm-12">
-	<input type="submit" name="upload" class="txt2" value="UPLOAD">
+    <input type="submit" value="UPLOAD"  name="upload" class="txt2" onclick="getConfirmation();" />
+ 
 </td>
 </tr>
 
@@ -109,3 +110,22 @@ if(isset($_GET['upload']))
 	';
 }
 ?>
+<?PHP
+/*if(isset($_POST['upload']))
+{
+	     getConfirmation();
+}*/
+?>
+<script type='text/javascript' >
+     function getConfirmation(){
+	   var retVal = confirm('Question paper successfully uploaded');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	  
+	}
+ 
+</script>
+

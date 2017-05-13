@@ -695,9 +695,13 @@ if(isset($_POST['next']))
                 </table>
 
                 <input type="text" required placeholder="Present School" value="<?php if(isset($_SESSION["Present_school"])){ echo $_SESSION["Present_school"];} else if(isset($_POST["Present_school"])){echo $_POST["Present_school"];}else { echo '';}?>" name="Present_school" class="txt">
+                    <td><input type="text" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
 
+<<<<<<< HEAD
                     <td><input style="width:100%; height:45px; margin-bottom:0px" type="email" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
 
+=======
+>>>>>>> 795b01f2913f7203a9719a0a7892be4229774076
                 <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3" required></textarea>
                 <br><br>
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Home_Language">
