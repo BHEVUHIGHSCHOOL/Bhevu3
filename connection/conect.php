@@ -13,7 +13,7 @@
 			
 			if($tbimages)
 			{
-				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text, Register text, Stream text)");
+				$tblearner = $con -> query ("CREATE TABLE Learner(Surname text(200), Firstname text(400), LastName text, IDNumber text(13), Mobilenumber text, PresentSchool varchar(50), LearnersAddress text, HomeLanguage text, Password text, Username text, Gender text, Citizenship text, DOB text, Initials text, Elder text, Relative text, ElderID text, Status varchar(50), Grade text, Register text, Stream text, Email text)");
 				
 				if($tblearner)
 				{
@@ -36,12 +36,23 @@
 								{
 									$tbsubj8 = $con -> query ("CREATE TABLE Subjects89(StudID text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text, subj8 text, subj9 text)");
 									$tbsubj10 = $con -> query ("CREATE TABLE Subjects101112(StudID text, Stream text, subj1 text, subj2 text, subj3 text, subj4 text, subj5 text, subj6 text, subj7 text)");
+
+									
+									$query = $con -> query("CREATE TABLE News(catname text, newstitle text,
+									story text , timestamp datetime, Attachments text, Type text)");
+									
+									$query = $con -> query("CREATE TABLE NewsOld(catname text, newstitle text,
+									story text , timestamp datetime, Attachments text, dateachived datetime)");
+									
+									//Ends here with the tables of the Subjects
+									
 								
 									$questionpapers = $con -> query ("CREATE TABLE Question_pprs(Year int, Subject varchar(200), QuestionPaper blob, QuetionPath varchar(200), QuestionName varchar(200), Grade varchar(200))");
 									$year = $con -> query ("CREATE TABLE Year(Year varchar(200))");
 									
 									$Subjects = $con -> query("CREATE TABLE Subjects (TeachersID varchar(13), 1st_Subject text, 2nd_Subject text, 3rd_Subject text)");
 									//Ends here
+
 								}
 								else
 								{

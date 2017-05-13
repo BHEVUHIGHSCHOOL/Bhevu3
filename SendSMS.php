@@ -125,7 +125,7 @@ if(isset($_POST['login']))
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Education World</title>
+<title>Bhevu High&reg;</title>
 
 <!-- Bootstrap CSS -->
 

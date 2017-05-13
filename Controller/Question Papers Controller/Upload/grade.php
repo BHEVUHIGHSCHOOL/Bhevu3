@@ -8,22 +8,22 @@
 		$_SESSION['phase'] =$data['Phase'];
 		if($_SESSION['phase']== 'Senior')
 		{
-			echo'<option value="Grade 8">Grade 8</option>
-			<option value="Grade 9">Grade 9</option>';	
+			echo'<option value="08">Grade 8</option>
+			<option value="09">Grade 9</option>';	
 		}
 		else if($_SESSION['phase']== 'FET')
 		{
 			echo'<option value="Grade 10">Grade 10</option>
-			<option value="Grade 11">Grade 11</option>
-			<option value="Grade 12">Grade 12</option>';	
+			<option value="11">Grade 11</option>
+			<option value="12">Grade 12</option>';	
 		}
 		else 
 		{
-			echo'<option value="Grade 8">Grade 8</option>
-			<option value="Grade 9">Grade 9</option>
-			<option value="Grade 10">Grade 10</option>
-			<option value="Grade 11">Grade 11</option>
-			<option value="Grade 12">Grade 12</option>';	
+			echo'<option value="08">Grade 8</option>
+			<option value="09">Grade 9</option>
+			<option value="10">Grade 10</option>
+			<option value="11">Grade 11</option>
+			<option value="12">Grade 12</option>';	
 		}
 	}
 

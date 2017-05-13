@@ -54,7 +54,123 @@ require ("signin.php");
 
 <div id="dvLoading"></div>
 
+<<<<<<< HEAD
 <?php include ("Controller/requirements/header/header.php");?>
+=======
+<!-- Header Start -->
+
+<header>
+
+  <div class="top-wrapper hidden-xs">
+
+    <div class="container">
+
+      <div class="col-md-4 col-sm-6 hidden-xs top-wraper-left no-padding">
+
+        <ul class="header-social-icons">
+
+          <li class="facebook"><a href="javascript:void(0)" target="_blank"><i class="fa fa-facebook"></i></a></li>
+
+          <li class="twitter"><a href="javascript:void(0)" target="_blank"><i class="fa fa-twitter"></i></a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="col-md-8 col-sm-6">
+
+        <ul class="top-right pull-right ">
+			<?php include ("Controller/sign in/logins.php");?>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+  
+  <div class="logo-bar hidden-xs">
+    <div class="container">
+      <!-- Logo -->
+      <div class="row">
+        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
+        <div class="col-sm-7">
+          <ul class="contact-info pull-right">
+            <li><i class="fa fa-phone"></i>
+              <p> <span>Call us</span><br>
+               062 569 8372</p>
+            </li>
+            <li><i class="fa fa-envelope"></i>
+              <p><span>Email Us</span><br>
+                <a href="mailto:lenjabulothabiso@gmail.com">lenjabulothabiso@gmail.com</a></p>
+            </li>
+          </ul>
+        </div>
+        <?php
+			  if(isset($_SESSION['Register']))
+			  {
+				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
+					$resul = $reg ->fetch_array(MYSQLI_BOTH);
+					{
+						if($resul['Register'] == "Registered")
+						{
+							echo "<div class='col-sm-1'><a href=''><img src='Bhevu Pics/P.Ps/17362372_1955905461304830_1811470495680181031_n.jpg' alt='Profile Pic' style='width:60px; height:60px;' class='img-thumbnail'></a> </div>";
+						}
+					}
+			  }
+		?>
+      </div>
+    </div>
+  </div>
+  <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
+
+    <div class="container">
+
+      <nav class="navbar navbar-default">
+
+        <div class="row">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Bhevu Logo"/></a> </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+
+              <li class="active"><a href="index.php">Home</a></li>
+
+              <li><a href="about-us.php">About us</a></li>
+
+              <li><a href="contact-us.php">Contact Us</a></li>
+              <li><a href="Controller/Newsfeeds controller/classic-news.php">School Newsfeeds</a></li>
+              <!--Registerd Learner-->
+			  <?php include ("Controller/sign in/login_navs.php");?>
+
+            </ul>
+
+          </div>
+
+          <!-- /.navbar-collapse -->
+
+        </div>
+
+      </nav>
+
+    </div>
+
+  </div>
+
+</header>
+
+<!-- Header End -->
+>>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
 
 <!-- Banner Wrapper Start -->
 
@@ -585,7 +701,6 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 <!-- sponsers End -->
 
 <!-- Gallery Start -->
-
 <div class="gal-container full-width">
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#1">
@@ -610,17 +725,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#2">
               <div class="caption">
-                <h4>Indlamu Dance</h4>
-                <p>...........</p>
+                <h4>Indlamu</h4>
+                <p>...............</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/Indlamu.jpg" alt="Netbal Team"> </a>
+              <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.JPG" alt="Gallery Image"> </a>
               <div class="modal fade" id="2" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/IndlamuFull.jpg" alt="Gallery Image"> </div>
+                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/Indlamu.JPG" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>Indlamu Dance</h4>
                     </div>
                   </div>
                 </div>
@@ -630,17 +745,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#3">
               <div class="caption">
-                <h4>School Soccer Team</h4>
-                <p>............</p>
+                <h4>Gallery Image3</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/Soccer.jpg" alt="Soccer Team"> </a>
+              <img src="images/gallery-img3.jpg" alt="Gallery Image"> </a>
               <div class="modal fade" id="3" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/SoccerFull.jpg" alt="Soocer Team"> </div>
+                    <div class="modal-body"> <img src="images/gallery-img3.jpg" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>This is the third one on my Gallery</h4>
                     </div>
                   </div>
                 </div>
@@ -650,17 +765,17 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
           <div class="col-md-3 col-sm-6 co-xs-12 gal-item">
             <div class="box"> <a href="javascript:void(0)" data-toggle="modal" data-target="#4">
               <div class="caption">
-                <h4>Matric Dance Event</h4>
-                <p>..........</p>
+                <h4>Gallery Image4</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing</p>
                 <i class="fa fa-search" aria-hidden="true"></i> </div>
-              <img src="Bhevu Pics/Edited/Gallery/MatricDance.jpg" alt="Matric Dance Event"></a>
+              <img src="images/gallery-img4.jpg" alt="Gallery Image"> </a>
               <div class="modal fade" id="4" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <div class="modal-body"> <img src="Bhevu Pics/Edited/Gallery/MatricDanceFull.jpg" alt="Matric Dance Event"> </div>
+                    <div class="modal-body"> <img src="images/gallery-img4.jpg" alt="Gallery Image"> </div>
                     <div class="col-md-12 description">
-                      <h4></h4>
+                      <h4>This is the fourth one on my Gallery</h4>
                     </div>
                   </div>
                 </div>
@@ -683,7 +798,6 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
             </div>
           </div>          
         </div>
-
 <!-- Gallery End -->
 
 <?php include ("Controller/footer/footer.php");?>

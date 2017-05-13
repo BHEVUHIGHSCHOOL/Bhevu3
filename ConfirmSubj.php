@@ -123,7 +123,10 @@ if(isset($_POST['confirm']))
 		}
 	}
 }
-?>			
+?>		
+
+
+	
 
 <!DOCTYPE html>
 
@@ -379,7 +382,7 @@ if(isset($_POST['confirm']))
 
                           <li><span>News</span></li>
 
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
+                          <li><a href="Controller/Newsfeeds controller/classic-news.php"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
 
                           <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
 
@@ -453,7 +456,7 @@ if(isset($_POST['confirm']))
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="classic-news.html">Classic News</a></li>
+                  <li><a href="Controller/Newsfeeds controller/classic-news.php">Classic News</a></li>
 
                   <li><a href="grid-news.html">Grid News</a></li>
 
@@ -630,7 +633,23 @@ if(isset($_POST['confirm']))
 						}
 					}
 				?>
-                <input type="submit" value="Confirm Subjects" name="confirm" class="txt2">
+                <script type='text/javascript' >
+     function getConfirmation(){
+	   var retVal = confirm('Subjects has successfully confirm');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	   else{
+		  document.write ('User does not want to continue!');
+		  return false;
+	   }
+	}
+ 
+</script>
+               <!-- <input type="submit" value="Confirm Subjects" name="confirm" class="txt2"> -->
+               <input type='submit' value='Confirm Subjects'  name='confirm' class='txt2' onclick='getConfirmation();' />
 
               </form>
 

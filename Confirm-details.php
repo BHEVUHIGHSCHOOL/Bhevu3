@@ -47,9 +47,21 @@ if(isset($_POST['save']))
 
 		//$image = $_SESSION["image"];
 
-		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected')");
+		$learner = $con -> query("INSERT INTO learner(Surname, Firstname, LastName, IDNumber, Mobilenumber, PresentSchool, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status, Grade, Register, Stream, Email) Values('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$present}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}','$_SESSION[grade]', 'Not Registered', 'No Stream Selected', '$_SESSION[Email]')");
 
+	//sending email
 	
+		$user= $_SESSION["username"];
+		$passw= $_SESSION["password"];
+		$toquery= $con->query("SELECT * from learner where '$_SESSION[ID_number]' = IDNumber ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Thank you for applying at bhevu  .</br>Your username:'.$user . '</br>Your password:'.$passw;
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
 
 	//Saving Parent
 
@@ -87,6 +99,19 @@ if(isset($_POST['save']))
 
 	$saveparent = $con -> query("INSERT INTO parent(Parent_Gardin, Title, First_Name, Second_Name, Surname, ID_Number, Email, Home_Address, Postal_Address, Gender, Password, Username, Citizenship, DOB, Initials, Cellphone)Values('{$parent_gardien}', '{$titlep}', '{$namep}', '{$lnamep}', '{$snamep}', '{$idp}', '{$emailp}', '{$homeaddrp}', '{$postaladdrp}', '{$genderp}', '{$passwordp}', '{$usernamep}', '{$citizeshp}', '{$dobp}', '{$initialsp}', '{$cellp}')");
 
+   // Sending Email to parent
+    
+		$userp= $_SESSION["Username"];
+		$passwp= $_SESSION["Password"];
+		$toquery= $con->query("SELECT * from parent where '$_SESSION[ID_numberp]' = ID_Number ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Thank you for letting your child to apply at bhevu  .</br>Your username:'.$userp . '</br>Your password:'.$passwp;
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
 	
 
 	if($saveparent)
@@ -341,7 +366,7 @@ if(isset($_POST['save']))
 
                           <li><span>News</span></li>
 
-                          <li><a href="classic-news.html"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
+                          <li><a href="Controller/Newsfeeds controller/classic-news.php"><span class="fa fa-angle-right menu-icon"></span>Classic News</a></li>
 
                           <li><a href="grid-news.html"><span class="fa fa-angle-right menu-icon"></span>Grid News</a></li>
 
@@ -415,7 +440,7 @@ if(isset($_POST['save']))
 
                 <ul class="dropdown-menu">
 
-                  <li><a href="classic-news.html">Classic News</a></li>
+                  <li><a href="Controller/Newsfeeds controller/classic-news.php">Classic News</a></li>
 
                   <li><a href="grid-news.html">Grid News</a></li>
 

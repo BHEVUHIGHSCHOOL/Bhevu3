@@ -258,11 +258,7 @@ Licensed under MIT
                                 </ul>
                              </div>
                         </nav>
-						<li>
-							<a href="Teachers.php?upload='Upload'">
-							<i class="glyphicon glyphicon-ok"></i>
-							Upload Questions Papers </a>
-						</li>
+      <li> <a href="Teachers.php?upload='Upload'"> <em class="glyphicon glyphicon-ok"></em> Upload Questions Papers </a> </li>
                         <li>
 							<a href="#">
 							<i class="glyphicon glyphicon-flag"></i>

@@ -70,14 +70,34 @@ else
 	if(isset($_POST['aprove']))
 
 	{
-
+        
+			
 		$updatestatus = "Approved";
 
 		$applicantid = $_SESSION["ID_number"];
+		$applicantId=$_SESSION["elderid"];
 
-		$sql = $con -> query("UPDATE learner SET Status = '{$updatestatus}' where $applicantid = IDNumber");
+		$sql = $con -> query("UPDATE learner SET Status = '{$updatestatus}' where '$applicantid' = IDNumber");
+		header("Location:Admin-Page.php");
+	$user= $_SESSION["username"];
+		$passw= $_SESSION["password"];
+		$toquery= $con->query("SELECT * from learner where '$_SESSION[ID_number]' = IDNumber ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Dear applicant, your application has been appproved.</br>You can now login and continue with registration of subject.</br> Thank you.';
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
+		 
+		 //feedback
+		 
+		 
+	   
 
 	}
+
 
 	if(isset($_POST['reject']))
 
@@ -128,8 +148,19 @@ else
 		if(isset($_SESSION["initials"]))
 
 		{
-			$emailbody= "You are rejected....";
-       		mail('philanimanp27@gmail.com','Customer Support',$emailbody);
+				$user= $_SESSION["username"];
+		$passw= $_SESSION["password"];
+		$toquery= $con->query("SELECT * from learner where '$_SESSION[ID_number]' = IDNumber ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Dear applicant, your application has been Rejected, because you did not meet the requirements .</br>Please retry next time. Thank you.</br> Thank you.';
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
+			//$emailbody= "You are rejected....";
+       		//mail('philanimanp27@gmail.com','Customer Support',$emailbody);
 			$sql2 = $con -> query("INSERT INTO rejected (Surname, Firstname, LastName, IDNumber, Mobilenumber, LearnersAddress, HomeLanguage, Password, Username, Gender, Citizenship, DOB, Initials, Elder, Relative, ElderID, Status) VALUES ('{$sname}','{$name}','{$lname}','{$id}','{$cell}','{$leaners_addr}','{$home_lang}','{$password}', '{$username}', '{$gender}', '{$citizesh}', '{$dob}', '{$initials}', '{$elder}', '{$relative}', '{$elder_id}', '{$status}')");
 
 		}
@@ -137,6 +168,30 @@ else
 	}
 
 ?>
+	<script type='text/javascript' >
+     function getConfirmation(){
+	   var retVal = confirm('The applicant has been approved');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	   
+	}
+ 
+</script>
+	<script type='text/javascript' >
+     function getRejected(){
+	   var retVal = confirm('The applicant has been Rejected');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	  
+	}
+ 
+</script>
 
 <!DOCTYPE html>
 
@@ -622,8 +677,9 @@ else
 									<td><a href='report.php'>Report</a><br/><a href='certificate.php'>ID/Certficate</a></td>
 								</tr>
 							</table>
-							<input type='submit' value='Approve' name='aprove' class='txt2'>
-							<input type='submit' value='Reject' name='reject' class='txt2'>
+                             <input type='submit' value='Approve'  name='aprove' class='txt2'     onclick='getConfirmation();' />
+							
+		<input type='submit' value='Reject' name='reject' class='txt2' onclick='getRejected();' />
 							";
 					}
 					else

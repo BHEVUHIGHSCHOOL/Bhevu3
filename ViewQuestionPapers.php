@@ -629,8 +629,12 @@ require('ViewDownload.php');
                     </tbody>
                 </table>
 				<?php
+<<<<<<< HEAD
 				 include ("DownloadPaper.php"); 
 				 include ("DownloadFile.php");
+=======
+				 include ("DownloadPaper.php");
+>>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
 				 ?>
               </form>
 
@@ -651,11 +655,77 @@ require('ViewDownload.php');
 </section>
 <!-- Call to Action start -->
 
+<<<<<<< HEAD
 
 
 <!-- Call to Action End -->
 
 <?php include ("Controller/footer/footer.php");?>
+=======
+<div class="call-to-action">
+
+  <div class="container">
+
+    <h3>Lorem Ipsum is simply dummy text</h3>
+
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing and typesetting industry.</p>
+
+    <a href="javascript:void(0)">Sign Up</a> </div>
+
+</div>
+
+<!-- Call to Action End -->
+
+<!-- Footer Links Start-->
+
+<footer>
+
+  <div class="container">
+
+    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"> </div>
+
+    <div class="col-sm-5">
+
+      <div class="contactus">
+
+        <h2>Contact Us</h2>
+
+        <ul class="list-ul">
+
+          <li><i class="fa fa-map-marker"></i>Department of State, 300 E-Block Building, USA</li>
+
+          <li><i class="fa fa-phone"></i>0800 123 46 0000</li>
+
+          <li><i class="fa fa-envelope"></i><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-4 subscirbe pull-right">
+
+      <h2>Newsletter</h2>
+
+      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
+
+      <div class="form">
+
+        <input type="text" placeholder="Enter your Email" id="exampleInputName" class="form-control first">
+
+        <input type="text" class="bttn" value="Subscribe">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Footer Links End -->
+>>>>>>> cef0ceb1865295f648cc0f3d18db4bd5e6ce8280
 
 <!-- Copy Rights Start -->
 
