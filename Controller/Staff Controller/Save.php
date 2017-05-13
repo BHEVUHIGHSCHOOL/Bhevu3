@@ -323,3 +323,18 @@ if(isset($_POST['next']))
 
 }
 ?>
+<script type='text/javascript' >
+     function getConfirmation(){
+	   var retVal = confirm('New Staff member Registered');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	   else{
+		  document.write ('User does not want to continue!');
+		  return false;
+	   }
+	}
+ 
+</script>

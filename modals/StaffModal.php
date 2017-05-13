@@ -130,7 +130,8 @@ if(isset($_GET['Details']))
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg" data-dismiss="modal">Back</button>
-                <button class="btn btn-success btn-lg" type="submit" name="next">Save</button>
+               <button type='submit'  name='next' class='btn btn-success btn-lg' onclick='getConfirmation();' >Save</button>
+              <!--  <button class="btn btn-success btn-lg" type="submit" name="next">Save</button>-->
             </div>
         </form>
     </div>
