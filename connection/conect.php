@@ -42,7 +42,7 @@
 									story text , timestamp datetime, Attachments text, Type text)");
 									
 									$query = $con -> query("CREATE TABLE NewsOld(catname text, newstitle text,
-									story text , timestamp datetime, Attachments text)");
+									story text , timestamp datetime, Attachments text, dateachived datetime)");
 									
 									//Ends here with the tables of the Subjects
 									

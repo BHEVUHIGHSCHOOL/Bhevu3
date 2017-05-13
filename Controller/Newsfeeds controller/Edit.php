@@ -153,16 +153,18 @@
 	<h3>Search by <a href="Edit.php?title='title'">Title</a> or <a href="Edit.php?Category='Category'">Category</a></h3>
 </div>
     <?php
-		
+		require("/../../connection/conect.php");
+		//session_start();
 		if(isset($_POST['title-search']))
 		{
-			//$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
-			$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
+			$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
+			//$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
 			$numcheck = mysqli_num_rows($title);
 			if($numcheck>0)
 			{
 				while ($titleresults = mysqli_fetch_array($title))
 				{
+					$time = $titleresults['timestamp'];
 					echo "
 				<table class='table col-sm-12'>
 				 <tr>
@@ -175,9 +177,45 @@
 				 </tr>
 				 <tr>
 					<td>".$titleresults['catname']."</td>
-					<td>".$titleresults['newstitle ']."</td>
+					<td>".$titleresults['newstitle']."</td>
 					<td>".$titleresults['story']."</td>
 					<td>".$titleresults['timestamp']."</td>
+					<td><a href='UploadNews.php'<span class='glyphicon glyphicon-edit'></span></a></td>
+					<td><a href='Edit.php?delete='".$time."'><span class='glyphicon glyphicon-trash'></a></span></td>
+				 </tr>
+				 </table>
+			";
+				}
+			}
+			else
+			{
+				echo "<p style='color:red;'>Record not found.</p>";
+			}
+		}
+		else if(isset($_POST['cat-search']))
+		{
+			$category = $con -> query("select * from news where catname = '$_POST[category]'");
+			//$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
+			$numcheck = mysqli_num_rows($category);
+			if($numcheck>0)
+			{
+				while ($categoryresults = mysqli_fetch_array($category))
+				{
+					echo "
+				<table class='table col-sm-12'>
+				 <tr>
+					 <th class='col-sm-1'>Category Name</th>
+					 <th class='col-sm-1'>Title</th>
+					 <th class='col-sm-4'>Content</th>
+					 <th class='col-sm-2'>Date Uploaded</th>
+					 <th class='col-sm-1'></th>
+					 <th class='col-sm-1'></th>
+				 </tr>
+				 <tr>
+					<td>".$categoryresults['catname']."</td>
+					<td>".$categoryresults['newstitle']."</td>
+					<td>".$categoryresults['story']."</td>
+					<td>".$categoryresults['timestamp']."</td>
 					<td><a href='UploadNews.php'<span class='glyphicon glyphicon-edit'></span></a></td>
 					<td><span class='glyphicon glyphicon-trash'></span></td>
 				 </tr>
@@ -187,11 +225,26 @@
 			}
 			else
 			{
-				echo "not found.";
+				echo "<p style='color:red;'>Record not found.</p>";
 			}
 		}
 		
-    	if(isset($_GET['title']))
+		//delete
+		if(isset($_GET['delete']))
+		{
+			$delete = $con -> query("DELETE FROM news WHERE timestamp = '$time'");
+			
+			if($delete)
+			{
+				$echo = "<p>Record deleted succesfully</p>";
+			}
+			else
+			{
+				$echo = "<p style='color:red;'>Failed to Delete record</p>".mysqli_error($con)."<p style='color:red;'>$_GET[delete]</p>";
+			}
+		}
+		
+    	if(isset($_GET['title']) || isset($_GET['delete']))
 		{
 			echo '
 			<form method="post">
@@ -204,10 +257,12 @@
 					<tr style="text-align:center;">
 						<td colspan="2"><button type="submit" name="title-search" class="txt2">Search</button></td>
 					</tr>
+					<tr><td>'.$echo.'</td></tr>
 				</table>
 				</div>
 			</form>
 			';
+			
 		}
 		else if (isset($_GET['Category']))
 		{
