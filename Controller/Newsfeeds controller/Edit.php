@@ -1,3 +1,8 @@
+<?php
+session_start();
+require("/../../connection/conect.php");
+require ('EditNews.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,16 +158,18 @@
 	<h3>Search by <a href="Edit.php?title='title'">Title</a> or <a href="Edit.php?Category='Category'">Category</a></h3>
 </div>
     <?php
+		//session_start();
 		
 		if(isset($_POST['title-search']))
 		{
-			//$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
-			$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
+			$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
+			//$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
 			$numcheck = mysqli_num_rows($title);
 			if($numcheck>0)
 			{
 				while ($titleresults = mysqli_fetch_array($title))
 				{
+					$time = $titleresults['timestamp'];
 					echo "
 				<table class='table col-sm-12'>
 				 <tr>
@@ -175,11 +182,10 @@
 				 </tr>
 				 <tr>
 					<td>".$titleresults['catname']."</td>
-					<td>".$titleresults['newstitle ']."</td>
+					<td>".$titleresults['newstitle']."</td>
 					<td>".$titleresults['story']."</td>
 					<td>".$titleresults['timestamp']."</td>
-					<td><a href='UploadNews.php'<span class='glyphicon glyphicon-edit'></span></a></td>
-					<td><span class='glyphicon glyphicon-trash'></span></td>
+					
 				 </tr>
 				 </table>
 			";
@@ -187,11 +193,61 @@
 			}
 			else
 			{
-				echo "not found.";
+				echo "<p style='color:red;'>Record not found.</p>";
+			}
+		}
+		else if(isset($_POST['cat-search']))
+		{
+			$category = $con -> query("select * from news where catname = '$_POST[category]'");
+			//$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
+			$numcheck = mysqli_num_rows($category);
+			if($numcheck>0)
+			{
+				while ($categoryresults = mysqli_fetch_array($category))
+				{
+					echo "
+				<table class='table col-sm-12'>
+				 <tr>
+					 <th class='col-sm-1'>Category Name</th>
+					 <th class='col-sm-1'>Title</th>
+					 <th class='col-sm-4'>Content</th>
+					 <th class='col-sm-2'>Date Uploaded</th>
+					 <th class='col-sm-1'></th>
+					 <th class='col-sm-1'></th>
+				 </tr>
+				 <tr>
+					<td>".$categoryresults['catname']."</td>
+					<td>".$categoryresults['newstitle']."</td>
+					<td>".$categoryresults['story']."</td>
+					<td>".$categoryresults['timestamp']."</td>
+					<td><a href='Edit.php?delete-cat='".$categoryresults['timestamp']."'><span class='glyphicon glyphicon-trash'></a></span></td>
+				 </tr>
+				 </table>
+			";
+				}
+			}
+			else
+			{
+				echo "<p style='color:red;'>Record not found.</p>";
 			}
 		}
 		
-    	if(isset($_GET['title']))
+		//delete
+		if(isset($_GET['delete']))
+		{
+			$delete = $con -> query("DELETE FROM news WHERE timestamp = '$time'");
+			
+			if($delete)
+			{
+				$echo = "<p>Record deleted succesfully</p>";
+			}
+			else
+			{
+				$echo = "<p style='color:red;'>Failed to Delete record</p>".mysqli_error($con)."<p style='color:red;'>$_GET[delete]</p>";
+			}
+		}
+		
+    	if(isset($_GET['title']) || isset($_GET['delete-title']))
 		{
 			echo '
 			<form method="post">
@@ -204,12 +260,14 @@
 					<tr style="text-align:center;">
 						<td colspan="2"><button type="submit" name="title-search" class="txt2">Search</button></td>
 					</tr>
+					<tr><td></td></tr>
 				</table>
 				</div>
 			</form>
 			';
+			
 		}
-		else if (isset($_GET['Category']))
+		else if (isset($_GET['Category']) || isset($_GET['delete-cat']))
 		{
 			echo '
 			<form method="post">
@@ -235,7 +293,7 @@
 			</form>
 			';
 		}
-		if (!isset($_GET['title'])  && !isset($_GET['Category']))
+		if (!isset($_GET['title'])  && !isset($_GET['Category'])  || isset($_GET['delete-all']))
 		{
 			echo "
 				<table class='table col-sm-12'>
@@ -246,10 +304,15 @@
 					 <th class='col-sm-2'>Date Uploaded</th>
 					 <th class='col-sm-1'></th>
 					 <th class='col-sm-1'></th>
-				 </tr>";
-			 require ('EditNews.php');
-			
-			 echo "</table>
+				 </tr>".$news."
+			 <tr>		 
+				 <td colspan='2'>
+				  <form action='UploadNews.php'>
+				 <input name='back' type='submit'  value='BACK' class='txt2'>
+				 </form>
+				 </td>
+			 </tr>	 
+			 </table>
 			";
 		}
 	?>

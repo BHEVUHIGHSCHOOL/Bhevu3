@@ -32,48 +32,7 @@ if(isset($_POST['search-submit']))
 	$result = $query -> fetch_array(MYSQLI_BOTH);
 	
 }
-/*====================Paginnation==================*/
-//approved Learners
-$result_per_page_approved = 10;
-$learner_approved = $con -> query ("SELECT * FROM learner where Status = 'Approved'");
-$number_of_learners_approved = mysqli_num_rows($learner_approved);
-$number_of_pages_approved = ceil($number_of_learners_approved/$result_per_page_approved);
-
-if(!isset($_GET['page_approved']))
-{
-	$page_approved = 1;
-}
-else
-{
-	$page_approved = $_GET['page_approved'];
-}
-
-$this_page_first_result_approved = ($page_approved-1)*$result_per_page_approved;
-
-$learner_approved = $con -> query ("SELECT * FROM learner where Status = 'Approved' LIMIT " . $this_page_first_result_approved . "," .$result_per_page_approved);
-
-//Waiting Students
-$result_per_page = 10;
-//get number of recods in the database
-$learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting'");
-$number_of_learners = mysqli_num_rows($learner);
-$number_of_pages = ceil($number_of_learners/$result_per_page);
-
-if(!isset($_GET['page']))
-{
-	$page = 1;
-}
-else
-{
-	$page = $_GET['page'];
-}
-
-$this_page_first_result = ($page-1)*$result_per_page;
-
-$learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT " . $this_page_first_result . "," .$result_per_page);
-
-//Pagination//
-
+include ("Controller/Admin/Pagination/pagination.php");
 ?>
 
 <!DOCTYPE html>
@@ -265,6 +224,8 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
               <li><a href="Send.php">Send SMS</a></li>
 
               <li><a href="Admin-Page.php">Admin</a></li>
+              
+              <li><a href="Controller/Newsfeeds controller/UploadNews.php">Upload newfeeds</a></li>
 
             </ul>
 
@@ -432,8 +393,7 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 						<br/>
 						";
 					}
-				?>
-                <?php
+
 				/*=========== these are approved learners=========-*/
 			  	if($number_of_learners_approved>0)
 					{
@@ -513,6 +473,95 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 						<table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
 							<tr>
 								<td><h1 style'text-aligne:center;'>There are currently no Approved applicants.</h1><td>
+							</tr>
+						</table>
+						<br/>
+						<hr/>
+						<br/>";
+					}
+					
+					/*=========== this is the staff=========-*/
+			  	if($number_of_staff>0)
+					{
+						echo"
+						<br/>
+								 <hr/>
+								 <br/>
+								 <table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
+									<tr>
+										<th colspan='12' style='text-align:center;'><h4><em>Staff member(s)</em></h4></th>
+									</tr>";
+						while($row_staff = mysqli_fetch_array($staff))
+						{
+							echo "
+									<tr style='background-color:#363FA3; text-align:center;'>
+										<th style='text-align:center;'>Initials</th>
+										<th style='text-align:center;'>First name</th>
+										<th style='text-align:center;'>Second name</th>
+										<th style='text-align:center;'>Surname</th>
+										<th style='text-align:center;'>Date of Birth</th>
+										<th style='text-align:center;'>Gander</th>
+										<th style='text-align:center;'>ID Number</th>
+										<th style='text-align:center;'>Email</th>
+									</tr>".
+									"<tr>
+										<td>".$row_staff['Email']."</td>                        
+										<td>".$row_staff['Initials']."</td>
+										<td>".$row_staff['Firstname']."</td>
+										<td>".$row_staff['Lastname']."</td>
+										<td>".$row_staff['Surname']."</td>
+										<td>".$row_staff['DOB']."</td>
+										<td>".$row_staff['Gender']."</td>
+										<td>".$row_staff['IDNumber']."</td>
+									</tr>
+									<tr style='background-color:#363FA3; text-align:center;'>
+										<th style='text-align:center;'>Citizenship</th>
+										<th style='text-align:center;'>Mobile number</th>
+										<th style='text-align:center;'>Phase</th>
+										<th style='text-align:center;'>Position</th>
+										<th style='text-align:center;'>Teaching Grade</th>
+										<th style='text-align:center;'>Documents</th>
+										<th style='text-align:center;'>Friendly Format</th>
+										<th></th>
+									</tr>
+									<tr>
+										<td>".$row_staff['Citizenship']."</td>
+										<td>".$row_staff['Mobilenumber']."</td>
+										<td>".$row_staff['Phase']."</td>
+										<td>".$row_staff['Position']."</td>
+										<td>".$row_staff['TeachingGrade']."</td>
+										<td><a style='color:black;' href='report.php'>Report</a><br/><a style='color:black;' href='certificate.php'>ID/Certficate</a></td>
+										<td><button type='button' class='btn btn-success' onclick='openModal(".$row_staff['IDNumber'].")'>View</button></td>
+									</tr>
+									<tr><td colspan='8'><hr/></td></tr>
+									";
+						}
+						echo"
+							<tr>
+										<td style='color:#fff'>
+										Page(s) :";
+										for ($page_staff=1;$page_staff<=$number_of_pages;$page_staff++)
+										{
+											echo '|<a style="color:black;" href="Admin-Page.php?page_approved='.$page_staff.'">'.$page_staff.'</a> |';
+										}
+									echo "
+										</td>
+									</tr>
+								
+						</table>
+								<br/>
+								<hr/>
+								<br/>";
+					}
+					else
+					{
+						echo "
+						<br/>
+						<hr/>
+						<br/>
+						<table style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
+							<tr>
+								<td><h1 style'text-aligne:center;'>Staff record is currently empty.</h1><td>
 							</tr>
 						</table>
 						<br/>

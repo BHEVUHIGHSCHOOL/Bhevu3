@@ -42,38 +42,7 @@
       <div class="col-md-8 col-sm-6">
         <ul class="top-right pull-right ">
           <!-- Login -->
-          <li class="login"><a href="javascript:void(0)"><i class="fa fa-lock"></i>Login</a>
-            <div class="login-form">
-              <h4>Login</h4>
-              <form action="#" method="post">
-                <input type="text" name="name" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <button type="submit" class="btn">Login</button>
-              </form>
-            </div>
-          </li>
-          <!-- Register -->
-          <li class="register"><a href="javascript:void(0)"><i class="fa fa-user"></i>Sign Up</a>
-            <div class="register-form">
-              <h4>Sign Up</h4>
-              <span>Please sign up the account</span>
-              <form action="#" method="post">
-                <input type="text" name="user-name" placeholder="Username">
-                <input type="email" name="user-email" placeholder="Email">
-                <input type="password" name="user-password" placeholder="Password">
-                <button type="submit" class="btn">Register</button>
-              </form>
-            </div>
-          </li>
-          <li class="search"><i class="fa fa-search" aria-hidden="true"></i>
-            <div id="search-form-container">
-              <form id="search-form" action="#" style="display: none;" class="">
-                <input type="search" id="search" name="search" placeholder="Search...">
-                <input type="submit" id="search-submit" value="">
-                <span id="close-form" class="close">x</span>
-              </form>
-            </div>
-          </li>
+          <?php include ("../sign in/logins.php");?>
         </ul>
       </div>
     </div>
