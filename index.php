@@ -48,126 +48,15 @@ require ("signin.php");
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
+
 </head>
 
 <body>
 
 <div id="dvLoading"></div>
 
-<!-- Header Start -->
 
-<header>
-
-  <div class="top-wrapper hidden-xs">
-
-    <div class="container">
-
-      <div class="col-md-4 col-sm-6 hidden-xs top-wraper-left no-padding">
-
-        <ul class="header-social-icons">
-
-          <li class="facebook"><a href="javascript:void(0)" target="_blank"><i class="fa fa-facebook"></i></a></li>
-
-          <li class="twitter"><a href="javascript:void(0)" target="_blank"><i class="fa fa-twitter"></i></a></li>
-
-        </ul>
-
-      </div>
-
-      <div class="col-md-8 col-sm-6">
-
-        <ul class="top-right pull-right ">
-			<?php include ("Controller/sign in/logins.php");?>
-        </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-  
-  <div class="logo-bar hidden-xs">
-    <div class="container">
-      <!-- Logo -->
-      <div class="row">
-        <div class="col-sm-4"><a href="index.php"> <img src="Bhevu Pics/Edited/Logo/logo2.png" alt="Bhevu Logo" style="width:218px; height:46px;"></a> </div>
-        <div class="col-sm-7">
-          <ul class="contact-info pull-right">
-            <li><i class="fa fa-phone"></i>
-              <p> <span>Call us</span><br>
-               062 569 8372</p>
-            </li>
-            <li><i class="fa fa-envelope"></i>
-              <p><span>Email Us</span><br>
-                <a href="mailto:lenjabulothabiso@gmail.com">lenjabulothabiso@gmail.com</a></p>
-            </li>
-          </ul>
-        </div>
-        <?php
-			  if(isset($_SESSION['Register']))
-			  {
-				  $reg = $con -> query ("select * from learner where username = '$_SESSION[username]'");
-					$resul = $reg ->fetch_array(MYSQLI_BOTH);
-					{
-						if($resul['Register'] == "Registered")
-						{
-							echo "<div class='col-sm-1'><a href=''><img src='Bhevu Pics/P.Ps/17362372_1955905461304830_1811470495680181031_n.jpg' alt='Profile Pic' style='width:60px; height:60px;' class='img-thumbnail'></a> </div>";
-						}
-					}
-			  }
-		?>
-      </div>
-    </div>
-  </div>
-  <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
-
-    <div class="container">
-
-      <nav class="navbar navbar-default">
-
-        <div class="row">
-
-          <!-- Brand and toggle get grouped for better mobile display -->
-
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-
-            <a class="navbar-brand" href="index.php"><img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="Bhevu Logo"/></a> </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav">
-
-              <li class="active"><a href="index.php">Home</a></li>
-
-              <li><a href="about-us.php">About us</a></li>
-
-              <li><a href="contact-us.php">Contact Us</a></li>
-              <li><a href="Controller/Newsfeeds controller/classic-news.php">School Newsfeeds</a></li>
-              <!--Registerd Learner-->
-			  <?php include ("Controller/sign in/login_navs.php");?>
-
-            </ul>
-
-          </div>
-
-          <!-- /.navbar-collapse -->
-
-        </div>
-
-      </nav>
-
-    </div>
-
-  </div>
-
-</header>
-
-<!-- Header End -->
-
+<?php include ("Controller/requirements/header/header.php");?>
 <!-- Banner Wrapper Start -->
 
 <div class="banner-wrapper">
@@ -263,6 +152,7 @@ require ("signin.php");
 Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would be opening in the rural area of Roosboom, just outside Ladysmith. She was shocked to hear that there would be no school buildings by the time the learners arrived in January 2009. The new year began with learners sitting in the sun (there are very few trees and none near the site of the school) using lap desks. There were total of 64 learners in the first Grade 8 Class.</p>
 
         <a href="about-us.php">More...</a> </div>
+        <link href="../../vendors/fullcalendar/fullcalendar.css" rel="stylesheet" media="screen">
 
       <div class="col-sm-12 col-md-4 pull-right hidden-sm"> <img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="World-edu"> </div>
 
@@ -492,7 +382,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Sarah Norris</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -508,7 +398,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Doris Wilson</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -524,7 +414,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Anne Kemper</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -540,7 +430,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Ruth Carman</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -556,7 +446,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Sarah Norris</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -572,7 +462,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Doris Wilson</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -588,7 +478,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Anne Kemper</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -604,7 +494,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
 
               <h4>Ruth Carman</h4>
 
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <p></p>
 
             </div>
 
@@ -796,55 +686,7 @@ Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would b
         </div>
 <!-- Gallery End -->
 
-<!-- Footer Links Start-->
-
-<footer>
-
-  <div class="container">
-
-    <div class="col-sm-3"><img src="Bhevu Pics/Edited/Logo/logo2.png" alt="World Education"> </div>
-
-    <div class="col-sm-5">
-
-      <div class="contactus">
-
-        <h2>Contact Us</h2>
-
-        <ul class="list-ul">
-
-          <li><i class="fa fa-map-marker"></i>Department of State, 300 E-Block Building, USA</li>
-
-          <li><i class="fa fa-phone"></i>0800 123 46 0000</li>
-
-          <li><i class="fa fa-envelope"></i><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-    <!--<div class="col-sm-4 subscirbe pull-right">
-
-      <h2>Newsletter</h2>
-
-      <p class="sub"><span>Subscribe</span> to Our Newsletter to get Important Blog Posts &amp; Inside Scoops:</p>
-
-      <div class="form">
-
-        <input type="text" placeholder="Enter your Email" id="exampleInputName" class="form-control first">
-
-        <input type="text" class="bttn" value="Subscribe">
-
-      </div>
-
-    </div>-->
-
-  </div>
-
-</footer>
-
-<!-- Footer Links End -->
+<?php include ("Controller/footer/footer.php");?>
 
 <!-- Copy Rights Start -->
 

@@ -35,7 +35,7 @@ else
 }
 
 
-/*====================Paginnation==================*/
+/*======Paginnation====*/
 //approved Learners
 $result_per_page_approved = 10;
 $learner_approved = $con -> query ("SELECT * FROM learner where Status = 'Approved'");
@@ -77,19 +77,19 @@ $learner = $con -> query ("SELECT * FROM learner where Status = 'Waiting' LIMIT 
 
 //Pagination//
 
-//===============upload news feeds=======//
+//=upload news feeds//
 
 if(isset($_POST["add"]))
 {
 	
-	//===============attach files start========//
+	//=attach files start=//
 	$myfile = $_FILES['img_preview']['name'];
 	$tmp_name = $_FILES['img_preview']['tmp_name'];
 	$type = $_FILES['img_preview']['type'];	
 		$location = $myfile;
 		move_uploaded_file($tmp_name,"documents/".$myfile);
 
-//==============attach files end===========//
+//attach files end====//
 
 	$query = "INSERT INTO News VALUES('$_POST[category]', '$_POST[title]','$_POST[story]', NOW(), '$location','$type')";
 	$results = mysqli_query($con,$query);
@@ -104,9 +104,15 @@ if(isset($_POST["add"]))
    	    header("Location: Edit.php");
 	}
 }
+
 //===============end upload news feeds=======//
 //==============Update====================//
 if(isset($_SESSION['time_up']))
+=======
+//=end upload news feeds//
+//Update======//
+if(isset($_SESSION['v']))
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
  {
 	 $edit = $con -> query ("select * from news where timestamp = '$_SESSION[time_up]'");
 	 $data = $edit -> fetch_array(MYSQLI_BOTH);
@@ -121,14 +127,14 @@ if(isset($_SESSION['time_up']))
  if(isset($_POST["update"]))
 {
 	
-	//===============attach files start========//
+	//=attach files start=//
 	$myfile = $_FILES['img_preview']['name'];
 	$tmp_name = $_FILES['img_preview']['tmp_name'];
 	$type = $_FILES['img_preview']['type'];	
 		$location = $myfile;
 		move_uploaded_file($tmp_name,"documents/".$myfile);
 
-//==============attach files end===========//
+//attach files end====//
 
 	$query = "UPDATE News SET catname  = '$_POST[category]',  newstitle='$_POST[title]', story='$_POST[story]', Attachments='$location', Type='$type' WHERE timestamp = '$_SESSION[time_up]'";
 	$results = mysqli_query($con,$query);
@@ -395,7 +401,7 @@ if(isset($_SESSION['time_up']))
           <div class="col-sm-10 col-md-12 no-space-left">
 
             <div class="form">
-              <!--===============Change from here=============-->
+              <!--=Change from here======-->
               <form method="post" action="UploadNews.php" enctype="multipart/form-data">
               <table class="col-sm-12" style="color:#fff; left:-6%;"> 
                    <tr> 
@@ -446,7 +452,7 @@ if(isset($_SESSION['time_up']))
            </table>
           </form>    
  
-              <!--===============Change to here=============-->
+              <!--=Change to here======-->
             </div>
 
           </div>

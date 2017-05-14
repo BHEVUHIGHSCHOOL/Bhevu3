@@ -99,6 +99,19 @@ if(isset($_POST['save']))
 
 	$saveparent = $con -> query("INSERT INTO parent(Parent_Gardin, Title, First_Name, Second_Name, Surname, ID_Number, Email, Home_Address, Postal_Address, Gender, Password, Username, Citizenship, DOB, Initials, Cellphone)Values('{$parent_gardien}', '{$titlep}', '{$namep}', '{$lnamep}', '{$snamep}', '{$idp}', '{$emailp}', '{$homeaddrp}', '{$postaladdrp}', '{$genderp}', '{$passwordp}', '{$usernamep}', '{$citizeshp}', '{$dobp}', '{$initialsp}', '{$cellp}')");
 
+   // Sending Email to parent
+    
+		$userp= $_SESSION["Username"];
+		$passwp= $_SESSION["Password"];
+		$toquery= $con->query("SELECT * from parent where '$_SESSION[ID_numberp]' = ID_Number ");
+		$re = $toquery -> fetch_array(MYSQLI_BOTH);
+		$to = $re['Email'];
+		$subject='Application Status';
+		$message ='Thank you for letting your child to apply at bhevu  .</br>Your username:'.$userp . '</br>Your password:'.$passwp;
+		$headers = 'From: Bhevuhighschool@gmail.com'."\r\n" .
+		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
+					'X-Mailer: PHP/' .phpversion();
+		 mail($to,$subject,$message,$headers);
 	
 
 	if($saveparent)
@@ -279,7 +292,7 @@ if(isset($_POST['save']))
 
                   <li><a href="grid.html">Grid</a></li>
 
-                  <li><a href="table.html">Tables</a></li>
+                  <li><a href="table.php">Tables</a></li>
 
                   <li><a href="tabs.html">Tabs</a></li>
 
@@ -313,7 +326,7 @@ if(isset($_POST['save']))
 
                           <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
 
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
+                          <li><a href="table.php"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
 
                           <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
 

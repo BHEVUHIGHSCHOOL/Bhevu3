@@ -17,6 +17,8 @@ if(isset($_POST['upload']))
 		
 		$insert = $con -> query ("INSERT INTO Question_pprs  VALUES('$Year','$SubjectName','$temp_name','$location','$FileName','$Grade')");
 
+
+
 		$checkyear = $con -> query ("SELECT * FROM Year WHERE Year = '$Year'");
 		
 		$number = mysqli_num_rows($checkyear);
@@ -28,4 +30,8 @@ if(isset($_POST['upload']))
 		
 	}
 }
+
 ?>
+
+?>
+

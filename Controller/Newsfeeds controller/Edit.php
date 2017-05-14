@@ -158,8 +158,13 @@ require ('EditNews.php');
 	<h3>Search by <a href="Edit.php?title='title'">Title</a> or <a href="Edit.php?Category='Category'">Category</a></h3>
 </div>
     <?php
+<<<<<<< HEAD
 		//session_start();
 		
+=======
+		require("/../../connection/conect.php");
+		//session_start();
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 		if(isset($_POST['title-search']))
 		{
 			$title = $con -> query("select * from news where newstitle = '$_POST[title]'");
@@ -185,7 +190,11 @@ require ('EditNews.php');
 					<td>".$titleresults['newstitle']."</td>
 					<td>".$titleresults['story']."</td>
 					<td>".$titleresults['timestamp']."</td>
+<<<<<<< HEAD
 					
+=======
+					<td><a href='UploadNews.php'<span class='glyphicon glyphicon-edit'></span></a></td>
+					<td><a href='Edit.php?delete='".$time."'><span class='glyphicon glyphicon-trash'></a></span></td>
 				 </tr>
 				 </table>
 			";
@@ -196,6 +205,44 @@ require ('EditNews.php');
 				echo "<p style='color:red;'>Record not found.</p>";
 			}
 		}
+		else if(isset($_POST['cat-search']))
+		{
+			$category = $con -> query("select * from news where catname = '$_POST[category]'");
+			//$title = $con -> query("select * from news where newstitle like %$_POST[title]%");
+			$numcheck = mysqli_num_rows($category);
+			if($numcheck>0)
+			{
+				while ($categoryresults = mysqli_fetch_array($category))
+				{
+					echo "
+				<table class='table col-sm-12'>
+				 <tr>
+					 <th class='col-sm-1'>Category Name</th>
+					 <th class='col-sm-1'>Title</th>
+					 <th class='col-sm-4'>Content</th>
+					 <th class='col-sm-2'>Date Uploaded</th>
+					 <th class='col-sm-1'></th>
+					 <th class='col-sm-1'></th>
+				 </tr>
+				 <tr>
+					<td>".$categoryresults['catname']."</td>
+					<td>".$categoryresults['newstitle']."</td>
+					<td>".$categoryresults['story']."</td>
+					<td>".$categoryresults['timestamp']."</td>
+					<td><a href='UploadNews.php'<span class='glyphicon glyphicon-edit'></span></a></td>
+					<td><span class='glyphicon glyphicon-trash'></span></td>
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
+				 </tr>
+				 </table>
+			";
+				}
+			}
+			else
+			{
+				echo "<p style='color:red;'>Record not found.</p>";
+			}
+		}
+<<<<<<< HEAD
 		else if(isset($_POST['cat-search']))
 		{
 			$category = $con -> query("select * from news where catname = '$_POST[category]'");
@@ -248,6 +295,25 @@ require ('EditNews.php');
 		}
 		
     	if(isset($_GET['title']) || isset($_GET['delete-title']))
+=======
+		
+		//delete
+		if(isset($_GET['delete']))
+		{
+			$delete = $con -> query("DELETE FROM news WHERE timestamp = '$time'");
+			
+			if($delete)
+			{
+				$echo = "<p>Record deleted succesfully</p>";
+			}
+			else
+			{
+				$echo = "<p style='color:red;'>Failed to Delete record</p>".mysqli_error($con)."<p style='color:red;'>$_GET[delete]</p>";
+			}
+		}
+		
+    	if(isset($_GET['title']) || isset($_GET['delete']))
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 		{
 			echo '
 			<form method="post">
@@ -260,7 +326,11 @@ require ('EditNews.php');
 					<tr style="text-align:center;">
 						<td colspan="2"><button type="submit" name="title-search" class="txt2">Search</button></td>
 					</tr>
+<<<<<<< HEAD
 					<tr><td></td></tr>
+=======
+					<tr><td>'.$echo.'</td></tr>
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 				</table>
 				</div>
 			</form>

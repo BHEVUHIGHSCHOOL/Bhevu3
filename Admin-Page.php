@@ -26,11 +26,29 @@ else
 }
 if(isset($_POST['search-submit']))
 {
-	$id = $_POST['search'];
-	$query = $con -> query ("SELECT * FROM learner where IDNumber = '$id'");
+	$id = $_POST['approved'];
+	//search leaner
+	$learner = $con -> query ("SELECT * FROM learner where IDNumber = '$id'");
 	
-	$result = $query -> fetch_array(MYSQLI_BOTH);
+	//search staff
+	$staff = $con -> query ("SELECT * FROM staff where IDNumber = '$id'");
 	
+	//found learner
+	$num_learner = mysqli_num_rows($learner);
+	if($num_learner>0)
+	{
+		//leaner
+		$result = $learner -> fetch_array(MYSQLI_BOTH);
+		$approved_name = $result['Firstname'];
+	}
+	//found staff
+	$num_staff = mysqli_num_rows($staff);
+	if($num_staff>0)
+	{
+		//leaner
+		$result = $staff -> fetch_array(MYSQLI_BOTH);
+		$staff_name = $result['Firstname'];
+	}	
 }
 include ("Controller/Admin/Pagination/pagination.php");
 ?>
@@ -227,6 +245,11 @@ include ("Controller/Admin/Pagination/pagination.php");
               
               <li><a href="Controller/Newsfeeds controller/UploadNews.php">Upload newfeeds</a></li>
 
+=======
+              
+              <li><a href="Admin-Page.php?Search='search'">Search</a></li>
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
+
             </ul>
 
           </div>
@@ -308,7 +331,9 @@ include ("Controller/Admin/Pagination/pagination.php");
 
               </table>
 			<?php
-			  /*<!--=========these are waiting learners=========-->*/
+			  if(!isset($_GET['Search']) && !isset($_GET['Approved']) && !isset($_GET['Result']))
+			  {
+				  /*<!--==these are waiting learners==-->*/
 			  	if($number_of_learners>0)
 					{
 						echo"
@@ -394,7 +419,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 						";
 					}
 
+
 				/*=========== these are approved learners=========-*/
+=======
+				/*==== these are approved learners==-*/
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 			  	if($number_of_learners_approved>0)
 					{
 						echo"
@@ -480,7 +509,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 						<br/>";
 					}
 					
+
 					/*=========== this is the staff=========-*/
+=======
+					/*==== this is the staff==-*/
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 			  	if($number_of_staff>0)
 					{
 						echo"
@@ -505,7 +538,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 										<th style='text-align:center;'>Email</th>
 									</tr>".
 									"<tr>
+
 										<td>".$row_staff['Email']."</td>                        
+=======
+										                       
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 										<td>".$row_staff['Initials']."</td>
 										<td>".$row_staff['Firstname']."</td>
 										<td>".$row_staff['Lastname']."</td>
@@ -513,6 +550,10 @@ include ("Controller/Admin/Pagination/pagination.php");
 										<td>".$row_staff['DOB']."</td>
 										<td>".$row_staff['Gender']."</td>
 										<td>".$row_staff['IDNumber']."</td>
+
+=======
+										<td>".$row_staff['Email']."</td> 
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 									</tr>
 									<tr style='background-color:#363FA3; text-align:center;'>
 										<th style='text-align:center;'>Citizenship</th>
@@ -568,6 +609,87 @@ include ("Controller/Admin/Pagination/pagination.php");
 						<hr/>
 						<br/>";
 					}
+
+=======
+			  }
+			  else
+			  {
+				  echo "<hr/>
+						<br/>
+						<form method='post' action='Admin-Page.php?Result=result'>
+						<table class='col-sm-12' style='color:#fff; width:100%; border-radius:5px; background-color:#458CBF;'>
+							<tr>
+								<td colspan='3'><h1 style'text-aligne:center;'>Search</h1><td>
+							</tr><tr>
+									<td class='col-sm-3'>
+										Please enter ID number :
+									</td>
+									<td class='col-sm-3'>
+										<input type='text' name='approved' />
+									</td>
+									<td class='col-sm-3'>
+										<input type='submit' value='Search' name='search-submit' class='txt2'/>
+									</td>
+								</tr>";
+								if(isset($_GET['Result']))
+								{
+									if(isset($staff_name))
+									{
+										echo "
+									<tr style='background-color:#363FA3; text-align:center;'>
+										<th style='text-align:center;'>Initials</th>
+										<th style='text-align:center;'>First name</th>
+										<th style='text-align:center;'>Second name</th>
+										<th style='text-align:center;'>Surname</th>
+										<th style='text-align:center;'>Date of Birth</th>
+										<th style='text-align:center;'>Gander</th>
+										<th style='text-align:center;'>ID Number</th>
+										<th style='text-align:center;'>Email</th>
+									</tr>".
+									"<tr>                        
+										<td>".$result['Initials']."</td>
+										<td>".$result['Firstname']."</td>
+										<td>".$result['Lastname']."</td>
+										<td>".$result['Surname']."</td>
+										<td>".$result['DOB']."</td>
+										<td>".$result['Gender']."</td>
+										<td>".$result['IDNumber']."</td>
+										<td>".$result['Email']."</td>										
+									</tr>
+									<tr style='background-color:#363FA3; text-align:center;'>
+										<th style='text-align:center;'>Citizenship</th>
+										<th style='text-align:center;'>Mobile number</th>
+										<th style='text-align:center;'>Phase</th>
+										<th style='text-align:center;'>Position</th>
+										<th style='text-align:center;'>Teaching Grade</th>
+										<th style='text-align:center;'>Documents</th>
+										<th style='text-align:center;'>Friendly Format</th>
+										<th></th>
+									</tr>
+									<tr>
+										<td>".$result['Citizenship']."</td>
+										<td>".$result['Mobilenumber']."</td>
+										<td>".$result['Phase']."</td>
+										<td>".$result['Position']."</td>
+										<td>".$result['TeachingGrade']."</td>
+										<td><a style='color:black;' href='report.php'>Report</a><br/><a style='color:black;' href='certificate.php'>ID/Certficate</a></td>
+										<td><button type='button' class='btn btn-success' onclick='openModal(".$result['IDNumber'].")'>View</button></td>
+									</tr>
+									<tr><td colspan='8'><hr/></td></tr>
+									";
+									}
+								}
+								else if(isset($approved_name))
+								{
+									echo $approved_name;
+								}
+							echo"
+							</tr></td>
+							</table>
+						</form>
+						<br/>";
+			  }
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 				?>
             </div>
 
