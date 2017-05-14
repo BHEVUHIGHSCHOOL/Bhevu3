@@ -210,7 +210,7 @@ require ("signin.php");
          <tr>
             <th>12h00-12h55</th>
             <td>business studies</td>
-            <td>english </td>
+            <td>history </td>
             <td>life sciences</td>
             <td> history</td>
             <td>maths lit</td>
