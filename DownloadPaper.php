@@ -9,8 +9,14 @@
 	 
 	 if($num > 0)
 	 {
+
+		 while ($result = mysqli_fetch_array($paper))
+		 {
+			$_SESSION['year']=$result['Year'];
+
 		 while ($result = mysqli_fetch_assoc($paper))
 		 {
+
 			 echo'<table style="background-color:#fff;" class="table">
 			 	<tr>
 					<td>Year</td>
@@ -18,9 +24,15 @@
 					<td>Download</td>
 				</tr>
 				<tr>
+
+					<td>'.$_SESSION['year'].'</td>
+					<td>'.$result['QuetionPath'].'</td>
+					<td><a href="ViewQuestionPapers.php?dow='.$result["Subject"].'">Download</a></td>
+
 					<td>'.$result['Year'].'</td>
 					<td>'.$result['QuetionPath'].'</td>
 					<td><a>Download</a></td>
+
 				</tr>
 			 </table>';
 		 }

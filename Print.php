@@ -270,9 +270,10 @@ if(isset($_POST['confirm']))
 
               <li><a href="index.php">Home</a></li>
 
-              <li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Elements <i class="fa fa-angle-down"></i></a>
 
-                <ul class="dropdown-menu">
+
+
+          
 
                   <li><a href="grid.html">Grid</a></li>
 
@@ -448,27 +449,16 @@ if(isset($_POST['confirm']))
 
                   <li><a href="modern-gallery.html">Modern Gallery</a></li>
 
-                </ul>
+
 
               </li>
 
-              <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down"></i></a>
 
-                <ul class="dropdown-menu">
+            
 
-                  <li><a href="about-us.php">About Us</a></li>
+           
 
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-
-                  <li><a href="404.html">404</a></li>
-
-                  <li><a href="faq.html">FAQ</a></li>
-
-                </ul>
-
-              </li>
-
-              <li><a href="contact-us.php">Register</a></li>
+              <li><a href="Portal.php">View Portal</a></li>
 
             </ul>
 
@@ -496,7 +486,7 @@ if(isset($_POST['confirm']))
 
     <div class="col-sm-12">
 
-      <h2>Register</h2>
+      <h2></h2>
 
     </div>
 
@@ -506,7 +496,7 @@ if(isset($_POST['confirm']))
 
         <li><a href="index.php">Home</a></li>
 
-        <li>Register</li>
+        <li>Proof</li>
 
       </ul>
 

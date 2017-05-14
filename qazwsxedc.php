@@ -78,7 +78,7 @@ else
 		$applicantId=$_SESSION["elderid"];
 
 		$sql = $con -> query("UPDATE learner SET Status = '{$updatestatus}' where '$applicantid' = IDNumber");
-		
+		header("Location:Admin-Page.php");
 	$user= $_SESSION["username"];
 		$passw= $_SESSION["password"];
 		$toquery= $con->query("SELECT * from learner where '$_SESSION[ID_number]' = IDNumber ");
@@ -90,9 +90,14 @@ else
 		            'Reply to :Bhevuhighschool@gmail.com' ."\r\n" .
 					'X-Mailer: PHP/' .phpversion();
 		 mail($to,$subject,$message,$headers);
+		 
+		 //feedback
+		 
+		 
 	   
 
 	}
+
 
 	if(isset($_POST['reject']))
 
@@ -163,6 +168,30 @@ else
 	}
 
 ?>
+	<script type='text/javascript' >
+     function getConfirmation(){
+	   var retVal = confirm('The applicant has been approved');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	   
+	}
+ 
+</script>
+	<script type='text/javascript' >
+     function getRejected(){
+	   var retVal = confirm('The applicant has been Rejected');
+	   if( retVal == true ){
+		  
+		  
+		  return true;
+	   }
+	  
+	}
+ 
+</script>
 
 <!DOCTYPE html>
 
@@ -648,8 +677,9 @@ else
 									<td><a href='report.php'>Report</a><br/><a href='certificate.php'>ID/Certficate</a></td>
 								</tr>
 							</table>
-							<input type='submit' value='Approve' name='aprove' class='txt2'>
-							<input type='submit' value='Reject' name='reject' class='txt2'>
+                             <input type='submit' value='Approve'  name='aprove' class='txt2'     onclick='getConfirmation();' />
+							
+		<input type='submit' value='Reject' name='reject' class='txt2' onclick='getRejected();' />
 							";
 					}
 					else

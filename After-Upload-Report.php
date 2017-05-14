@@ -647,13 +647,12 @@ session_start();
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	<a href="#">0</a>
                     </td>
                 </tr>
                 <tr>
                 	<td>
-                    	nmhgfhh
-                    </td>
+                    	0</td>
                 </tr>
             </table>
         	<div id="for-flower">

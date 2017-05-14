@@ -5,9 +5,9 @@
 */
 
 /*
-================================================
+======
 /* Table of Content
-==================================================
+=
 
 1. Fonts
 2. Common CSS
@@ -40,15 +40,15 @@
 29. Media Quries 
 
 /*
-================================================
+======
 1. Fonts - Raleway and Opensans
-================================================
+======
 */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,600,700');
 /*
-================================================
+======
 2. Common CSS
-================================================
+======
 */
 * {
 	margin: 0;
@@ -144,9 +144,9 @@ i {
 	text-align:center;
 }
 /*
-================================================
+======
 3. Loader CSS
-================================================
+======
 */
 #dvLoading {
 	background: url(../images/loader.gif) no-repeat center center #fff;
@@ -156,9 +156,9 @@ i {
 	z-index: 9999999;
 }
 /*
-================================================
+======
 4. Top Wrapper
-================================================
+======
 */
 header {
 	width: 100%;
@@ -352,9 +352,9 @@ header {
 	display: inline-block;
 }
 /*
-================================================
+======
 5. Logo Bar 
-================================================
+======
 */
 .logo-bar {
 	float: left;
@@ -396,9 +396,9 @@ header {
 	font-weight:600;
 }
 /*
-================================================
+======
 6. Navigation
-================================================
+======
 */
 .affix.fadeInDown {
 	animation-delay: 0s;
@@ -548,9 +548,9 @@ header {
 	color: #fff;
 }
 /*
-================================================
+======
 7. Banner Wrapper
-================================================
+======
 */
 .banner-wrapper {
 	width: 100%;
@@ -647,9 +647,9 @@ header {
 	background-image:url(../Bhevu%20Pics/2cnd%20CD/slide3.jpg);
 }
 /*
-================================================
+======
 8. Inner Page Banner
-================================================
+======
 */
 .inner-banner::before {
  background: #000;
@@ -719,9 +719,9 @@ header {
 	color: #041A49;
 }
 /*
-================================================
+======
 9. About Section
-================================================
+======
 */
 .about-us {
 	padding:100px 0 105px;
@@ -805,9 +805,9 @@ header {
 	transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 /*
-================================================
+======
 10. Callouts
-================================================
+======
 */
 .callouts-wrapper {
 	padding: 100px 0 105px;
@@ -878,9 +878,9 @@ header {
 	color: #2d2e2e;
 }
 /*
-================================================
+======
 11. Satisfied-wrapper
-================================================
+======
 */
 .satisfied-wrapper {
 	padding: 100px 0 98px;
@@ -935,9 +935,9 @@ header {
 	width: 100%;
 }
 /*
-================================================
+======
 12. Call to Action
-================================================
+======
 */
 .call-to-action {
 	padding: 110px 0 116px;
@@ -1028,9 +1028,9 @@ header {
 	transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 /*
-================================================
+======
 13. Team Wrapper
-================================================
+======
 */
 .team-wrapper {
 	padding: 100px 0 80px;
@@ -1149,9 +1149,9 @@ header {
 	display: none;
 }
 /*
-================================================
+======
 14. Testimonials Wrapper 
- ================================================
+ ======
 */
 .testimonials-wrapper {
 	padding: 100px 0 95px;
@@ -1247,9 +1247,9 @@ header {
 	display: none;
 }
 /*
-================================================
+======
 15. Sponsers
-================================================
+======
 */
 .sponsers {
 	padding: 100px 0 95px;
@@ -1280,9 +1280,9 @@ header {
 	display: none;
 }
 /*
-================================================
+======
 16. Ineer Wrapper
-================================================
+======
 */
 .inner-wrapper {
 	float: left;
@@ -1320,9 +1320,9 @@ header {
 	padding: 0;
 }
 /*
-================================================
+======
 17. Tables
-================================================
+======
 */
 .table-custom {
 	width: 100%;
@@ -1377,9 +1377,9 @@ table.striped tr:hover:nth-child(even) {
 	background: none;
 }
 /*
-================================================
+======
 18. Tabs
-================================================
+======
 */
 /* Classic Tabs */
 .classic-tab-panel {
@@ -1561,9 +1561,9 @@ div.classic-vertical-tab-panel .nav > li.active > a {
 	border: 2px solid #6091ba;
 }
 /*
-================================================
+======
 19. Accordions us Page
-================================================
+======
 */
 /* Modern Accordion  */
 #accordion-first .accordion-group {
@@ -1612,9 +1612,9 @@ div.classic-vertical-tab-panel .nav > li.active > a {
 	padding: 0 !important;
 }
 /*
-================================================
+======
 20. Forms Page
-================================================
+======
 */
 /* Quick Contact */
 .form {
@@ -1733,9 +1733,9 @@ div.classic-vertical-tab-panel .nav > li.active > a {
 	animation: toRightFromLeft 0.2s forwards;
 }
 /*
-================================================
+======
 21. Buttons
-================================================
+======
 */
 .btn-shapes {
 	text-align: center;
@@ -1807,9 +1807,9 @@ div.classic-vertical-tab-panel .nav > li.active > a {
 	animation: toRightFromLeft 0.2s forwards;
 }
 /*
-================================================
+======
 22. Lists
-================================================
+======
 */
 .lists h2 {
 	text-align:left;
@@ -1854,9 +1854,9 @@ div.classic-vertical-tab-panel .nav > li.active > a {
  padding-right:5px;
 }
 /*
-================================================
+======
 23. Typography
-================================================
+======
 */
 .inner-wrapper .typo hgroup h1, .inner-wrapper .typo hgroup h2, .inner-wrapper .typo hgroup h3, .inner-wrapper .typo hgroup h4, .inner-wrapper .typo hgroup h5, .inner-wrapper .typo hgroup h6 {
 	margin: 0 0 20px 0;
@@ -1918,9 +1918,9 @@ inner-wrapper-main.html-elements mark {
 	height:auto;
 }
 /*
-================================================
+======
 24. Courses
-================================================
+======
 */
 .inner-wrapper .courses {
 	box-shadow:0 0 5px rgba(0, 0, 0, 0.15);
@@ -2020,9 +2020,9 @@ inner-wrapper-main.html-elements mark {
 	color:#fff;
 }
 /*
-================================================
+======
 25. Course Details
-================================================
+======
 */
 .inner-wrapper .courses.course-details {
 	box-shadow: none;
@@ -2116,9 +2116,9 @@ inner-wrapper-main.html-elements mark {
 	padding:5px 15px;
 }
 /*
-================================================
+======
 26. News
-================================================
+======
 */
 .inner-wrapper .news-info {
 	margin:0 0 30px 0;
@@ -2380,9 +2380,9 @@ inner-wrapper-main.html-elements mark {
 	color: #fff;
 }
 /*
-================================================
+======
 27. About us Page
-================================================
+======
 */
 .about-edu h2 {
 	text-align:left;
@@ -2425,9 +2425,9 @@ margin:14px 0 0;
 	padding-left:0;
 }
 /*
-================================================
+======
 28. Comming Soon
-================================================
+======
 */
 body.comming-soon {
 	background-image:url(../images/comming-soon-bg.jpg);
@@ -2541,9 +2541,9 @@ body.comming-soon {
 	font-size: 18px;
 }
 /*
-================================================
+======
 29. 404 Page
-================================================
+======
 */
 .not-found {
 	text-align:center;
@@ -2609,9 +2609,9 @@ body.comming-soon {
 	transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 /*
-================================================
+======
 30. Gallery Page
-================================================
+======
 */
 .gal-container {
 	padding: 12px;
@@ -2779,9 +2779,9 @@ body.comming-soon {
 	height:auto;
 }
 /*
-================================================
+======
 31. Contact us page
-================================================
+======
 */
 .inner-wrapper.contact-wrapper {
 	padding:30px 0 0;
@@ -2854,9 +2854,9 @@ div#google-map iframe {
 	border:none;
 }
 /*
-================================================
+======
 32 .Footer
-================================================
+======
 */
 footer {
 	background: #fff;
@@ -2962,9 +2962,9 @@ div.footer-wrapper p {
 	margin:0;
 }
 /*
-================================================
+======
 33. Media Quries 
-================================================
+======
  */
 @media (min-width: 768px) {
 .gal-container .modal-dialog {

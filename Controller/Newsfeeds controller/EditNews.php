@@ -1,10 +1,11 @@
 <?php
- require("/../../connection/conect.php");
+ //require_once("/../../connection/conect.php");
  
  $update = $con -> query("select * from news limit 10");
  
  while($results = mysqli_fetch_array($update))
  {
+//	 session_start();
 	 $_SESSION['v'] = $results[3];
 	 echo "
 			 <tr>
