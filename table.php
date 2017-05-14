@@ -174,7 +174,9 @@ require ("signin.php");
         <div class="col-sm-8 col-sm-offset-2 col-xs-offset-0 table-responsive">
        
           <table class="table-custom">
-        
+         <tr>
+            <td colspan="6"; bgcolor="#CDC9C9"; style="text-align:center"><strong>Grade 10 to 12 Time Table</strong></td>
+        </tr>
            <th>Times</th>
           <th>Monday</th>
           <th>Tuesday</th>
@@ -202,7 +204,7 @@ require ("signin.php");
             <th>10h00-10h55</th>
             <td>life orientation</td>
             <td>physical sciences</td>
-            <td>english </td>
+            <td>busines studies</td>
             <td> history</td>
             <td>economics</td>
         </tr>
@@ -225,6 +227,66 @@ require ("signin.php");
          <tr>
             <th>13h00-13h55</th>
             <td>physical sciences</td>
+            <td>maths</td>
+            <td>study period </td>
+            <td> life orientation</td>
+            <td>english</td>
+        </tr>
+       <tr>
+       
+         <tr>
+            <td colspan="6"; bgcolor="#CDC9C9"; style="text-align:center"><strong>Grade 8 and 9 Time Table</strong></td>
+        </tr>
+           <th>Times</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          
+           <tr>
+            <th>8h00-8h55</th>
+            <td>isizulu </td>
+            <td>natural science</td>
+            <td>Technology </td>
+            <td> Life orientation</td>
+            <td>maths</td>
+        </tr>
+        <tr>
+            <th>9h00-9h55</th>
+            <td>english</td>
+            <td>economic and management sciences</td>
+            <td>life orientation </td>
+            <td> english</td>
+            <td>maths</td>
+        </tr>
+        <tr>
+            <th>10h00-10h55</th>
+            <td>technology</td>
+            <td>natural sciences</td>
+            <td>english </td>
+            <td> isizulu</td>
+            <td>economic and management sciences</td>
+        </tr>
+        <tr>
+            <th class="glyphicon-text-color"; bgcolor="#B7AFB0" >11h00-11h55</th>
+            <td class="glyphicon-text-color"; bgcolor="#B7AFB0">break</td>
+            <td class="glyphicon-text-color"; bgcolor="#B7AFB0">break </td>
+            <td class="glyphicon-text-color"; bgcolor="#B7AFB0">break </td>
+            <td class="glyphicon-text-color"; bgcolor="#B7AFB0"> break</td>
+            <td class="glyphicon-text-color"; bgcolor="#B7AFB0">break</td>
+        </tr>
+         <tr>
+            <th>12h00-12h55</th>
+            <td>maths</td>
+            <td>english </td>
+            <td>economic and management sciences</td>
+            <td>accounting</td>
+            <td>isizulu</td>
+        </tr>
+         <tr>
+            <th>13h00-13h55</th>
+            <td>economic and management sciences</td>
             <td>maths</td>
             <td>study period </td>
             <td> life orientation</td>
