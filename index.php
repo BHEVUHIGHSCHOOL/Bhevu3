@@ -48,6 +48,7 @@ require ("signin.php");
 
 <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
 
+
 </head>
 
 <body>
@@ -263,6 +264,7 @@ require ("signin.php");
 Late in 2008, Principal(Gugu Ntshangase) was told that a new High school would be opening in the rural area of Roosboom, just outside Ladysmith. She was shocked to hear that there would be no school buildings by the time the learners arrived in January 2009. The new year began with learners sitting in the sun (there are very few trees and none near the site of the school) using lap desks. There were total of 64 learners in the first Grade 8 Class.</p>
 
         <a href="about-us.php">More...</a> </div>
+        <link href="../../vendors/fullcalendar/fullcalendar.css" rel="stylesheet" media="screen">
 
       <div class="col-sm-12 col-md-4 pull-right hidden-sm"> <img src="Bhevu Pics/Edited/Logo/Bhevu Logo.jpg" alt="World-edu"> </div>
 

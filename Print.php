@@ -276,7 +276,7 @@ if(isset($_POST['confirm']))
 
                   <li><a href="grid.html">Grid</a></li>
 
-                  <li><a href="table.html">Tables</a></li>
+                  <li><a href="table.php">Tables</a></li>
 
                   <li><a href="tabs.html">Tabs</a></li>
 
@@ -310,7 +310,7 @@ if(isset($_POST['confirm']))
 
                           <li><a href="grid.html"><span class="fa fa-angle-right menu-icon"></span>Grid</a></li>
 
-                          <li><a href="table.html"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
+                          <li><a href="table.php"><span class="fa fa-angle-right menu-icon"></span>Tables</a></li>
 
                           <li><a href="tabs.html"><span class="fa fa-angle-right menu-icon"></span>Tabs</a></li>
 

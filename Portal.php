@@ -74,8 +74,8 @@ session_start();
 
         <ul class="top-right pull-right ">
       
-        <?php include ("signin.php");?> 
-
+        <?php include ("signin.php");?>
+        
         </ul>
 
       </div>
@@ -251,6 +251,11 @@ session_start();
             	<a href="Print.php">Proof of Reg.</span></a>
             </li>
         </ul>
+        <ul class="nav navbar-nav">
+        	<li class="dropdown">
+            	<a href="table.php">view TimeTable</span></a>
+            </li>
+        </ul>
     </div>
 </nav>
 <div id="HeaderWrapper" class="table-responsive">
@@ -343,21 +348,9 @@ session_start();
                 </tr>
                 <tr>
                 	<td>
-                    	<a href="#">nmhgfhh</a>
+                    	
                     </td>
-                    <td>
-                    	nmhgfhh
-                    </td>
-                    <td>
-                    	nmhgfhh
-                    </td>
-                    <td>
-                    	nmhgfhh
-                    </td>
-                    <td>
-                    	nmhgfhh
-                    </td>
-                </tr>
+             
                 <tr>
                 	<td>
                     	<a href="#">nmhgfhh</a>
