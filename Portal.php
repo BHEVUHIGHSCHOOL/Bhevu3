@@ -348,7 +348,7 @@ session_start();
                     	
                     </td>
              
-=======
+
                     	<?php echo '<a href="Portal.php?subj='.$subj['subj2'].'">'.$subj['subj2'].'</a>';?>
                     </td>
                     <td>
@@ -361,7 +361,7 @@ session_start();
                     <td>
                     	0</td>
                 </tr>
->>>>>>> f695deac1508654f2965b03659f17378afe378a8
+
                 <tr>
                 	<td>
                     	<?php echo '<a href="Portal.php?subj='.$subj['subj3'].'">'.$subj['subj3'].'</a>';?>

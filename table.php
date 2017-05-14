@@ -75,14 +75,6 @@ require ("signin.php");
 
       </div>
 
-      <div class="col-md-8 col-sm-6">
-
-        <ul class="top-right pull-right ">
-			<?php include ("Controller/sign in/logins.php");?>
-        </ul>
-
-      </div>
-
     </div>
 
   </div>
@@ -172,8 +164,7 @@ require ("signin.php");
       <h2><span>School TimeTable For The Year 2017</span></h2>
       <div class="inner-wrapper-main offset-top-30">
         <div class="col-sm-8 col-sm-offset-2 col-xs-offset-0 table-responsive">
-       
-          <table class="table-custom">
+        <table class="table table-striped table-bordered student_table">
          <tr>
             <td colspan="6"; bgcolor="#CDC9C9"; style="text-align:center"><strong>Grade 10 to 12 Time Table</strong></td>
         </tr>
@@ -218,7 +209,7 @@ require ("signin.php");
         </tr>
          <tr>
             <th>12h00-12h55</th>
-            <td>maths</td>
+            <td>business studies</td>
             <td>english </td>
             <td>life sciences</td>
             <td> history</td>
@@ -258,12 +249,12 @@ require ("signin.php");
             <td>economic and management sciences</td>
             <td>life orientation </td>
             <td> english</td>
-            <td>maths</td>
+            <td>natural sciences</td>
         </tr>
         <tr>
             <th>10h00-10h55</th>
             <td>technology</td>
-            <td>natural sciences</td>
+            <td>life orientation</td>
             <td>english </td>
             <td> isizulu</td>
             <td>economic and management sciences</td>
@@ -289,18 +280,21 @@ require ("signin.php");
             <td>economic and management sciences</td>
             <td>maths</td>
             <td>study period </td>
-            <td> life orientation</td>
+            <td> technology</td>
             <td>english</td>
         </tr>
        <tr>
-		  <?php 
-	
-	      ?>
+
     </tr>
-  
+ 
           </table>
+          	
+	
+          
+          
           <div class="call-to-action" style="margin-top:50px; margin-bottom:50px;">
-    <a id="p" href="javascript:void(0)">print timetable</a> 
+    <a id="p" href="Portal.php">back to portal</a> 
+     
 </div>
         </div>
       </div>
