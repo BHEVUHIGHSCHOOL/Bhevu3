@@ -244,8 +244,11 @@ include ("Controller/Admin/Pagination/pagination.php");
               <li><a href="Admin-Page.php">Admin</a></li>
               
               <li><a href="Controller/Newsfeeds controller/UploadNews.php">Upload newfeeds</a></li>
+
+=======
               
               <li><a href="Admin-Page.php?Search='search'">Search</a></li>
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 
             </ul>
 
@@ -416,7 +419,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 						";
 					}
 
+
+				/*=========== these are approved learners=========-*/
+=======
 				/*==== these are approved learners==-*/
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 			  	if($number_of_learners_approved>0)
 					{
 						echo"
@@ -502,7 +509,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 						<br/>";
 					}
 					
+
+					/*=========== this is the staff=========-*/
+=======
 					/*==== this is the staff==-*/
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 			  	if($number_of_staff>0)
 					{
 						echo"
@@ -527,7 +538,11 @@ include ("Controller/Admin/Pagination/pagination.php");
 										<th style='text-align:center;'>Email</th>
 									</tr>".
 									"<tr>
+
+										<td>".$row_staff['Email']."</td>                        
+=======
 										                       
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 										<td>".$row_staff['Initials']."</td>
 										<td>".$row_staff['Firstname']."</td>
 										<td>".$row_staff['Lastname']."</td>
@@ -535,7 +550,10 @@ include ("Controller/Admin/Pagination/pagination.php");
 										<td>".$row_staff['DOB']."</td>
 										<td>".$row_staff['Gender']."</td>
 										<td>".$row_staff['IDNumber']."</td>
+
+=======
 										<td>".$row_staff['Email']."</td> 
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 									</tr>
 									<tr style='background-color:#363FA3; text-align:center;'>
 										<th style='text-align:center;'>Citizenship</th>
@@ -591,6 +609,8 @@ include ("Controller/Admin/Pagination/pagination.php");
 						<hr/>
 						<br/>";
 					}
+
+=======
 			  }
 			  else
 			  {
@@ -669,6 +689,7 @@ include ("Controller/Admin/Pagination/pagination.php");
 						</form>
 						<br/>";
 			  }
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
 				?>
             </div>
 

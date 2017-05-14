@@ -11,6 +11,15 @@
 <?php
 ob_start();
 session_start();
+if(isset($_GET['delete-all']) || isset($_GET['edit']))
+  {
+	 $_SESSION['catname_up'] = $_SESSION['catname'];
+	 $_SESSION['newstitle_up'] =$_SESSION['newstitle'];
+	 $_SESSION['story_up'] = $_SESSION['story'];
+	 $_SESSION['time_up'] = $_SESSION['time'];
+	 $_SESSION['attach_up'] = $_SESSION['attach'];
+	 $_SESSION['Type_up'] = $_SESSION['Type'];
+  }
 if(isset($_SESSION['userid']))
 
 {
@@ -92,26 +101,28 @@ if(isset($_POST["add"]))
 	
 	else
 	{
-	    $upload= '<table class="table pull-right" style="border-radius:5px; color:white;"><tr>
-		                 <td><h3>News Uploaded Successfully!!!</h3></td>
-						 <td><a href="Edit.php"><h3 style="color:white;">Edit Newsfeeds</h3></a></td>
-		             </tr>
-			 </table>';
+   	    header("Location: Edit.php");
 	}
 }
+
+//===============end upload news feeds=======//
+//==============Update====================//
+if(isset($_SESSION['time_up']))
+=======
 //=end upload news feeds//
 //Update======//
 if(isset($_SESSION['v']))
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
  {
-	 $edit = $con -> query ("select * from news where timestamp = '$_SESSION[v]'");
+	 $edit = $con -> query ("select * from news where timestamp = '$_SESSION[time_up]'");
 	 $data = $edit -> fetch_array(MYSQLI_BOTH);
 	 
-	 $_SESSION['catname'] = $data['catname'];
-	 $_SESSION['newstitle'] = $data['newstitle'];
-	 $_SESSION['story'] = $data['story'];
-	 $_SESSION['Attachments'] = $data['Attachments'];
-	 $_SESSION['Type'] = $data['Type'];
-	 $_SESSION['timestamp'] = $data['timestamp'];
+	 $_SESSION['catname_up'] = $data['catname'];
+	 $_SESSION['newstitle_up'] = $data['newstitle'];
+	 $_SESSION['story_up'] = $data['story'];
+	 $_SESSION['attach_up'] = $data['Attachments'];
+	 $_SESSION['Type_up'] = $data['Type'];
+	 $_SESSION['time_up'] = $data['timestamp'];
  }
  if(isset($_POST["update"]))
 {
@@ -125,22 +136,15 @@ if(isset($_SESSION['v']))
 
 //attach files end====//
 
-	$query = "UPDATE News SET catname  = '$_POST[category]',  newstitle='$_POST[title]', story='$_POST[story]', Attachments='$location', Type='$type' WHERE timestamp = '$_SESSION[timestamp]'";
+	$query = "UPDATE News SET catname  = '$_POST[category]',  newstitle='$_POST[title]', story='$_POST[story]', Attachments='$location', Type='$type' WHERE timestamp = '$_SESSION[time_up]'";
 	$results = mysqli_query($con,$query);
-	if(!$results)
-	{
-	  echo ('Error adding news'.mysqli_error($con));
-	  exit();	
-	}
-	
-	else
-	{
-	    $upload= '<table class="table pull-right" style="border-radius:5px; color:white;"><tr>
-		                 <td><h3>News updated Successfully!!!</h3></td>
-						 <td><a href="Edit.php"><h3 style="color:white;">Edit Newsfeeds</h3></a></td>
-		             </tr>
-			 </table>';
-	}
+	    header("Location: Edit.php");
+		unset($_SESSION['catname_up']);
+		unset($_SESSION['newstitle_up']);
+		unset($_SESSION['story_up']);
+		unset($_SESSION['attach_up']);
+		unset($_SESSION['Type_up']);
+		unset($_SESSION['time_up']);		
 }
 
 ?>
@@ -333,6 +337,8 @@ if(isset($_SESSION['v']))
               <li><a href="../../RegisterStuff.php">Register Staff</a></li>
 
               <li><a href="#">Admin</a></li>
+              
+              <li><a href="Edit.php">All Newsfeeds</a></li>
 
             </ul>
 
@@ -402,7 +408,7 @@ if(isset($_SESSION['v']))
                       <td width="50%">Category</td>
                       <td>
                         <select name="category" style="width:100%; height:44px; color:#000; margin-left:1px; margin-top:1px;" required>
-                            <option value="<?php if(isset($_SESSION['catname'])){echo $_SESSION['catname'];} ?>">Select News Category</option>
+                            <option value="<?php if(isset($_SESSION['catname_up'])){echo $_SESSION['catname_up'];} ?>">Select News Category</option>
                             <option>Accademics</option>
                             <option>Cultural Activities</option>
                             <option>Fundraising events</option>
@@ -413,13 +419,13 @@ if(isset($_SESSION['v']))
                     <tr> 
                         <td>News Title</td>
                         <td>
-                            <input style="color:#000" name="title" value="<?php if(isset($_SESSION['newstitle'])){echo $_SESSION['newstitle'];} ?>" type="text" class="txt" required>
+                            <input style="color:#000" name="title" value="<?php if(isset($_SESSION['newstitle_up'])){echo $_SESSION['newstitle_up'];} ?>" type="text" class="txt" required>
                         </td>
                     </tr>
                     <tr> 
                         <td>News Story</td>
                         <td>
-                            <textarea  class="col-sm-12 form-group" name="story" style="color:#000; margin-bottom:10px;"  rows="8" cols="70" required><?php if(isset($_SESSION['story'])){echo $_SESSION['story'];} ?></textarea>
+                            <textarea  class="col-sm-12 form-group" name="story" style="color:#000; margin-bottom:10px;"  rows="8" cols="70" required><?php if(isset($_SESSION['story_up'])){echo $_SESSION['story_up'];} ?></textarea>
                         </td>
                         <td></td>
                     </tr>
@@ -431,26 +437,19 @@ if(isset($_SESSION['v']))
                         <td colspan="3">
                             <div align="center"> 
                             <?php
-                            	if(isset($_SESSION['v']))
+                            	if(isset($_SESSION['time_up']))
 								{
-									echo ' <input name="update" type="submit"  value="UPDATE" class="txt2">';
+									echo ' <input name="update" type="submit"  value="UPDATE" class="txt2"> ' ;
 								}
 								else
 								{
-									echo ' <input name="add" type="submit"  value="UPLOAD" class="txt2">';
+									echo ' <input name="add" type="submit"  value="UPLOAD" class="txt2" onClick="getConfirmation();">';
 								}
 							?>                               
                             </div>
                         </td>
                     </tr>           
            </table>
-           <?php
-			if(isset($upload))
-			{
-				echo $upload;
-			}
-			
-			?>
           </form>    
  
               <!--=Change to here======-->
@@ -567,6 +566,18 @@ if(isset($_SESSION['v']))
 <script src="../../assets/owl-carousel/js/owl.carousel.js"></script> 
 
 <script src="../../js/custom.js"></script>
+
+<script>
+         function getConfirmation()
+     {
+	     var reval= confirm('Newsfeed uploded successfuly');
+	      if(retval==true)
+	     {
+		    return true;
+	     }
+     }
+</script>
+
 
 <script>
 

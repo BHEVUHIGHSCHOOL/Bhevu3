@@ -306,8 +306,6 @@ if(isset($_POST['next']))
 
 					$_SESSION["Learners_address"] = $_POST["Learners_address"];
 
-					//$_SESSION["Relative"] = $_POST["rel_First_name"]."-".$_POST["rel_Surname"]."-".$_POST["rel_Grade"]."-".$_POST["rel_Section"];
-
 					$_SESSION["citizenship"] = $citizenship;
 
 					$_SESSION["username"] = $username;
@@ -322,11 +320,6 @@ if(isset($_POST['next']))
 					$_SESSION['grade'] = $_POST['grade'];
 					$_SESSION['Email'] = $_POST['Email'];
 					
-					if(isset($_POST['elder']))
-					{
-						$_SESSION["elder"] = $_POST['elder'];
-					}
-
 					//Inserting documents
 
 					$doc_name = "ID/Certeficate".$id;
@@ -346,7 +339,7 @@ if(isset($_POST['next']))
 							$_SESSION["report"] = "Report".$id;
 						}
 					}	
-						header('Location:Parent-details.php');
+						header('Location: Parent-details.php');
 				 }
 
 				 else
@@ -700,11 +693,28 @@ if(isset($_POST['next']))
                 
                     <td><input type="text" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
 
+<<<<<<< HEAD
+=======
+                    <td><input style="width:100%; height:45px; margin-bottom:0px" type="email" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
+
+
+=======
+=======
+
+>>>>>>> 53e69feb3b8f36da9955ee3e322b047aba0738a4
 
                     <td><input type="homeAdd" placeholder="Home Address" value="<?php if(isset($_POST["Address"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
 
                     <td><input style="width:100%; height:45px; margin-bottom:0px" type="email" placeholder="Email" value="<?php if(isset($_POST["Email"])){echo $_POST["Email"];}else { echo '';}?>" name="Email" class="txt"></td>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 795b01f2913f7203a9719a0a7892be4229774076
+
+>>>>>>> f695deac1508654f2965b03659f17378afe378a8
+>>>>>>> 81609555af0c87f80bb728d44f9d3f0bd022dae3
+>>>>>>> 53e69feb3b8f36da9955ee3e322b047aba0738a4
                 <textarea value="<?php if(isset($_SESSION["Learners_address"])){ echo $_SESSION["Learners_address"];}else { echo '';}?>" placeholder="Learners Address" name="Learners_address" type="text" class="txt_3" required></textarea>
                 <br><br>
                <select style="width:100%; height:45px; margin-bottom:10px" required name="Home_Language">
