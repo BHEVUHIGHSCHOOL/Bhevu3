@@ -51,6 +51,14 @@
 									$year = $con -> query ("CREATE TABLE Year(Year varchar(200))");
 									
 									$Subjects = $con -> query("CREATE TABLE Subjects (TeachersID varchar(13), 1st_Subject text, 2nd_Subject text, 3rd_Subject text)");
+									
+									//create timetable table
+									
+									$timetable = $con -> query("CREATE TABLE Timetable (TeachersID varchar(13), classID varchar(3),subjectID varchar(6),gradeID varchar(6),AcademicYearID int,datetime date,)");
+									
+									//create class table
+									
+									$class = $con -> query("CREATE TABLE Class ( classID varchar(3),TeachersID varchar(13), subjectID varchar(6),gradeID varchar(6),AcademicYearID int)");
 									//Ends here
 
 								}

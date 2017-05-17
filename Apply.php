@@ -618,7 +618,7 @@ if(isset($_POST['next']))
 
           <div class="col-sm-12 col-md-9 no-space-left" style="text-align:center; padding-left:25%;">
 
-            <div class="form"  style="text-align:center; border-radius:10px;">
+            <div class="form"  style="text-align:center; border-radius:10px; border:dashed">
 
               <form action="Apply.php" method="post" id="contactFrm" name="contactFrm" enctype="multipart/form-data">
 <!--MUST CHANGE-->

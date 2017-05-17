@@ -163,8 +163,7 @@ require ("signin.php");
     <div class="row">
       <h2><span>School TimeTable For The Year 2017</span></h2>
       <div class="inner-wrapper-main offset-top-30">
-        <div class="col-sm-8 col-sm-offset-2 col-xs-offset-0 table-responsive">
-        <table class="table table-striped table-bordered student_table">
+       <table class="table table-striped table-bordered student_table">
          <tr>
             <td colspan="6"; bgcolor="#CDC9C9"; style="text-align:center"><strong>Grade 10 to 12 Time Table</strong></td>
         </tr>
